@@ -1,0 +1,582 @@
+﻿<Page
+    x:Class="Scalemate.MainPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:Scalemate"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:controls="using:Scalemate.Controls"
+    xmlns:converters="using:Scalemate.Converters"
+    xmlns:views="using:Scalemate.Views"
+    xmlns:viewmodels="using:Scalemate.ViewModels"
+    xmlns:controlmate="using:Controlmate"
+    mc:Ignorable="d" Foreground="{ThemeResource ForegroundColour}" FontSize="13" SizeChanged="Page_SizeChanged" Loaded="Page_Loaded">
+
+    <Page.Resources>
+
+        <converters:BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter"/>
+        <converters:BooleanToVisibilityConverter IsReversed="True" x:Key="BooleanToVisibilityConverterInverted"/>
+
+        <Storyboard x:Name="AnimateIn">
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.ScaleX)" Storyboard.TargetName="buttonDragDrop">
+                <EasingDoubleKeyFrame KeyTime="0" Value="0">
+                    <EasingDoubleKeyFrame.EasingFunction>
+                        <CircleEase EasingMode="EaseOut"/>
+                    </EasingDoubleKeyFrame.EasingFunction>
+                </EasingDoubleKeyFrame>
+                <EasingDoubleKeyFrame KeyTime="0:0:0.4" Value="1">
+                    <EasingDoubleKeyFrame.EasingFunction>
+                        <CircleEase EasingMode="EaseOut"/>
+                    </EasingDoubleKeyFrame.EasingFunction>
+                </EasingDoubleKeyFrame>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.ScaleY)" Storyboard.TargetName="buttonDragDrop">
+                <EasingDoubleKeyFrame KeyTime="0" Value="0">
+                    <EasingDoubleKeyFrame.EasingFunction>
+                        <CircleEase EasingMode="EaseOut"/>
+                    </EasingDoubleKeyFrame.EasingFunction>
+                </EasingDoubleKeyFrame>
+                <EasingDoubleKeyFrame KeyTime="0:0:0.4" Value="1">
+                    <EasingDoubleKeyFrame.EasingFunction>
+                        <CircleEase EasingMode="EaseOut"/>
+                    </EasingDoubleKeyFrame.EasingFunction>
+                </EasingDoubleKeyFrame>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.ScaleX)" Storyboard.TargetName="buttonAddImagesFromFolder">
+                <EasingDoubleKeyFrame KeyTime="0" Value="0">
+                    <EasingDoubleKeyFrame.EasingFunction>
+                        <CircleEase EasingMode="EaseOut"/>
+                    </EasingDoubleKeyFrame.EasingFunction>
+                </EasingDoubleKeyFrame>
+                <EasingDoubleKeyFrame KeyTime="0:0:0.4" Value="0">
+                    <EasingDoubleKeyFrame.EasingFunction>
+                        <CircleEase EasingMode="EaseOut"/>
+                    </EasingDoubleKeyFrame.EasingFunction>
+                </EasingDoubleKeyFrame>
+                <EasingDoubleKeyFrame KeyTime="0:0:0.8" Value="1">
+                    <EasingDoubleKeyFrame.EasingFunction>
+                        <CircleEase EasingMode="EaseOut"/>
+                    </EasingDoubleKeyFrame.EasingFunction>
+                </EasingDoubleKeyFrame>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.ScaleY)" Storyboard.TargetName="buttonAddImagesFromFolder">
+                <EasingDoubleKeyFrame KeyTime="0" Value="0">
+                    <EasingDoubleKeyFrame.EasingFunction>
+                        <CircleEase EasingMode="EaseOut"/>
+                    </EasingDoubleKeyFrame.EasingFunction>
+                </EasingDoubleKeyFrame>
+                <EasingDoubleKeyFrame KeyTime="0:0:0.4" Value="0">
+                    <EasingDoubleKeyFrame.EasingFunction>
+                        <CircleEase EasingMode="EaseOut"/>
+                    </EasingDoubleKeyFrame.EasingFunction>
+                </EasingDoubleKeyFrame>
+                <EasingDoubleKeyFrame KeyTime="0:0:0.8" Value="1">
+                    <EasingDoubleKeyFrame.EasingFunction>
+                        <CircleEase EasingMode="EaseOut"/>
+                    </EasingDoubleKeyFrame.EasingFunction>
+                </EasingDoubleKeyFrame>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.ScaleX)" Storyboard.TargetName="textblockOR">
+                <EasingDoubleKeyFrame KeyTime="0" Value="0">
+                    <EasingDoubleKeyFrame.EasingFunction>
+                        <CircleEase EasingMode="EaseOut"/>
+                    </EasingDoubleKeyFrame.EasingFunction>
+                </EasingDoubleKeyFrame>
+                <EasingDoubleKeyFrame KeyTime="0:0:0.2" Value="0">
+                    <EasingDoubleKeyFrame.EasingFunction>
+                        <CircleEase EasingMode="EaseOut"/>
+                    </EasingDoubleKeyFrame.EasingFunction>
+                </EasingDoubleKeyFrame>
+                <EasingDoubleKeyFrame KeyTime="0:0:0.6" Value="1">
+                    <EasingDoubleKeyFrame.EasingFunction>
+                        <CircleEase EasingMode="EaseOut"/>
+                    </EasingDoubleKeyFrame.EasingFunction>
+                </EasingDoubleKeyFrame>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.ScaleY)" Storyboard.TargetName="textblockOR">
+                <EasingDoubleKeyFrame KeyTime="0" Value="0">
+                    <EasingDoubleKeyFrame.EasingFunction>
+                        <CircleEase EasingMode="EaseOut"/>
+                    </EasingDoubleKeyFrame.EasingFunction>
+                </EasingDoubleKeyFrame>
+                <EasingDoubleKeyFrame KeyTime="0:0:0.2" Value="0">
+                    <EasingDoubleKeyFrame.EasingFunction>
+                        <CircleEase EasingMode="EaseOut"/>
+                    </EasingDoubleKeyFrame.EasingFunction>
+                </EasingDoubleKeyFrame>
+                <EasingDoubleKeyFrame KeyTime="0:0:0.6" Value="1">
+                    <EasingDoubleKeyFrame.EasingFunction>
+                        <CircleEase EasingMode="EaseOut"/>
+                    </EasingDoubleKeyFrame.EasingFunction>
+                </EasingDoubleKeyFrame>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.ScaleX)" Storyboard.TargetName="rectangleOR1">
+                <EasingDoubleKeyFrame KeyTime="0" Value="0">
+                    <EasingDoubleKeyFrame.EasingFunction>
+                        <CubicEase EasingMode="EaseOut"/>
+                    </EasingDoubleKeyFrame.EasingFunction>
+                </EasingDoubleKeyFrame>
+                <EasingDoubleKeyFrame KeyTime="0:0:0.2" Value="0">
+                    <EasingDoubleKeyFrame.EasingFunction>
+                        <CubicEase EasingMode="EaseOut"/>
+                    </EasingDoubleKeyFrame.EasingFunction>
+                </EasingDoubleKeyFrame>
+                <EasingDoubleKeyFrame KeyTime="0:0:1" Value="1">
+                    <EasingDoubleKeyFrame.EasingFunction>
+                        <CubicEase EasingMode="EaseOut"/>
+                    </EasingDoubleKeyFrame.EasingFunction>
+                </EasingDoubleKeyFrame>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.ScaleX)" Storyboard.TargetName="rectangleOR2">
+                <EasingDoubleKeyFrame KeyTime="0" Value="0">
+                    <EasingDoubleKeyFrame.EasingFunction>
+                        <CubicEase EasingMode="EaseOut"/>
+                    </EasingDoubleKeyFrame.EasingFunction>
+                </EasingDoubleKeyFrame>
+                <EasingDoubleKeyFrame KeyTime="0:0:0.2" Value="0">
+                    <EasingDoubleKeyFrame.EasingFunction>
+                        <CubicEase EasingMode="EaseOut"/>
+                    </EasingDoubleKeyFrame.EasingFunction>
+                </EasingDoubleKeyFrame>
+                <EasingDoubleKeyFrame KeyTime="0:0:1" Value="1">
+                    <EasingDoubleKeyFrame.EasingFunction>
+                        <CubicEase EasingMode="EaseOut"/>
+                    </EasingDoubleKeyFrame.EasingFunction>
+                </EasingDoubleKeyFrame>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Opacity)" Storyboard.TargetName="buttonDragDrop">
+                <EasingDoubleKeyFrame KeyTime="0" Value="0"/>
+                <EasingDoubleKeyFrame KeyTime="0:0:0.2" Value="1"/>
+                <EasingDoubleKeyFrame KeyTime="0:0:0.4" Value="1"/>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Opacity)" Storyboard.TargetName="textblockOR">
+                <EasingDoubleKeyFrame KeyTime="0" Value="1"/>
+                <EasingDoubleKeyFrame KeyTime="0:0:0.2" Value="0"/>
+                <EasingDoubleKeyFrame KeyTime="0:0:0.4" Value="1"/>
+                <EasingDoubleKeyFrame KeyTime="0:0:0.6" Value="1"/>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Opacity)" Storyboard.TargetName="buttonAddImagesFromFolder">
+                <EasingDoubleKeyFrame KeyTime="0" Value="1"/>
+                <EasingDoubleKeyFrame KeyTime="0:0:0.4" Value="0"/>
+                <EasingDoubleKeyFrame KeyTime="0:0:0.6" Value="1"/>
+                <EasingDoubleKeyFrame KeyTime="0:0:0.8" Value="1"/>
+            </DoubleAnimationUsingKeyFrames>
+        </Storyboard>
+        <Storyboard x:Name="FadeInDrop">
+            <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Visibility)" Storyboard.TargetName="gridDrop">
+                <DiscreteObjectKeyFrame KeyTime="0">
+                    <DiscreteObjectKeyFrame.Value>
+                        <Visibility>Visible</Visibility>
+                    </DiscreteObjectKeyFrame.Value>
+                </DiscreteObjectKeyFrame>
+            </ObjectAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Opacity)" Storyboard.TargetName="gridDrop">
+                <EasingDoubleKeyFrame KeyTime="0:0:0.2" Value="1"/>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimation Duration="0:0:0.2" To="1" Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.ScaleX)" Storyboard.TargetName="textblockDropToImport" d:IsOptimized="True">
+                <DoubleAnimation.EasingFunction>
+                    <CircleEase EasingMode="EaseOut"/>
+                </DoubleAnimation.EasingFunction>
+            </DoubleAnimation>
+            <DoubleAnimation Duration="0:0:0.2" To="1" Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.ScaleY)" Storyboard.TargetName="textblockDropToImport" d:IsOptimized="True">
+                <DoubleAnimation.EasingFunction>
+                    <CircleEase EasingMode="EaseOut"/>
+                </DoubleAnimation.EasingFunction>
+            </DoubleAnimation>
+        </Storyboard>
+        <Storyboard x:Name="FadeOutDrop">
+            <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Visibility)" Storyboard.TargetName="gridDrop">
+                <DiscreteObjectKeyFrame KeyTime="0:0:0.2">
+                    <DiscreteObjectKeyFrame.Value>
+                        <Visibility>Collapsed</Visibility>
+                    </DiscreteObjectKeyFrame.Value>
+                </DiscreteObjectKeyFrame>
+            </ObjectAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Opacity)" Storyboard.TargetName="gridDrop">
+                <EasingDoubleKeyFrame KeyTime="0:0:0.2" Value="0"/>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimation Duration="0:0:0.4" To="0" Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.ScaleX)" Storyboard.TargetName="textblockDropToImport" d:IsOptimized="True">
+                <DoubleAnimation.EasingFunction>
+                    <CircleEase EasingMode="EaseOut"/>
+                </DoubleAnimation.EasingFunction>
+            </DoubleAnimation>
+            <DoubleAnimation Duration="0:0:0.4" To="0" Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.ScaleY)" Storyboard.TargetName="textblockDropToImport" d:IsOptimized="True">
+                <DoubleAnimation.EasingFunction>
+                    <CircleEase EasingMode="EaseOut"/>
+                </DoubleAnimation.EasingFunction>
+            </DoubleAnimation>
+        </Storyboard>
+
+    </Page.Resources>
+
+    <Grid Background="{ThemeResource BackgroundColour}" AllowDrop="True" Drop="Grid_Drop" DragOver="Grid_DragOver" DragEnter="Grid_DragEnter" DragLeave="Grid_DragLeave" DropCompleted="Grid_DropCompleted">
+
+        <StackPanel x:Name="stackpanelImport" MaxWidth="300" VerticalAlignment="Center">
+
+            <Button x:Name="buttonDragDrop"  IsHitTestVisible="False" Content="Drag and drop images" Style="{StaticResource buttonImportStyle}" IsEnabled="False" RenderTransformOrigin="0.5,1">
+                <Button.RenderTransform>
+                    <CompositeTransform/>
+                </Button.RenderTransform>
+            </Button>
+
+            <Grid Margin="0,8">
+
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="15"/>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="15"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+
+                <Rectangle x:Name="rectangleOR1" Fill="{ThemeResource SeparatorColour}" Height="1" VerticalAlignment="Center" RenderTransformOrigin="1,0.5">
+                    <Rectangle.RenderTransform>
+                        <CompositeTransform/>
+                    </Rectangle.RenderTransform>
+                </Rectangle>
+
+                <TextBlock x:Name="textblockOR" Grid.Column="2" FontSize="12" TextLineBounds="Tight" FontWeight="SemiBold" RenderTransformOrigin="0.5,0.5">
+                    <TextBlock.RenderTransform>
+                        <CompositeTransform/>
+                    </TextBlock.RenderTransform>OR</TextBlock>
+
+                <Rectangle x:Name="rectangleOR2" Grid.Column="4" Fill="{ThemeResource SeparatorColour}" Height="1" VerticalAlignment="Center" RenderTransformOrigin="0,0.5">
+                    <Rectangle.RenderTransform>
+                        <CompositeTransform/>
+                    </Rectangle.RenderTransform>
+                </Rectangle>
+
+            </Grid>
+
+            <Button x:Name="buttonAddImagesFromFolder" Content="Click to import images" Style="{StaticResource buttonImportStyle}" Click="AddImagesFromFolderAsync" RenderTransformOrigin="0.5,0">
+                <Button.RenderTransform>
+                    <CompositeTransform/>
+                </Button.RenderTransform>
+            </Button>
+
+        </StackPanel>
+
+        <GridView x:Name="gridviewImages" ItemsSource="{x:Bind mainPageViewModel.Images.ImageList, Mode=TwoWay}" SelectionMode="None" Visibility="Collapsed" Padding="0,60,0,0" ContainerContentChanging="gridviewImages_ContainerContentChanging">
+
+            <GridView.ItemContainerStyle>
+                <Style TargetType="GridViewItem">
+                    <Setter Property="Padding" Value="0" />
+                    <Setter Property="Margin" Value="0" />
+                    <Setter Property="BorderThickness" Value="0" />
+                    <Setter Property="HorizontalAlignment" Value="Stretch" />
+                    <Setter Property="Template">
+                        <Setter.Value>
+                            <ControlTemplate TargetType="GridViewItem">
+                                <ListViewItemPresenter ContentMargin="0" Padding="0"/>
+                            </ControlTemplate>
+                        </Setter.Value>
+                    </Setter>
+                </Style>
+            </GridView.ItemContainerStyle>
+
+            <GridView.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <ItemsWrapGrid Orientation="Horizontal" SizeChanged="ItemsWrapGrid_SizeChanged" AreStickyGroupHeadersEnabled="False" Margin="0,0,-10,0"/>
+                </ItemsPanelTemplate>
+            </GridView.ItemsPanel>
+
+            <GridView.ItemTemplate>
+                <DataTemplate>
+                    <controls:ImageItemControl/>
+                </DataTemplate>
+            </GridView.ItemTemplate>
+
+            <GridView.Footer>
+                <StackPanel x:Name="stackpanelImageCount" Opacity="0" Orientation="Horizontal" HorizontalAlignment="Center" Padding="30">
+                    <TextBlock Text="{x:Bind mainPageViewModel.Images.ImageList.Count, Mode=OneWay, FallbackValue=0}" FontSize="12" FontWeight="SemiBold"/>
+                    <TextBlock Text="IMAGES" Margin="5,0,0,0" FontSize="12" FontWeight="SemiBold"/>
+                </StackPanel>
+            </GridView.Footer>
+
+        </GridView>
+
+        <Grid x:Name="gridTitleBar" VerticalAlignment="Top" Height="60">
+
+            <!--Titlebar Background-->
+
+            <Grid x:Name="gridTitleBarBackground" Background="Transparent">
+                <Grid x:Name="gridTitleBarBackgroundInner" Opacity="0">
+                    <controls:BackDrop BlurAmount="25"/>
+                    <Rectangle Fill="{ThemeResource TitleBarBrush}" Opacity=".9"/>
+                    <Rectangle Fill="{ThemeResource ForegroundColour}" Height="1" VerticalAlignment="Bottom" Opacity=".1"/>
+                    <Rectangle Fill="{ThemeResource BackgroundColour}" Height="1" VerticalAlignment="Bottom" Opacity=".1" Margin="0,0,0,1"/>
+                </Grid>
+            </Grid>
+
+            <!--Logo, Buttons and Separator-->
+
+            <Grid x:Name="gridTitleBarButtons" Visibility="Collapsed">
+
+                <TextBlock x:Name="textblockLogo" FontSize="12" HorizontalAlignment="Center" VerticalAlignment="Center" IsHitTestVisible="False" FontFamily="Assets/Fonts/Raleway-SemiBold.ttf#Raleway">Scalemate</TextBlock>
+
+                <CheckBox x:Name="checkboxOverflow" Click="checkboxOverflow_Click" Style="{StaticResource checkboxAppBar}">
+
+                    <Grid>
+
+                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center" Visibility="{Binding IsChecked,ElementName=checkboxOverflow,Converter={StaticResource BooleanToVisibilityConverterInverted}}">
+
+                            <Ellipse
+			Height="4"
+			Width="4"
+			Opacity="1"
+			Stroke="{ThemeResource ForegroundColour}" />
+
+                            <Ellipse
+			Height="4"
+			Width="4"
+			Opacity="1"
+            Margin="4"
+			Stroke="{ThemeResource ForegroundColour}" />
+
+                            <Ellipse
+			Height="4"
+			Width="4"
+			Opacity="1"
+			Stroke="{ThemeResource ForegroundColour}" />
+
+                        </StackPanel>
+
+                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center" Visibility="{Binding IsChecked,ElementName=checkboxOverflow,Converter={StaticResource BooleanToVisibilityConverter}}">
+
+                            <Ellipse
+			Height="4"
+			Width="4"
+			Opacity="1"
+			Fill="{ThemeResource ForegroundColour}" />
+
+                            <Ellipse
+			Height="4"
+			Width="4"
+			Opacity="1"
+            Margin="4"
+			Fill="{ThemeResource ForegroundColour}" />
+
+                            <Ellipse
+			Height="4"
+			Width="4"
+			Opacity="1"
+			Fill="{ThemeResource ForegroundColour}" />
+
+                        </StackPanel>
+
+                    </Grid>
+
+                </CheckBox>
+
+                <Rectangle x:Name="rectangleTitleBarSeparator" Width="1" HorizontalAlignment="Right" Fill="{ThemeResource ForegroundColour}" Opacity=".1"/>
+
+                <CheckBox x:Name="checkboxDone" HorizontalAlignment="Right" Click="checkboxDone_Click" Style="{StaticResource checkboxAppBar}">
+                    <Path
+			Height="10"
+			Width="14"
+			Stretch="Fill"
+			Opacity="1"
+			Data="M 15,0 C15,0 5.4375,9.546875 5.4375,9.546875 5.4375,9.546875 0.875,5 0.875,5 0.875,5 0,5.875 0,5.875 0,5.875 5.4375,11.328125 5.4375,11.328125 5.4375,11.328125 15.875,0.875 15.875,0.875 15.875,0.875 15,0 15,0 15,0 15,0 15,0 z"
+			Fill="{ThemeResource ForegroundColour}" />
+                </CheckBox>
+
+            </Grid>
+
+            <Grid x:Name="gridSelected" Visibility="Collapsed">
+
+                <TextBlock x:Name="textblockItemsSelected" FontSize="12" HorizontalAlignment="Left" Margin="20,0,0,0" VerticalAlignment="Center" IsHitTestVisible="False" FontFamily="Assets/Fonts/Raleway-SemiBold.ttf#Raleway">1 Selected</TextBlock>
+
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+                    <Button Style="{StaticResource buttonAppBar}">
+                        <Path
+		Height="16"
+		Width="16"
+		Stretch="Fill"
+		Opacity="1"
+		Data="M 10,10 C10,10 15,10 15,10 15,10 15,15 15,15 15,15 10,15 10,15 10,15 10,10 10,10 zM 9,9 C9,9 9,16 9,16 9,16 16,16 16,16 16,16 16,9 16,9 16,9 9,9 9,9 zM 1,10 C1,10 6,10 6,10 6,10 6,15 6,15 6,15 1,15 1,15 1,15 1,10 1,10 zM 0,9 C0,9 0,16 0,16 0,16 7,16 7,16 7,16 7,9 7,9 7,9 0,9 0,9 zM 10,1 C10,1 15,1 15,1 15,1 15,6 15,6 15,6 10,6 10,6 10,6 10,1 10,1 zM 9,0 C9,0 9,7 9,7 9,7 16,7 16,7 16,7 16,0 16,0 16,0 9,0 9,0 zM 1,1 C1,1 6,1 6,1 6,1 6,6 6,6 6,6 1,6 1,6 1,6 1,1 1,1 zM 0,0 C0,0 0,7 0,7 0,7 7,7 7,7 7,7 7,0 7,0 7,0 0,0 0,0 z"
+		Fill="{ThemeResource ForegroundColour}" />
+                    </Button>
+                    <Button Style="{StaticResource buttonAppBar}">
+                        <Path
+		Height="16"
+		Width="16"
+		Stretch="Fill"
+		Opacity="1"
+		Data="M 15,1 C15,1 15,6 15,6 15,6 10,6 10,6 10,6 10,1 10,1 10,1 15,1 15,1 zM 16,0 C16,0 9,0 9,0 9,0 9,7 9,7 9,7 16,7 16,7 16,7 16,0 16,0 zM 6,10 C6,10 6,15 6,15 6,15 1,15 1,15 1,15 1,10 1,10 1,10 6,10 6,10 zM 7,9 C7,9 0,9 0,9 0,9 0,16 0,16 0,16 7,16 7,16 7,16 7,9 7,9 zM 16,9 C16,9 9,9 9,9 9,9 9,16 9,16 9,16 16,16 16,16 16,16 16,9 16,9 zM 7,0 C7,0 0,0 0,0 0,0 0,7 0,7 0,7 7,7 7,7 7,7 7,0 7,0 z"
+		Fill="{ThemeResource ForegroundColour}" />
+                    </Button>
+                    <Button Style="{StaticResource buttonAppBar}">
+                        <Path
+		Height="16"
+		Width="16"
+		Stretch="Fill"
+		Opacity="1"
+		Data="M 9,9 C9,9 9,16 9,16 9,16 16,16 16,16 16,16 16,9 16,9 16,9 9,9 9,9 zM 0,9 C0,9 0,16 0,16 0,16 7,16 7,16 7,16 7,9 7,9 7,9 0,9 0,9 zM 9,0 C9,0 9,7 9,7 9,7 16,7 16,7 16,7 16,0 16,0 16,0 9,0 9,0 zM 0,0 C0,0 0,7 0,7 0,7 7,7 7,7 7,7 7,0 7,0 7,0 0,0 0,0 z"
+		Fill="{ThemeResource ForegroundColour}" />
+                    </Button>
+                    <Button Style="{StaticResource buttonAppBar}" Margin="0,0,25,0">
+                        <Path
+		Height="16"
+		Width="16"
+		Stretch="Fill"
+		Opacity="1"
+		Data="M 10.90625,1.53125 C10.90625,1.53125 10.46875,1.09375 10.46875,1.09375 10.46875,1.09375 6,5.5625 6,5.5625 6,5.5625 1.53125,1.09375 1.53125,1.09375 1.53125,1.09375 1.09375,1.53125 1.09375,1.53125 1.09375,1.53125 5.5625,6 5.5625,6 5.5625,6 1.09375,10.46875 1.09375,10.46875 1.09375,10.46875 1.53125,10.90625 1.53125,10.90625 1.53125,10.90625 6,6.4375 6,6.4375 6,6.4375 10.46875,10.90625 10.46875,10.90625 10.46875,10.90625 10.90625,10.46875 10.90625,10.46875 10.90625,10.46875 6.4375,6 6.4375,6 6.4375,6 10.90625,1.53125 10.90625,1.53125 10.90625,1.53125 10.90625,1.53125 10.90625,1.53125 z"
+		Stroke="{ThemeResource ForegroundColour}"
+		StrokeThickness="1" />
+                    </Button>
+                    <Rectangle Width="1" HorizontalAlignment="Right" Fill="{ThemeResource ForegroundColour}" Opacity=".1"/>
+                </StackPanel>
+
+            </Grid>
+
+        </Grid>
+
+        <controlmate:DropdownMenu x:Name="dropdownMenu">
+            <controlmate:DropdownMenu.Menu>
+                <Grid>
+
+                    <StackPanel x:Name="stackpanelOverflow" Width="280">
+                        <Button Style="{StaticResource buttonMenu}" Click="AddImagesFromFolderAsync">
+                            IMPORT IMAGES
+                        </Button>
+                        <Rectangle Height="1" Fill="{ThemeResource ForegroundColour}" Opacity=".1"/>
+                        <TextBlock Margin="20,15,20,0" FontWeight="SemiBold" FontSize="12">IMAGE SIZE</TextBlock>
+                        <Slider x:Name="sliderImageSize" ValueChanged="sliderImageSize_ValueChanged" Minimum="9" Value="12" Maximum="15" Background="{ThemeResource ForegroundColour}" Style="{StaticResource SliderModern}" Margin="20,5"/>
+                        <Rectangle Height="1" Fill="{ThemeResource ForegroundColour}" Opacity=".1"/>
+                        <Button x:Name="buttonAbout" Click="buttonAbout_Click" Style="{StaticResource buttonMenu}">
+                            ABOUT SCALEMATE
+                        </Button>
+                    </StackPanel>
+
+                    <StackPanel x:Name="stackpanelSave" Width="280">
+
+                        <RadioButton Style="{StaticResource radiobuttonMenu}" IsChecked="True">
+
+                            <StackPanel>
+
+                                <Grid Height="20" Margin="0,0,0,20">
+                                    <TextBlock Text="PERCENTAGE" VerticalAlignment="Center" TextLineBounds="Tight" Margin="40,0,0,0"/>
+                                </Grid>
+
+                                <Grid>
+
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="40"/>
+                                        <ColumnDefinition Width="40"/>
+                                        <ColumnDefinition Width="*"/>
+                                    </Grid.ColumnDefinitions>
+
+                                    <TextBox Text="100" Style="{StaticResource textboxMenu}" Grid.Column="1"/>
+
+                                    <StackPanel Grid.Column="2" Opacity=".45">
+
+                                        <Grid Height="20">
+                                            <TextBlock TextLineBounds="Tight" VerticalAlignment="Center">PERCENT</TextBlock>
+                                        </Grid>
+
+                                    </StackPanel>
+
+                                </Grid>
+
+                            </StackPanel>
+
+                        </RadioButton>
+
+                        <Rectangle Fill="{ThemeResource ForegroundColour}" Opacity=".05" Height="1"/>
+
+                        <RadioButton Style="{StaticResource radiobuttonMenu}">
+
+                            <Grid>
+
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*"/>
+                                </Grid.ColumnDefinitions>
+
+                                <StackPanel>
+
+                                    <Grid Height="20" Margin="0,0,0,20">
+                                        <TextBlock Text="SPECIFIC SIZE" VerticalAlignment="Center" TextLineBounds="Tight" Margin="40,0,0,0"/>
+                                    </Grid>
+
+                                    <Grid>
+
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="40"/>
+                                            <ColumnDefinition Width="40"/>
+                                            <ColumnDefinition Width="*"/>
+                                        </Grid.ColumnDefinitions>
+
+                                        <StackPanel Grid.Column="1">
+
+                                            <TextBox Text="1280" Style="{StaticResource textboxMenu}" VerticalAlignment="Center" Margin="0,0,0,20"/>
+
+                                            <TextBox Text="720" Style="{StaticResource textboxMenu}" VerticalAlignment="Center"/>
+
+                                        </StackPanel>
+
+                                        <StackPanel Grid.Column="2" Opacity=".45">
+
+                                            <Grid Height="20" Margin="0,0,0,20">
+                                                <TextBlock TextLineBounds="Tight" VerticalAlignment="Center">WIDTH</TextBlock>
+                                            </Grid>
+
+                                            <Grid Height="20">
+                                                <TextBlock TextLineBounds="Tight" VerticalAlignment="Center">HEIGHT</TextBlock>
+                                            </Grid>
+
+                                        </StackPanel>
+
+                                    </Grid>
+
+                                </StackPanel>
+
+                            </Grid>
+
+                        </RadioButton>
+
+                        <Button x:Name="buttonSave" Style="{StaticResource buttonSave}">
+                            SAVE
+                        </Button>
+
+                    </StackPanel>
+
+                </Grid>
+            </controlmate:DropdownMenu.Menu>
+        </controlmate:DropdownMenu>
+
+        <Grid x:Name="gridMiniWindow" Grid.ColumnSpan="2" Visibility="Collapsed">
+
+            <controls:BackDrop BlurAmount="30"/>
+
+            <Rectangle Fill="{ThemeResource BackgroundColour}" RequestedTheme="Dark" Opacity=".6"/>
+
+            <Grid HorizontalAlignment="Center" VerticalAlignment="Center">
+
+                <controls:DropShadowPanel BlurRadius="50" OffsetY="10" ShadowOpacity="0.25">
+                    <Rectangle Fill="{ThemeResource BackgroundColour}" RadiusX="6" RadiusY="6"/>
+                </controls:DropShadowPanel>
+
+                <Border Background="White" Opacity=".1" CornerRadius="5,5,10,10"/>
+
+                <views:ViewAbout x:Name="viewAbout" Margin="0,0,0,30"/>
+
+                <Button Click="HideMiniWindow" Style="{StaticResource ButtonSettings}">
+                    OK
+                </Button>
+
+            </Grid>
+
+        </Grid>
+
+        <Grid x:Name="gridDrop" Visibility="Collapsed" Opacity="0">
+            <controls:BackDrop/>
+            <Rectangle Fill="{ThemeResource BackgroundColour}" Opacity=".8"/>
+            <TextBlock x:Name="textblockDropToImport" HorizontalAlignment="Center" FontSize="20" FontWeight="Light" VerticalAlignment="Center" TextLineBounds="Tight" RenderTransformOrigin="0.5,0.5">
+                <TextBlock.RenderTransform>
+                    <CompositeTransform ScaleX="0" ScaleY="0"/>
+                </TextBlock.RenderTransform>Drop to import images</TextBlock>
+        </Grid>
+
+    </Grid>
+
+</Page>

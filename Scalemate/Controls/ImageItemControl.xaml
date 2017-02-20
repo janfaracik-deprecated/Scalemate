@@ -1,0 +1,132 @@
+﻿<UserControl
+    x:Class="Scalemate.Controls.ImageItemControl"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:Scalemate.Controls"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:converters="using:Scalemate.Converters"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    d:DesignHeight="100"
+    d:DesignWidth="100">
+
+    <UserControl.Resources>
+        <Style x:Key="CheckBoxStyle1" TargetType="CheckBox">
+            <Setter Property="Background" Value="{ThemeResource CheckBoxBackgroundUnchecked}"/>
+            <Setter Property="Foreground" Value="{ThemeResource CheckBoxForegroundUnchecked}"/>
+            <Setter Property="BorderBrush" Value="{ThemeResource CheckBoxBorderBrushUnchecked}"/>
+            <Setter Property="Padding" Value="0"/>
+            <Setter Property="HorizontalAlignment" Value="Stretch"/>
+            <Setter Property="VerticalAlignment" Value="Stretch"/>
+            <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
+            <Setter Property="VerticalContentAlignment" Value="Stretch"/>
+            <Setter Property="FontFamily" Value="{ThemeResource ContentControlThemeFontFamily}"/>
+            <Setter Property="FontSize" Value="{ThemeResource ControlContentThemeFontSize}"/>
+            <Setter Property="MinWidth" Value="0"/>
+            <Setter Property="MinHeight" Value="0"/>
+            <Setter Property="UseSystemFocusVisuals" Value="True"/>
+            <Setter Property="FocusVisualMargin" Value="-7,-3,-7,-3"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="CheckBox">
+                        <Grid x:Name="RootGrid" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" Background="{TemplateBinding Background}">
+
+                            <VisualStateManager.VisualStateGroups>
+                                <VisualStateGroup x:Name="CombinedStates">
+
+                                    <VisualState x:Name="UncheckedNormal">
+                                        <Storyboard>
+                                            <DoubleAnimation Storyboard.TargetName="rectangleDarken" Storyboard.TargetProperty="Opacity" Duration="0:0:0.1" To="0"/>
+                                            <DoubleAnimation Storyboard.TargetName="ellipseCheck" Storyboard.TargetProperty="Opacity" Duration="0:0:0.1" To="0"/>
+                                            <DoubleAnimation Storyboard.TargetName="ellipseCheck" Storyboard.TargetProperty="(RenderTransform).(ScaleTransform.ScaleX)" Duration="0:0:0.1" To="0"/>
+                                            <DoubleAnimation Storyboard.TargetName="ellipseCheck" Storyboard.TargetProperty="(RenderTransform).(ScaleTransform.ScaleY)" Duration="0:0:0.1" To="0"/>
+                                        </Storyboard>
+                                    </VisualState>
+                                    <VisualState x:Name="UncheckedPointerOver">
+                                        <Storyboard>
+                                            <DoubleAnimation Storyboard.TargetName="rectangleDarken" Storyboard.TargetProperty="Opacity" Duration="0:0:0.1" To="0.2"/>
+                                            <DoubleAnimation Storyboard.TargetName="ellipseCheck" Storyboard.TargetProperty="Opacity" Duration="0:0:0.1" To="0"/>
+                                            <DoubleAnimation Storyboard.TargetName="ellipseCheck" Storyboard.TargetProperty="(RenderTransform).(ScaleTransform.ScaleX)" Duration="0:0:0.1" To="0"/>
+                                            <DoubleAnimation Storyboard.TargetName="ellipseCheck" Storyboard.TargetProperty="(RenderTransform).(ScaleTransform.ScaleY)" Duration="0:0:0.1" To="0"/>
+                                        </Storyboard>
+                                    </VisualState>
+                                    <VisualState x:Name="UncheckedPressed">
+                                        <Storyboard>
+                                            <DoubleAnimation Storyboard.TargetName="rectangleDarken" Storyboard.TargetProperty="Opacity" Duration="0:0:0.1" To="0.4"/>
+                                        </Storyboard>
+                                    </VisualState>
+
+                                    <VisualState x:Name="CheckedNormal">
+                                        <Storyboard>
+                                            <DoubleAnimation Storyboard.TargetName="rectangleDarken" Storyboard.TargetProperty="Opacity" Duration="0:0:0.1" To="0.6"/>
+                                            <DoubleAnimation Storyboard.TargetName="ellipseCheck" Storyboard.TargetProperty="Opacity" Duration="0:0:0.1" To="1"/>
+                                            <DoubleAnimation Storyboard.TargetName="ellipseCheck" Storyboard.TargetProperty="(RenderTransform).(ScaleTransform.ScaleX)" Duration="0:0:0.1" To="1"/>
+                                            <DoubleAnimation Storyboard.TargetName="ellipseCheck" Storyboard.TargetProperty="(RenderTransform).(ScaleTransform.ScaleY)" Duration="0:0:0.1" To="1"/>
+                                        </Storyboard>
+                                    </VisualState>
+                                    <VisualState x:Name="CheckedPointerOver">
+                                        <Storyboard>
+                                            <DoubleAnimation Storyboard.TargetName="rectangleDarken" Storyboard.TargetProperty="Opacity" Duration="0:0:0.1" To="0.65"/>
+                                            <DoubleAnimation Storyboard.TargetName="ellipseCheck" Storyboard.TargetProperty="Opacity" Duration="0:0:0.1" To="1"/>
+                                            <DoubleAnimation Storyboard.TargetName="ellipseCheck" Storyboard.TargetProperty="(RenderTransform).(ScaleTransform.ScaleX)" Duration="0:0:0.1" To="1"/>
+                                            <DoubleAnimation Storyboard.TargetName="ellipseCheck" Storyboard.TargetProperty="(RenderTransform).(ScaleTransform.ScaleY)" Duration="0:0:0.1" To="1"/>
+                                        </Storyboard>
+                                    </VisualState>
+                                    <VisualState x:Name="CheckedPressed">
+                                        <Storyboard>
+                                            <DoubleAnimation Storyboard.TargetName="rectangleDarken" Storyboard.TargetProperty="Opacity" Duration="0:0:0.1" To="0.65"/>
+                                            <DoubleAnimation Storyboard.TargetName="ellipseCheck" Storyboard.TargetProperty="Opacity" Duration="0:0:0.1" To="1"/>
+                                            <DoubleAnimation Storyboard.TargetName="ellipseCheck" Storyboard.TargetProperty="(RenderTransform).(ScaleTransform.ScaleX)" Duration="0:0:0.1" To="1"/>
+                                            <DoubleAnimation Storyboard.TargetName="ellipseCheck" Storyboard.TargetProperty="(RenderTransform).(ScaleTransform.ScaleY)" Duration="0:0:0.1" To="1"/>
+                                        </Storyboard>
+                                    </VisualState>
+
+                                    <VisualState x:Name="UncheckedDisabled"/>
+                                    <VisualState x:Name="CheckedDisabled"/>
+                                    <VisualState x:Name="IndeterminateNormal"/>
+                                    <VisualState x:Name="IndeterminatePointerOver"/>
+                                    <VisualState x:Name="IndeterminatePressed"/>
+                                    <VisualState x:Name="IndeterminateDisabled"/>
+                                </VisualStateGroup>
+                            </VisualStateManager.VisualStateGroups>
+
+                            <Rectangle x:Name="rectangleDarken" Fill="{ThemeResource BackgroundColour}" Grid.ColumnSpan="2" Opacity="0"/>
+
+                            <Grid x:Name="ellipseCheck" Width="28" Height="28" Opacity="0" RenderTransformOrigin="0.5,0.5">
+                                <Grid.RenderTransform>
+                                    <CompositeTransform ScaleX="0" ScaleY="0"/>
+                                </Grid.RenderTransform>
+                                <Ellipse Fill="{ThemeResource ForegroundColour}"/>
+                                <Path
+			Height="8"
+			Width="10"
+			Stretch="Fill"
+			Opacity="1"
+			Data="M 15,0 C15,0 5.4375,9.546875 5.4375,9.546875 5.4375,9.546875 0.875,5 0.875,5 0.875,5 0,5.875 0,5.875 0,5.875 5.4375,11.328125 5.4375,11.328125 5.4375,11.328125 15.875,0.875 15.875,0.875 15.875,0.875 15,0 15,0 15,0 15,0 15,0 z"
+			Fill="{ThemeResource BackgroundColour}" />
+                            </Grid>
+
+                            <ContentPresenter x:Name="ContentPresenter" AutomationProperties.AccessibilityView="Raw" ContentTemplate="{TemplateBinding ContentTemplate}" ContentTransitions="{TemplateBinding ContentTransitions}" Content="{TemplateBinding Content}" Grid.Column="1" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" Margin="{TemplateBinding Padding}" TextWrapping="Wrap" VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
+
+                        </Grid>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </UserControl.Resources>
+
+    <Grid converters:Clip.ToBounds="True">
+
+        <!--<Image x:Name="imageThumbnail" Source="{Binding Thumbnail, Mode=OneWay}" Opacity="0" HorizontalAlignment="Center" VerticalAlignment="Center" Stretch="UniformToFill" Margin="-2" Loaded="imageThumbnail_Loaded"/>-->
+
+        <Image x:Name="imageFull" Source="{Binding IncludedImage, Mode=OneWay}" Opacity="0" HorizontalAlignment="Center" VerticalAlignment="Center" Stretch="UniformToFill" Margin="-2" Loaded="imageFull_Loaded"/>
+
+        <CheckBox IsChecked="{Binding IsSelected, Mode=TwoWay}" Style="{StaticResource CheckBoxStyle1}"/>
+
+        <ToolTipService.ToolTip>
+            <Image Source="{Binding IncludedImage, Mode=OneWay}" MaxWidth="600" MaxHeight="600"/>
+        </ToolTipService.ToolTip>
+
+    </Grid>
+
+</UserControl>
