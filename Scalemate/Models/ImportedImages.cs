@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
+using System.Linq;
 using System.Runtime.CompilerServices;
 
 namespace Scalemate.Models
@@ -8,11 +9,19 @@ namespace Scalemate.Models
     public class ImportedImages : INotifyPropertyChanged
     {
 
-        public ObservableCollection<ImportedImage> ImageList = new ObservableCollection<ImportedImage>();
-        
-        public ImportedImages()
+        private ObservableCollection<ImportedImage> imageList = new ObservableCollection<ImportedImage>();
+
+        public ObservableCollection<ImportedImage> ImageList
         {
-            ImageList = new ObservableCollection<ImportedImage>();
+            get
+            {
+                return imageList;
+            }
+            set
+            {
+                imageList = value;
+                OnPropertyChanged();
+            }
         }
 
         public void Add(ImportedImage image)
@@ -25,9 +34,14 @@ namespace Scalemate.Models
 
         public void Delete(ImportedImage image)
         {
-            if (ImageList.Contains(image))
+            ImageList.Remove(image);
+        }
+
+        public void Delete(IList<object> itemsToDelete)
+        {
+            foreach (ImportedImage ii in itemsToDelete)
             {
-                ImageList.Remove(image);
+                ImageList.Remove(ii);
             }
         }
 

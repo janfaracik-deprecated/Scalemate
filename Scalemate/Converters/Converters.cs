@@ -98,8 +98,35 @@ namespace Scalemate.Converters
         }
     }
 
+    internal sealed class IntToTextConverter : IValueConverter
+    {
+
+        public object Convert(object value, Type targetType, object parameter, string language)
+        {
+
+            int returnedValue = (int)value;
+
+            if (returnedValue == 1)
+            {
+                return "Image";
+            }
+            else
+            {
+                return "Images";
+            }
+
+        }
+
+        public object ConvertBack(object value, Type targetType, object parameter, string language)
+        {
+            return -1;
+        }
+    }
+
     class Converters
     {
        
+
+
     }
 }

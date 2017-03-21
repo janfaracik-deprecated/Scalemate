@@ -8,9 +8,11 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d"
     d:DesignHeight="100"
-    d:DesignWidth="100">
+    d:DesignWidth="100"
+    DataContextChanged="UserControl_DataContextChanged">
 
     <UserControl.Resources>
+
         <Style x:Key="CheckBoxStyle1" TargetType="CheckBox">
             <Setter Property="Background" Value="{ThemeResource CheckBoxBackgroundUnchecked}"/>
             <Setter Property="Foreground" Value="{ThemeResource CheckBoxForegroundUnchecked}"/>
@@ -113,18 +115,61 @@
                 </Setter.Value>
             </Setter>
         </Style>
+
+        <Style x:Key="ToolTipImage" TargetType="ToolTip">
+            <Setter Property="Foreground" Value="{ThemeResource SystemControlForegroundBaseHighBrush}" />
+            <Setter Property="Background" Value="{ThemeResource SystemControlBackgroundChromeMediumLowBrush}" />
+            <Setter Property="BorderBrush" Value="{ThemeResource SystemControlForegroundChromeHighBrush}" />
+            <Setter Property="BorderThickness" Value="{ThemeResource ToolTipBorderThemeThickness}" />
+            <Setter Property="FontFamily" Value="{ThemeResource ContentControlThemeFontFamily}" />
+            <Setter Property="FontSize" Value="{ThemeResource ToolTipContentThemeFontSize}" />
+            <Setter Property="Padding" Value="0" />
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="ToolTip">
+                        <ContentPresenter x:Name="LayoutRoot"
+                                          BorderBrush="#19000000" BorderThickness="1" CornerRadius="2"
+                         Content="{TemplateBinding Content}"
+                         ContentTransitions="{TemplateBinding ContentTransitions}"
+                         ContentTemplate="{TemplateBinding ContentTemplate}"
+                         Padding="{TemplateBinding Padding}"
+                         TextWrapping="Wrap" >
+                            <VisualStateManager.VisualStateGroups>
+                                <VisualStateGroup x:Name="OpenStates">
+                                    <VisualState x:Name="Closed">
+                                        <Storyboard>
+                                            <FadeOutThemeAnimation TargetName="LayoutRoot" />
+                                        </Storyboard>
+                                    </VisualState>
+                                    <VisualState x:Name="Opened">
+                                        <Storyboard>
+                                            <FadeInThemeAnimation TargetName="LayoutRoot" />
+                                        </Storyboard>
+                                    </VisualState>
+                                </VisualStateGroup>
+                            </VisualStateManager.VisualStateGroups>
+                        </ContentPresenter>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
     </UserControl.Resources>
 
     <Grid converters:Clip.ToBounds="True">
 
-        <!--<Image x:Name="imageThumbnail" Source="{Binding Thumbnail, Mode=OneWay}" Opacity="0" HorizontalAlignment="Center" VerticalAlignment="Center" Stretch="UniformToFill" Margin="-2" Loaded="imageThumbnail_Loaded"/>-->
+        <Rectangle x:Name="rectangleDarken" Fill="{ThemeResource ForegroundColour}" Opacity="0"/>
 
-        <Image x:Name="imageFull" Source="{Binding IncludedImage, Mode=OneWay}" Opacity="0" HorizontalAlignment="Center" VerticalAlignment="Center" Stretch="UniformToFill" Margin="-2" Loaded="imageFull_Loaded"/>
+        <Image x:Name="imageThumbnail" Opacity="0" HorizontalAlignment="Center" VerticalAlignment="Center" Stretch="UniformToFill" Margin="-2"/>
 
-        <CheckBox IsChecked="{Binding IsSelected, Mode=TwoWay}" Style="{StaticResource CheckBoxStyle1}"/>
+        <Image x:Name="imageFull" Opacity="0" HorizontalAlignment="Center" VerticalAlignment="Center" Stretch="UniformToFill" Margin="-2"/>
+
+        <CheckBox IsChecked="{Binding IsSelected, Mode=TwoWay}" Style="{StaticResource CheckBoxStyle1}" IsHitTestVisible="False"/>
 
         <ToolTipService.ToolTip>
-            <Image Source="{Binding IncludedImage, Mode=OneWay}" MaxWidth="600" MaxHeight="600"/>
+            <ToolTip RequestedTheme="Dark" Style="{StaticResource ToolTipImage}">
+                <Image x:Name="imagePreview"/>
+            </ToolTip>
         </ToolTipService.ToolTip>
 
     </Grid>
