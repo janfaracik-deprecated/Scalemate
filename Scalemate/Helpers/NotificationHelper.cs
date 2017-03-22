@@ -17,16 +17,12 @@ namespace Scalemate.Helpers
             var xmlToastTemplate = "<toast>" +
                                      "<visual>" +
                                        "<binding template =\"ToastGeneric\">" +
-                                         "<text>Your images have been exported.</text>" +
+                                         "<text>Your images have been exported!</text>" +
                                          "<text>" +
-                                           "Tap Open Folder to view them." +
+                                           "Tap Open Folder in Scalemate to view them." +
                                          "</text>" +
                                        "</binding>" +
                                      "</visual>" +
-                                     "<actions>" +
-                                         "<action activationType=\"background\" arguments=\"action=rsvpEvent&amp;eventId=63851\" content=\"Open Folder\" />" +
-                                         "<action activationType = \"system\" arguments = \"dismiss\" content = \"\" />" +
-                                     "</actions>" +
                                    "</toast>";
 
             // load the template as XML document

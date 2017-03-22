@@ -3,6 +3,7 @@ using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
 using System.Runtime.CompilerServices;
+using GalaSoft.MvvmLight.Messaging;
 
 namespace Scalemate.Models
 {
@@ -39,10 +40,14 @@ namespace Scalemate.Models
 
         public void Delete(IList<object> itemsToDelete)
         {
+
             foreach (ImportedImage ii in itemsToDelete)
             {
                 ImageList.Remove(ii);
             }
+
+            Messenger.Default.Send("TryShowStartUI");
+
         }
 
         #region INotifyPropertyChanged

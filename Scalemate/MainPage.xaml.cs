@@ -86,6 +86,7 @@ namespace Scalemate
         private void Page_Loaded(object sender, RoutedEventArgs e)
         {
             AnimateIn.Begin();
+            Page_SizeChanged(this, null);
         }
 
         protected override void OnNavigatedTo(NavigationEventArgs e)
@@ -119,6 +120,9 @@ namespace Scalemate
                     stackpanelExporting.Visibility = Visibility.Collapsed;
                     stackpanelExportComplete.Visibility = Visibility.Visible;
                     Animationmate.ChangeObjectOpacity(stackpanelExportComplete, 0, 1, 150);
+                    break;
+                case "TryShowStartUI":
+                    TryShowStartUI();
                     break;
             }
         }
@@ -212,6 +216,7 @@ namespace Scalemate
                     gridTitleBarButtons.Visibility = Visibility.Visible;
                     stackpanelImport.Visibility = Visibility.Collapsed;
                     Animationmate.ChangeObjectOpacity(gridTitleBarButtons, 0, 1);
+                    gridTitleBarButtons.IsHitTestVisible = true;
                     Animationmate.ChangeObjectOpacity(gridTitleBarBackgroundInner, 0, 1);
                     gridviewImages.Visibility = Visibility.Visible;
                     Animationmate.ChangeObjectOpacity(imageTitleBarShadow, 0, 0.2);
@@ -249,6 +254,7 @@ namespace Scalemate
                         gridTitleBarButtons.Visibility = Visibility.Visible;
                         stackpanelImport.Visibility = Visibility.Collapsed;
                         Animationmate.ChangeObjectOpacity(gridTitleBarButtons, 0, 1);
+                        gridTitleBarButtons.IsHitTestVisible = true;
                         Animationmate.ChangeObjectOpacity(gridTitleBarBackgroundInner, 0, 1);
                         Animationmate.ChangeObjectOpacity(imageTitleBarShadow, 0, 0.2);
                         gridviewImages.Visibility = Visibility.Visible;
@@ -515,19 +521,28 @@ namespace Scalemate
 
         #region Save Interface
 
+        private void TryShowStartUI()
+        {
+            if (mainPageViewModel.Images.ImageList.Count == 0)
+            {
+                gridContainer.AllowDrop = true;
+                stackpanelImport.Visibility = Visibility.Visible;
+                stackpanelImport.Opacity = 1;
+                gridSave.Visibility = Visibility.Collapsed;
+                gridTitleBarBackgroundInner.Opacity = 0;
+                gridviewImages.Visibility = Visibility.Collapsed;
+                stackpanelImport.IsHitTestVisible = true;
+                imageTitleBarShadow.Opacity = 0;
+                AnimateIn.Begin();
+                Animationmate.ChangeObjectOpacity(gridTitleBarButtons, 1, 0, 100);
+                gridTitleBarButtons.IsHitTestVisible = false;
+            }
+        }
+
         private void buttonImportMoreImages_Click(object sender, RoutedEventArgs e)
         {
-            gridContainer.AllowDrop = true;
             mainPageViewModel.Images.ImageList.Clear();
-            stackpanelImport.Visibility = Visibility.Visible;
-            stackpanelImport.Opacity = 1;
-            gridSave.Visibility = Visibility.Collapsed;
-            gridTitleBarBackgroundInner.Opacity = 0;
-            gridTitleBarButtons.Visibility = Visibility.Collapsed;
-            gridviewImages.Visibility = Visibility.Collapsed;
-            stackpanelImport.IsHitTestVisible = true;
-            imageTitleBarShadow.Opacity = 0;
-            AnimateIn.Begin();
+            TryShowStartUI();
         }
 
         #endregion

@@ -18,6 +18,7 @@ using GalaSoft.MvvmLight.Command;
 using System.Collections.Generic;
 using Scalemate.Helpers;
 using Windows.System;
+using Windows.Storage.FileProperties;
 
 namespace Scalemate.ViewModels
 {
@@ -161,31 +162,10 @@ namespace Scalemate.ViewModels
 
             //Resize and Save
 
-            //using (imageStream)
-            //{
-            //    using (var resizedStream = await resizedImage.OpenAsync(FileAccessMode.ReadWrite))
-            //    {
-            //        var encoder = await BitmapEncoder.CreateForTranscodingAsync(resizedStream, decoder);
-
-            //        BitmapTransform transform = new BitmapTransform()
-            //        {
-            //            InterpolationMode = BitmapInterpolationMode.Fant,
-            //            ScaledWidth = (uint)newSize.Width,
-            //            ScaledHeight = (uint)newSize.Height
-            //        };
-
-            //        PixelDataProvider pixelData = await decoder.GetPixelDataAsync(BitmapPixelFormat.Bgra8, BitmapAlphaMode.Straight, transform, ExifOrientationMode.RespectExifOrientation, ColorManagementMode.DoNotColorManage);
-
-            //        encoder.SetPixelData(BitmapPixelFormat.Bgra8, BitmapAlphaMode.Premultiplied, (uint)newSize.Width, (uint)newSize.Height, 96, 96, pixelData.DetachPixelData());
-
-            //        await encoder.FlushAsync();
-            //    }
-            //}
+            //BitmapDecoder decoder = await BitmapDecoder.CreateAsync(imageStream);
 
             var fileEncoder = BitmapEncoder.JpegEncoderId;
 
-            Debug.WriteLine(linkedFile.Path.Substring(linkedFile.Path.Length - 4, 4));
-            
             switch (linkedFile.Path.Substring(linkedFile.Path.Length - 4, 4).ToLower())
             {
                 case ".png":
@@ -202,28 +182,88 @@ namespace Scalemate.ViewModels
                     break;
             }
 
-            using (imageStream)
+            using (var sourceStream = await linkedFile.OpenAsync(FileAccessMode.Read))
             {
 
-                BitmapDecoder decoder = await BitmapDecoder.CreateAsync(imageStream);
+                BitmapDecoder decoder = await BitmapDecoder.CreateAsync(sourceStream);
+
+                ImageProperties props = await linkedFile.Properties.GetImagePropertiesAsync();
+
+                //Debug.WriteLine(linkedFile.DisplayName + " " + props.Orientation);
 
                 BitmapTransform transform = new BitmapTransform()
                 {
-                    ScaledHeight = (uint)newSize.Width,
-                    ScaledWidth = (uint)newSize.Height,
+                    ScaledWidth = (uint)newSize.Width,
+                    ScaledHeight = (uint)newSize.Height,
                     InterpolationMode = BitmapInterpolationMode.Fant
                 };
 
-                PixelDataProvider pixelData = await decoder.GetPixelDataAsync(BitmapPixelFormat.Bgra8, BitmapAlphaMode.Straight, transform, ExifOrientationMode.RespectExifOrientation, ColorManagementMode.DoNotColorManage);
-
-                using (var resizedStream = await resizedImage.OpenAsync(FileAccessMode.ReadWrite))
+                if (!(props.Orientation == PhotoOrientation.Normal || props.Orientation == PhotoOrientation.Unspecified || props.Orientation == PhotoOrientation.FlipVertical || props.Orientation == PhotoOrientation.Rotate180))
                 {
-                    BitmapEncoder encoder = await BitmapEncoder.CreateAsync(fileEncoder, resizedStream);
-                    encoder.SetPixelData(BitmapPixelFormat.Bgra8, BitmapAlphaMode.Premultiplied, (uint)newSize.Width, (uint)newSize.Height, 96, 96, pixelData.DetachPixelData());
+                    transform.ScaledWidth = (uint)newSize.Height;
+                    transform.ScaledHeight = (uint)newSize.Width;
+                }
+
+                PixelDataProvider pixelData = await decoder.GetPixelDataAsync(BitmapPixelFormat.Rgba8, BitmapAlphaMode.Straight, transform, ExifOrientationMode.RespectExifOrientation, ColorManagementMode.DoNotColorManage);
+
+                using (var destinationStream = await resizedImage.OpenAsync(FileAccessMode.ReadWrite))
+                {
+                    BitmapEncoder encoder = await BitmapEncoder.CreateAsync(fileEncoder, destinationStream);
+                    encoder.SetPixelData(BitmapPixelFormat.Rgba8, BitmapAlphaMode.Premultiplied, (uint)newSize.Width, (uint)newSize.Height, 96, 96, pixelData.DetachPixelData());
                     await encoder.FlushAsync();
                 }
 
             }
+
+            //using (imageStream)
+            //{
+            //    using (var resizedStream = await resizedImage.OpenAsync(FileAccessMode.ReadWrite))
+            //    {
+            //        var encoder = await BitmapEncoder.CreateForTranscodingAsync(resizedStream, decoder);
+
+            //        encoder.BitmapTransform.InterpolationMode = BitmapInterpolationMode.Fant;
+            //        encoder.BitmapTransform.ScaledWidth = (uint)newSize.Width;
+            //        encoder.BitmapTransform.ScaledHeight = (uint)newSize.Height;
+
+            //        BitmapTransform transform = new BitmapTransform()
+            //        {
+            //            ScaledHeight = (uint)newSize.Width,
+            //            ScaledWidth = (uint)newSize.Height,
+            //            InterpolationMode = BitmapInterpolationMode.Fant
+            //        };
+
+            //        PixelDataProvider pixelData = await decoder.GetPixelDataAsync(BitmapPixelFormat.Bgra8, BitmapAlphaMode.Premultiplied, transform, ExifOrientationMode.RespectExifOrientation, ColorManagementMode.DoNotColorManage);
+
+            //        encoder.SetPixelData(BitmapPixelFormat.Bgra8, BitmapAlphaMode.Premultiplied, (uint)newSize.Width, (uint)newSize.Height, 96, 96, pixelData.DetachPixelData());
+
+            //        await encoder.FlushAsync();
+            //    }
+            //}
+
+
+
+            //using (imageStream)
+            //{
+
+            //    BitmapDecoder decoder = await BitmapDecoder.CreateAsync(imageStream);
+
+            //    BitmapTransform transform = new BitmapTransform()
+            //    {
+            //        ScaledWidth = (uint)newSize.Width,
+            //        ScaledHeight = (uint)newSize.Height,
+            //        InterpolationMode = BitmapInterpolationMode.Fant
+            //    };
+
+            //    PixelDataProvider pixelData = await decoder.GetPixelDataAsync(BitmapPixelFormat.Bgra8, BitmapAlphaMode.Premultiplied, transform, ExifOrientationMode.RespectExifOrientation, ColorManagementMode.DoNotColorManage);
+
+            //    using (var resizedStream = await resizedImage.OpenAsync(FileAccessMode.ReadWrite))
+            //    {
+            //        BitmapEncoder encoder = await BitmapEncoder.CreateAsync(fileEncoder, resizedStream);
+            //        encoder.SetPixelData(BitmapPixelFormat.Bgra8, BitmapAlphaMode.Premultiplied, (uint)newSize.Width, (uint)newSize.Height, 96, 96, pixelData.DetachPixelData());
+            //        await encoder.FlushAsync();
+            //    }
+
+            //}
 
         }
 
@@ -261,28 +301,27 @@ namespace Scalemate.ViewModels
                     {
 
                         BitmapImage bitmapImage = new BitmapImage();
-
                         await bitmapImage.SetSourceAsync(await image.LinkedFile.OpenReadAsync());
 
                         double correctPercentage = Convert.ToDouble(Percentage) / 100;
                         uint aspectWidth = (uint)Math.Floor(bitmapImage.PixelWidth * correctPercentage);
                         uint aspectHeight = (uint)Math.Floor(bitmapImage.PixelHeight * correctPercentage);
 
-                        Debug.WriteLine("EXPORT");
-                        Debug.WriteLine("original width: " + bitmapImage.PixelWidth);
-                        Debug.WriteLine("original height: " + bitmapImage.PixelHeight);
-                        Debug.WriteLine("multiply by: " + correctPercentage);
-                        Debug.WriteLine("aspectWidth: " + aspectWidth);
-                        Debug.WriteLine("aspectHeight: " + aspectHeight);
-
                         newSize = new Size(Convert.ToDouble(aspectWidth), Convert.ToDouble(aspectHeight));
 
                     }
                     else
                     {
-                        if (ConstrainProportions == true)
+                        if (ConstrainProportions)
                         {
-                            newSize = new Size(Convert.ToDouble(Width), Convert.ToDouble(Height));
+                            BitmapImage bitmapImage = new BitmapImage();
+                            await bitmapImage.SetSourceAsync(await image.LinkedFile.OpenReadAsync());
+
+                            float scaleWidth = (float)Convert.ToDouble(Width) / bitmapImage.PixelWidth;
+                            float scaleHeight = (float)Convert.ToDouble(Height) / bitmapImage.PixelHeight;
+                            float scale = Math.Min(scaleHeight, scaleWidth);
+
+                            newSize = new Size((int)(bitmapImage.PixelWidth * scale), (int)(bitmapImage.PixelHeight * scale));
                         }
                         else
                         {

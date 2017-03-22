@@ -16,7 +16,11 @@
     <MinimumVisualStudioVersion>14</MinimumVisualStudioVersion>
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{A5A43C5B-DE2A-4C0C-9213-0A381AF9435A};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
-    <PackageCertificateKeyFile>Scalemate_TemporaryKey.pfx</PackageCertificateKeyFile>
+    <PackageCertificateKeyFile>Scalemate_StoreKey.pfx</PackageCertificateKeyFile>
+    <AppxAutoIncrementPackageRevision>False</AppxAutoIncrementPackageRevision>
+    <AppxBundle>Always</AppxBundle>
+    <AppxBundlePlatforms>x86|x64|arm</AppxBundlePlatforms>
+    <PackageCertificateThumbprint>F751F0A5D32954B69E92D5C3444CCBED77FFD0EE</PackageCertificateThumbprint>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x86'">
     <DebugSymbols>true</DebugSymbols>
@@ -89,6 +93,7 @@
   </PropertyGroup>
   <ItemGroup>
     <!-- A reference to the entire .Net Framework and Windows SDK are automatically included -->
+    <Content Include="Assets\BadgeLogo.png" />
     <Content Include="Assets\BadgeLogo.scale-100.png" />
     <Content Include="Assets\Fonts\Raleway-Light.ttf" />
     <Content Include="Assets\Fonts\Raleway-Medium.ttf" />
@@ -139,13 +144,16 @@
     <AppxManifest Include="Package.appxmanifest">
       <SubType>Designer</SubType>
     </AppxManifest>
+    <None Include="Scalemate_StoreKey.pfx" />
     <None Include="Scalemate_TemporaryKey.pfx" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Assets\ImportPhotos.scale-200.png" />
     <Content Include="Assets\ImportPhotos.png" />
     <Content Include="Assets\LargeTile.scale-100.png" />
     <Content Include="Assets\LargeTile.scale-200.png" />
     <Content Include="Assets\SmallTile.scale-200.png" />
+    <Content Include="Assets\StoreLogo.png" />
     <Content Include="Assets\TitleBarShadow.png" />
     <Content Include="Assets\SmallTile.scale-100.png" />
     <Content Include="Assets\SplashScreen.scale-100.png" />
@@ -155,6 +163,7 @@
     <Content Include="Assets\Square44x44Logo.targetsize-16.png" />
     <Content Include="Assets\StoreLogo.scale-100.png" />
     <Content Include="Assets\Wide310x150Logo.scale-100.png" />
+    <None Include="Package.StoreAssociation.xml" />
     <Content Include="Properties\Default.rd.xml" />
     <Content Include="Assets\SplashScreen.scale-200.png" />
     <Content Include="Assets\Square150x150Logo.scale-200.png" />

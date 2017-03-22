@@ -1,5 +1,6 @@
 ﻿using System.Diagnostics;
 using Windows.ApplicationModel.Core;
+using Windows.Foundation;
 using Windows.UI;
 using Windows.UI.ViewManagement;
 using Windows.UI.Xaml;
@@ -26,6 +27,8 @@ namespace Scalemate.Helpers
             coreTitleBar.ExtendViewIntoTitleBar = true;
 
             UI_ColorValuesChanged(null, null);
+
+            ApplicationView.GetForCurrentView().SetPreferredMinSize(new Size(660,660));
 
             //Tracks System Colour
             UISettings UI = new UISettings();
