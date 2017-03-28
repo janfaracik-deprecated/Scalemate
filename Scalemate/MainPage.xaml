@@ -283,6 +283,12 @@
 
     <Grid x:Name="gridContainer" Background="{ThemeResource BackgroundColour}" AllowDrop="True" Drop="Grid_Drop" DragOver="Grid_DragOver" DragEnter="Grid_DragEnter" DragLeave="Grid_DragLeave" DropCompleted="Grid_DropCompleted">
 
+        <controls:HostBackDrop/>
+
+        <Rectangle Fill="Black" Opacity=".05"/>
+        
+        <Rectangle Fill="{ThemeResource BackgroundColour}" Opacity=".85"/>
+
         <StackPanel x:Name="stackpanelImport" MaxWidth="300" VerticalAlignment="Center">
 
             <Button x:Name="buttonDragDrop"  IsHitTestVisible="False" Content="Drag and drop images" Style="{StaticResource buttonImportStyle}" IsEnabled="False" RenderTransformOrigin="0.5,1">
@@ -382,7 +388,7 @@
             <!--Titlebar Background-->
 
             <Grid x:Name="gridTitleBarBackground" Background="Transparent">
-                <Grid x:Name="gridTitleBarBackgroundInner" Opacity="1">
+                <Grid x:Name="gridTitleBarBackgroundInner" Opacity="0">
                     <controls:BackDrop BlurAmount="25"/>
                     <Rectangle Fill="{ThemeResource TitleBarBrush}" Opacity=".875"/>
                     <Rectangle Fill="{ThemeResource BackgroundColour}" Height="1" VerticalAlignment="Bottom" Opacity=".175"/>
