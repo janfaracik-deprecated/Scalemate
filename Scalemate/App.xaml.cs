@@ -33,8 +33,8 @@ namespace Scalemate
         {
             JumpList jumpList = await JumpList.LoadCurrentAsync();
             jumpList.Items.Clear();
-            JumpListItem item1 = JumpListItem.CreateWithArguments("importphotos", "Import Photos");
-            item1.Logo = new Uri("ms-appx:///Assets/ImportPhotos.png");
+            JumpListItem item1 = JumpListItem.CreateWithArguments("importphotos", "Import Images");
+            item1.Logo = new Uri("ms-appx:///Assets/ImportPhotos.scale-200.png");
             jumpList.Items.Add(item1);
             await jumpList.SaveAsync();
         }

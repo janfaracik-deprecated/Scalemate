@@ -19,13 +19,16 @@ using System.Collections.Generic;
 using Scalemate.Helpers;
 using Windows.System;
 using Windows.Storage.FileProperties;
+using System.Collections.ObjectModel;
+using Windows.UI.Xaml.Controls;
+using Windows.ApplicationModel;
 
 namespace Scalemate.ViewModels
 {
     public class MainPageViewModel : BaseViewModel
     {
 
-        public ImportedImages Images = new ImportedImages();
+        public ObservableCollection<ImportedImage> ImageList = new ObservableCollection<ImportedImage>();
 
         private bool percentageChecked;
         private bool specificSizeChecked;
@@ -290,9 +293,9 @@ namespace Scalemate.ViewModels
 
                 Messenger.Default.Send("Export");
                 ProgressValue = 0;
-                ProgressMax = Images.ImageList.Count;
+                ProgressMax = ImageList.Count;
 
-                foreach (ImportedImage image in Images.ImageList)
+                foreach (ImportedImage image in ImageList)
                 {
 
                     Size newSize;
@@ -354,6 +357,68 @@ namespace Scalemate.ViewModels
         {
             await Launcher.LaunchFolderAsync(await StorageFolder.GetFolderFromPathAsync(SettingsHelper.GetSetting("CurrentFolder", false).ToString()));
         }
+
+        public void Delete(ImportedImage image)
+        {
+            ImageList.Remove(image);
+            Messenger.Default.Send("TryShowStartUI");
+        }
+
+        public void Delete(IList<object> itemsToDelete)
+        {
+
+            foreach (ImportedImage ii in itemsToDelete)
+            {
+                ImageList.Remove(ii);
+            }
+
+            Messenger.Default.Send("TryShowStartUI");
+
+        }
+
+        #region About
+
+        public async void About()
+        {
+
+            //Create Content
+
+            StackPanel stackpanelContent = new StackPanel();
+            TextBlock textblockTitle = new TextBlock();
+            TextBlock textblockVersion = new TextBlock();
+
+            textblockTitle.Style = Application.Current.Resources["TextBlockTitle"] as Style;
+            textblockVersion.Style = Application.Current.Resources["TextBlockSubtitle"] as Style;
+
+            stackpanelContent.HorizontalAlignment = HorizontalAlignment.Stretch;
+            textblockTitle.HorizontalAlignment = HorizontalAlignment.Center;
+            textblockVersion.HorizontalAlignment = HorizontalAlignment.Center;
+
+            textblockVersion.Margin = new Thickness(0, 15, 0, 0);
+            stackpanelContent.Padding = new Thickness(0, 90, 0, 90);
+
+            stackpanelContent.Children.Add(textblockTitle);
+            stackpanelContent.Children.Add(textblockVersion);
+
+            PackageId packageId = Package.Current.Id;
+            PackageVersion version = packageId.Version;
+
+            textblockTitle.Text = Package.Current.DisplayName;
+            textblockVersion.Text = string.Format("{0}.{1}", version.Major, version.Minor);
+
+            var dialog = new ContentDialog()
+            {
+                Content = stackpanelContent,
+                CloseButtonText = "Close Dialog"
+            };
+
+            //Show Dialog
+
+            ContentDialogResult result = await dialog.ShowAsync();
+
+        }
+
+        #endregion
 
     }
 }

@@ -1,10 +1,14 @@
 ﻿using Scalemate.Helpers;
 using Scalemate.Models;
+using Shared.Helpers;
 using System;
 using System.Diagnostics;
+using Windows.Graphics.Imaging;
 using Windows.Storage.FileProperties;
+using Windows.UI;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
+using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Media.Imaging;
 
 namespace Scalemate.Controls
@@ -18,7 +22,7 @@ namespace Scalemate.Controls
 
         private async void UserControl_DataContextChanged(FrameworkElement sender, DataContextChangedEventArgs args)
         {
-            if (DataContext != null)
+            if (DataContext != null && DataContext.GetType() == typeof(ImportedImage))
             {
 
                 ImportedImage ii = (ImportedImage)DataContext;
@@ -57,8 +61,50 @@ namespace Scalemate.Controls
                         Animationmate.ChangeObjectOpacity(imageThumbnail, 1, 0, 300, 200);
                     }
                 }
-                
+
+                using (StorageItemThumbnail dominantColour = await ii.LinkedFile.GetThumbnailAsync(ThumbnailMode.SingleItem, 1))
+                {
+                    if (dominantColour != null)
+                    {
+                        //Prepare thumbnail to display
+                        var bitmapImage = new BitmapImage();
+                        await bitmapImage.SetSourceAsync(dominantColour);
+
+                        //Create a decoder for the image
+                        var decoder = await BitmapDecoder.CreateAsync(dominantColour.CloneStream());
+
+                        //Get the pixel provider
+                        var pixels = await decoder.GetPixelDataAsync(
+                            BitmapPixelFormat.Rgba8,
+                            BitmapAlphaMode.Ignore,
+                            new BitmapTransform(),
+                            ExifOrientationMode.IgnoreExifOrientation,
+                            ColorManagementMode.DoNotColorManage);
+
+                        //Get the bytes of the 1x1 scaled image
+                        var bytes = pixels.DetachPixelData();
+
+                        //read the color 
+                        var myDominantColor = Color.FromArgb(255, bytes[0], bytes[1], bytes[2]);
+
+                        gradientStop1.Color = Color.FromArgb(100, bytes[0], bytes[1], bytes[2]);
+                        gradientStop2.Color = Color.FromArgb(255, bytes[0], bytes[1], bytes[2]);
+                        ellipseRGB.Fill = new SolidColorBrush(myDominantColor);
+
+                    }
+                }
+
             }
+        }
+
+        private void Grid_PointerEntered(object sender, Windows.UI.Xaml.Input.PointerRoutedEventArgs e)
+        {
+            Animationmate.ChangeObjectOpacity(gridHoverCheck, 0, 1);
+        }
+
+        private void Grid_PointerExited(object sender, Windows.UI.Xaml.Input.PointerRoutedEventArgs e)
+        {
+            Animationmate.ChangeObjectOpacity(gridHoverCheck, 1, 0);
         }
     }
 }

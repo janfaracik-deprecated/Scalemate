@@ -2,11 +2,14 @@
 using Scalemate.Helpers;
 using Scalemate.Models;
 using Scalemate.ViewModels;
+using Shared.Helpers;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Numerics;
+using System.Text.RegularExpressions;
+using System.Threading.Tasks;
 using Windows.ApplicationModel.Core;
 using Windows.ApplicationModel.DataTransfer;
 using Windows.Foundation;
@@ -30,6 +33,7 @@ namespace Scalemate
 
         Visual visualAll;
         Compositor compositor;
+        bool shouldHide = true;
 
         #region Load
 
@@ -42,31 +46,9 @@ namespace Scalemate
 
             DataContext = mainPageViewModel;
 
-            Window.Current.CoreWindow.Activated += (sender, args) =>
-            {
-                if (args.WindowActivationState == Windows.UI.Core.CoreWindowActivationState.Deactivated)
-                {
-                    // buttonHelp.Opacity = .5;
-                    textblockLogo.Opacity = .5;
-                    checkboxDone.Opacity = .5;
-                }
-                else
-                {
-                    //buttonHelp.Opacity = 1;
-                    textblockLogo.Opacity = 1;
-                    checkboxDone.Opacity = 1;
-                }
-            };
-
             //Adds event handler in order to set proper margins for TitleBar buttons
 
-            titleBarHelper.coreTitleBar.LayoutMetricsChanged += OnLayoutMetricsChanged;
-
-            Window.Current.SetTitleBar(gridTitleBarBackground);
-
-            dropdownMenu.isOpenChanged += DropdownMenu_isOpenChanged;
-
-            visualAll = ElementCompositionPreview.GetElementVisual(gridTitleBar);
+            visualAll = ElementCompositionPreview.GetElementVisual(gridContainer);
             compositor = visualAll.Compositor;
 
             Messenger.Default.Register<String>(this, (action) => ReceiveMessage(action));
@@ -85,8 +67,16 @@ namespace Scalemate
 
         private void Page_Loaded(object sender, RoutedEventArgs e)
         {
+            AnimateOOBE();
+        }
+
+        private void AnimateOOBE()
+        {
+            rectangleOR1.Width = 0;
+            rectangleOR2.Width = 0;
             AnimateIn.Begin();
-            Page_SizeChanged(this, null);
+            Animationmate.ChangeObjectWidth(rectangleOR1, 0, 100, 500, 600);
+            Animationmate.ChangeObjectWidth(rectangleOR2, 0, 100, 500, 600);
         }
 
         protected override void OnNavigatedTo(NavigationEventArgs e)
@@ -108,7 +98,6 @@ namespace Scalemate
             switch (action.ToString())
             {
                 case "Export":
-                    dropdownMenu.Close();
                     gridSave.Visibility = Visibility.Visible;
                     stackpanelExporting.Visibility = Visibility.Visible;
                     stackpanelExportComplete.Visibility = Visibility.Collapsed;
@@ -131,35 +120,6 @@ namespace Scalemate
 
         #region SizeChanged
 
-        private void OnLayoutMetricsChanged(CoreApplicationViewTitleBar sender, object args)
-        {
-
-            //Sets margin on buttons in TitleBar
-
-            checkboxOverflow.Margin = new Thickness(titleBarHelper.coreTitleBar.SystemOverlayLeftInset, 0, 0, 0);
-            checkboxDone.Margin = new Thickness(0, 0, titleBarHelper.coreTitleBar.SystemOverlayRightInset, 0);
-            rectangleTitleBarSeparator.Margin = new Thickness(0, 0, titleBarHelper.coreTitleBar.SystemOverlayRightInset - 25, 0);
-            gridSelected.Margin = new Thickness(0, 0, titleBarHelper.coreTitleBar.SystemOverlayRightInset - 25, 0);
-
-        }
-
-        private void Page_SizeChanged(object sender, SizeChangedEventArgs e)
-        {
-            if (ActualWidth < 1200)
-            {
-                textblockLogo.Margin = new Thickness(0, 0, Math.Min((1200 - ActualWidth) / 4, titleBarHelper.coreTitleBar.SystemOverlayRightInset), 0);
-            }
-            else if (ActualWidth >= 1200)
-            {
-                textblockLogo.Margin = new Thickness(0);
-            }
-        }
-
-        private void sliderImageSize_ValueChanged(object sender, Windows.UI.Xaml.Controls.Primitives.RangeBaseValueChangedEventArgs e)
-        {
-            UpdateItemSize();
-        }
-
         private void ItemsWrapGrid_SizeChanged(object sender, SizeChangedEventArgs e)
         {
             UpdateItemSize();
@@ -171,14 +131,14 @@ namespace Scalemate
 
             if (itemsWrapGrid != null)
             {
-                double optimizedWidth = sliderImageSize.Value * 10;
+                double optimizedWidth = 200;
                 double number = (int)itemsWrapGrid.ActualWidth / (int)optimizedWidth;
                 double newSize = itemsWrapGrid.ActualWidth / number;
 
                 if (itemsWrapGrid != null)
                 {
                     itemsWrapGrid.ItemWidth = (int)newSize;
-                    itemsWrapGrid.ItemHeight = (int)newSize;
+                    itemsWrapGrid.ItemHeight = (int)newSize * 0.6;
                 }
             }
 
@@ -191,8 +151,6 @@ namespace Scalemate
         private async void AddImagesFromFolderAsync(object sender, RoutedEventArgs e)
         {
 
-            dropdownMenu.Close();
-
             var picker = new Windows.Storage.Pickers.FileOpenPicker()
             {
                 ViewMode = Windows.Storage.Pickers.PickerViewMode.Thumbnail,
@@ -204,77 +162,16 @@ namespace Scalemate
             picker.FileTypeFilter.Add(".png");
             picker.FileTypeFilter.Add(".bmp");
             picker.FileTypeFilter.Add(".tiff");
-            var files = await picker.PickMultipleFilesAsync();
 
-            if (files.Count > 0)
-            {
-
-                if (stackpanelImport.IsHitTestVisible == true)
-                {
-                    stackpanelImport.IsHitTestVisible = false;
-                    Animationmate.ChangeObjectOpacity(stackpanelImport, 1, 0, 100);
-                    gridTitleBarButtons.Visibility = Visibility.Visible;
-                    stackpanelImport.Visibility = Visibility.Collapsed;
-                    Animationmate.ChangeObjectOpacity(gridTitleBarButtons, 0, 1);
-                    gridTitleBarButtons.IsHitTestVisible = true;
-                    Animationmate.ChangeObjectOpacity(gridTitleBarBackgroundInner, 0, 1);
-                    gridviewImages.Visibility = Visibility.Visible;
-                    Animationmate.ChangeObjectOpacity(imageTitleBarShadow, 0, 0.2);
-                }
-
-                foreach (StorageFile file in files)
-                {
-                    ImportedImage ii = new ImportedImage { Address = file.Path, LinkedFile = file};
-                    if (mainPageViewModel.Images.ImageList.FirstOrDefault(s => s.Address == ii.Address) == null)
-                    {
-                        mainPageViewModel.Images.ImageList.Add(ii);
-                        ii.Index = mainPageViewModel.Images.ImageList.IndexOf(ii);
-                    }
-                }
-
-                Animationmate.ChangeObjectOpacity(stackpanelImageCount, stackpanelImageCount.Opacity, 0.7, 250, 150);
-
-            }
+            Import(await picker.PickMultipleFilesAsync());
 
         }
 
         private async void Grid_Drop(object sender, DragEventArgs e)
         {
-            FadeOutDrop.Begin();
-
             if (e.DataView.Contains(StandardDataFormats.StorageItems))
             {
-                var files = await e.DataView.GetStorageItemsAsync();
-                if (files.Count > 0)
-                {
-                    if (stackpanelImport.IsHitTestVisible == true)
-                    {
-                        stackpanelImport.IsHitTestVisible = false;
-                        Animationmate.ChangeObjectOpacity(stackpanelImport, 1, 0, 100);
-                        gridTitleBarButtons.Visibility = Visibility.Visible;
-                        stackpanelImport.Visibility = Visibility.Collapsed;
-                        Animationmate.ChangeObjectOpacity(gridTitleBarButtons, 0, 1);
-                        gridTitleBarButtons.IsHitTestVisible = true;
-                        Animationmate.ChangeObjectOpacity(gridTitleBarBackgroundInner, 0, 1);
-                        Animationmate.ChangeObjectOpacity(imageTitleBarShadow, 0, 0.2);
-                        gridviewImages.Visibility = Visibility.Visible;
-                    }
-
-                    foreach (StorageFile file in files)
-                    {
-                        if (file.Path.ToLower().EndsWith(".jpg") || file.Path.ToLower().EndsWith(".jpeg") || file.Path.ToLower().EndsWith(".png") || file.Path.ToLower().EndsWith(".bmp") || file.Path.ToLower().EndsWith(".tiff"))
-                        {
-                            ImportedImage ii = new ImportedImage { Address = file.Path, LinkedFile = file };
-                            if (mainPageViewModel.Images.ImageList.FirstOrDefault(s => s.Address == ii.Address) == null)
-                            {
-                                mainPageViewModel.Images.ImageList.Add(ii);
-                                ii.Index = mainPageViewModel.Images.ImageList.IndexOf(ii);
-                            }
-                        }
-                    }
-
-                    Animationmate.ChangeObjectOpacity(stackpanelImageCount, stackpanelImageCount.Opacity, 0.7, 250, 150);
-                }
+                Import(await e.DataView.GetStorageItemsAsync());
             }
         }
 
@@ -290,14 +187,71 @@ namespace Scalemate
             e.DragUIOverride.IsGlyphVisible = false;
         }
 
-        private void Grid_DragEnter(object sender, DragEventArgs e)
+        private async void Import(IReadOnlyList<IStorageItem> files)
         {
-            FadeInDrop.Begin();
+
+            Debug.WriteLine("Using the new import method!");
+
+            //Checks if files is empty, if not continue
+
+            if (files.Count > 0)
+            {
+
+                foreach (IStorageItem i in files)
+                {
+
+                    if (i.IsOfType(StorageItemTypes.File))
+                    {
+                        ImportPhotos((StorageFile)i);
+                    }
+                    if (i.IsOfType(StorageItemTypes.Folder))
+                    {
+
+                        StorageFolder s = (StorageFolder)i;
+
+                        foreach (IStorageItem i2 in await s.GetFilesAsync())
+                        {
+                            if (i2.IsOfType(StorageItemTypes.File))
+                            {
+                                ImportPhotos((StorageFile)i2);
+                            }
+                        }
+
+                    }
+                }
+
+                if (mainPageViewModel.ImageList.Count != 0)
+                {
+
+                    //Performs first time animation if need be
+
+                    if (stackpanelImport.IsHitTestVisible == true)
+                    {
+                        stackpanelImport.IsHitTestVisible = false;
+
+                        gridOOBE.Visibility = Visibility.Collapsed;
+                        relativePanelContainer.Visibility = Visibility.Visible;
+                        Animationmate.ChangeObjectOpacity(gridSidebarBG, 0, 1, 200);
+
+                        AnimateInContent.Begin();
+
+                    }
+                }
+
+            }
         }
 
-        private void Grid_DragLeave(object sender, DragEventArgs e)
+        private void ImportPhotos(StorageFile sf)
         {
-            FadeOutDrop.Begin();
+            if (sf.Path.ToLower().EndsWith(".jpg") || sf.Path.ToLower().EndsWith(".jpeg") || sf.Path.ToLower().EndsWith(".png") || sf.Path.ToLower().EndsWith(".bmp") || sf.Path.ToLower().EndsWith(".tiff"))
+            {
+                ImportedImage ii = new ImportedImage { Address = sf.Path, LinkedFile = sf };
+                if (mainPageViewModel.ImageList.FirstOrDefault(s => s.Address == ii.Address) == null)
+                {
+                    mainPageViewModel.ImageList.Add(ii);
+                    ii.Index = mainPageViewModel.ImageList.IndexOf(ii);
+                }
+            }
         }
 
         #endregion
@@ -404,12 +358,19 @@ namespace Scalemate
 
         public void ShowGridSelected()
         {
-            AnimateInSelectBar.Begin();
+            if (stackpanelImageCount.Opacity == 1)
+            {
+                AnimateInSelectBar.Begin();
+            }
         }
 
         public void HideGridSelected()
         {
-            AnimateOutSelectBar.Begin();
+            if (shouldHide)
+            {
+                AnimateOutSelectBar.Begin();
+            }
+            shouldHide = true;
         }
 
         private void gridviewImages_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -447,6 +408,8 @@ namespace Scalemate
         private void buttonInverseSelection_Click(object sender, RoutedEventArgs e)
         {
 
+            shouldHide = false;
+
             List<ImportedImage> newList = new List<ImportedImage>();
 
             foreach (ImportedImage ii in gridviewImages.Items)
@@ -468,6 +431,7 @@ namespace Scalemate
 
         private void buttonSelectAll_Click(object sender, RoutedEventArgs e)
         {
+            shouldHide = false;
             gridviewImages.SelectedIndex = -1;
             foreach (ImportedImage ii in gridviewImages.Items)
             {
@@ -477,44 +441,7 @@ namespace Scalemate
 
         private void buttonRemoveSelected_Click(object sender, RoutedEventArgs e)
         {
-            mainPageViewModel.Images.Delete(gridviewImages.SelectedItems.ToList());
-        }
-
-        #endregion
-
-        #region Popups
-
-        private void DropdownMenu_isOpenChanged(object sender, EventArgs e)
-        {
-            if (!dropdownMenu.IsOpen)
-            {
-                checkboxOverflow.IsChecked = false;
-                checkboxDone.IsChecked = false;
-            }
-        }
-
-        private void checkboxOverflow_Click(object sender, RoutedEventArgs e)
-        {
-            stackpanelOverflow.Visibility = Visibility.Visible;
-            stackpanelSave.Visibility = Visibility.Collapsed;
-            dropdownMenu.InvertOpenState(checkboxOverflow, new Thickness(0, 48, 0, 0));
-        }
-
-        private void checkboxDone_Click(object sender, RoutedEventArgs e)
-        {
-            stackpanelOverflow.Visibility = Visibility.Collapsed;
-            stackpanelSave.Visibility = Visibility.Visible;
-            dropdownMenu.InvertOpenState(checkboxDone, new Thickness(0, 48, 0, 0));
-        }
-
-        #endregion
-
-        #region Overflow
-
-        private void buttonAbout_Click(object sender, RoutedEventArgs e)
-        {
-            popupControl.Show();
-            dropdownMenu.Close();
+            mainPageViewModel.Delete(gridviewImages.SelectedItems.ToList());
         }
 
         #endregion
@@ -523,25 +450,22 @@ namespace Scalemate
 
         private void TryShowStartUI()
         {
-            if (mainPageViewModel.Images.ImageList.Count == 0)
+            if (mainPageViewModel.ImageList.Count == 0)
             {
                 gridContainer.AllowDrop = true;
                 stackpanelImport.Visibility = Visibility.Visible;
                 stackpanelImport.Opacity = 1;
                 gridSave.Visibility = Visibility.Collapsed;
-                gridTitleBarBackgroundInner.Opacity = 0;
-                gridviewImages.Visibility = Visibility.Collapsed;
                 stackpanelImport.IsHitTestVisible = true;
-                imageTitleBarShadow.Opacity = 0;
-                AnimateIn.Begin();
-                Animationmate.ChangeObjectOpacity(gridTitleBarButtons, 1, 0, 100);
-                gridTitleBarButtons.IsHitTestVisible = false;
+                relativePanelContainer.Visibility = Visibility.Collapsed;
+                gridOOBE.Visibility = Visibility.Visible;
+                AnimateOOBE();
             }
         }
 
         private void buttonImportMoreImages_Click(object sender, RoutedEventArgs e)
         {
-            mainPageViewModel.Images.ImageList.Clear();
+            mainPageViewModel.ImageList.Clear();
             TryShowStartUI();
         }
 
@@ -565,7 +489,7 @@ namespace Scalemate
         private void menuFlyoutRemoveImage_Click(object sender, RoutedEventArgs e)
         {
             ImportedImage ii = (ImportedImage)(e.OriginalSource as FrameworkElement).DataContext;
-            mainPageViewModel.Images.Delete(ii);
+            mainPageViewModel.Delete(ii);
         }
 
         #endregion
@@ -574,14 +498,7 @@ namespace Scalemate
 
         private void TextBox_KeyDown(object sender, KeyRoutedEventArgs e)
         {
-            if (System.Text.RegularExpressions.Regex.IsMatch(e.Key.ToString(), "\\d+([.]\\d)?"))
-            {
-                e.Handled = false;
-            }
-            else
-            {
-                e.Handled = true;
-            }
+            e.Handled = !Regex.IsMatch(e.Key.ToString(), "\\d+([.]\\d)?");
         }
 
         private void ValidateTextboxes(object sender, TextChangedEventArgs e)
@@ -591,9 +508,14 @@ namespace Scalemate
 
             try
             {
-                Convert.ToDouble(textboxPercentage.Text);
+                Double percentage = Convert.ToDouble(textboxPercentage.Text);
                 Convert.ToDouble(textboxWidth.Text);
                 Convert.ToDouble(textboxHeight.Text);
+
+                if (percentage > 400)
+                {
+                    return;
+                }
 
                 buttonSave.IsEnabled = true;
             }
@@ -613,11 +535,15 @@ namespace Scalemate
             if (e.Key == VirtualKey.Delete)
             {
                 e.Handled = true;
-                mainPageViewModel.Images.Delete(gridviewImages.SelectedItems.ToList());
+                mainPageViewModel.Delete(gridviewImages.SelectedItems.ToList());
             }
         }
 
         #endregion
 
+        private void textboxPercentage_TextChanged(object sender, TextChangedEventArgs e)
+        {
+
+        }
     }
 }

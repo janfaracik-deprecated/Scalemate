@@ -8,10 +8,10 @@
     xmlns:controls="using:Scalemate.Controls"
     xmlns:converters="using:Scalemate.Converters"
     xmlns:model="using:Scalemate.Models"
-    xmlns:views="using:Scalemate.Views"
     xmlns:viewmodels="using:Scalemate.ViewModels"
     xmlns:controlmate="using:Controlmate"
-    mc:Ignorable="d" Foreground="{ThemeResource ForegroundColour}" FontSize="13" SizeChanged="Page_SizeChanged" Loaded="Page_Loaded">
+    xmlns:shared="using:Shared"
+    mc:Ignorable="d" Foreground="{ThemeResource ForegroundColor}" FontSize="13" Loaded="Page_Loaded" Background="AliceBlue">
 
     <Page.Resources>
 
@@ -26,7 +26,7 @@
                         <CircleEase EasingMode="EaseOut"/>
                     </EasingDoubleKeyFrame.EasingFunction>
                 </EasingDoubleKeyFrame>
-                <EasingDoubleKeyFrame KeyTime="0:0:0.4" Value="1">
+                <EasingDoubleKeyFrame KeyTime="0:0:0.5" Value="1">
                     <EasingDoubleKeyFrame.EasingFunction>
                         <CircleEase EasingMode="EaseOut"/>
                     </EasingDoubleKeyFrame.EasingFunction>
@@ -38,7 +38,7 @@
                         <CircleEase EasingMode="EaseOut"/>
                     </EasingDoubleKeyFrame.EasingFunction>
                 </EasingDoubleKeyFrame>
-                <EasingDoubleKeyFrame KeyTime="0:0:0.4" Value="1">
+                <EasingDoubleKeyFrame KeyTime="0:0:0.5" Value="1">
                     <EasingDoubleKeyFrame.EasingFunction>
                         <CircleEase EasingMode="EaseOut"/>
                     </EasingDoubleKeyFrame.EasingFunction>
@@ -50,12 +50,12 @@
                         <CircleEase EasingMode="EaseOut"/>
                     </EasingDoubleKeyFrame.EasingFunction>
                 </EasingDoubleKeyFrame>
-                <EasingDoubleKeyFrame KeyTime="0:0:0.4" Value="0">
+                <EasingDoubleKeyFrame KeyTime="0:0:0.5" Value="0">
                     <EasingDoubleKeyFrame.EasingFunction>
                         <CircleEase EasingMode="EaseOut"/>
                     </EasingDoubleKeyFrame.EasingFunction>
                 </EasingDoubleKeyFrame>
-                <EasingDoubleKeyFrame KeyTime="0:0:0.8" Value="1">
+                <EasingDoubleKeyFrame KeyTime="0:0:1" Value="1">
                     <EasingDoubleKeyFrame.EasingFunction>
                         <CircleEase EasingMode="EaseOut"/>
                     </EasingDoubleKeyFrame.EasingFunction>
@@ -67,12 +67,12 @@
                         <CircleEase EasingMode="EaseOut"/>
                     </EasingDoubleKeyFrame.EasingFunction>
                 </EasingDoubleKeyFrame>
-                <EasingDoubleKeyFrame KeyTime="0:0:0.4" Value="0">
+                <EasingDoubleKeyFrame KeyTime="0:0:0.5" Value="0">
                     <EasingDoubleKeyFrame.EasingFunction>
                         <CircleEase EasingMode="EaseOut"/>
                     </EasingDoubleKeyFrame.EasingFunction>
                 </EasingDoubleKeyFrame>
-                <EasingDoubleKeyFrame KeyTime="0:0:0.8" Value="1">
+                <EasingDoubleKeyFrame KeyTime="0:0:1" Value="1">
                     <EasingDoubleKeyFrame.EasingFunction>
                         <CircleEase EasingMode="EaseOut"/>
                     </EasingDoubleKeyFrame.EasingFunction>
@@ -84,12 +84,12 @@
                         <CircleEase EasingMode="EaseOut"/>
                     </EasingDoubleKeyFrame.EasingFunction>
                 </EasingDoubleKeyFrame>
-                <EasingDoubleKeyFrame KeyTime="0:0:0.2" Value="0">
+                <EasingDoubleKeyFrame KeyTime="0:0:0.3" Value="0">
                     <EasingDoubleKeyFrame.EasingFunction>
                         <CircleEase EasingMode="EaseOut"/>
                     </EasingDoubleKeyFrame.EasingFunction>
                 </EasingDoubleKeyFrame>
-                <EasingDoubleKeyFrame KeyTime="0:0:0.6" Value="1">
+                <EasingDoubleKeyFrame KeyTime="0:0:0.7" Value="1">
                     <EasingDoubleKeyFrame.EasingFunction>
                         <CircleEase EasingMode="EaseOut"/>
                     </EasingDoubleKeyFrame.EasingFunction>
@@ -101,647 +101,543 @@
                         <CircleEase EasingMode="EaseOut"/>
                     </EasingDoubleKeyFrame.EasingFunction>
                 </EasingDoubleKeyFrame>
-                <EasingDoubleKeyFrame KeyTime="0:0:0.2" Value="0">
+                <EasingDoubleKeyFrame KeyTime="0:0:0.3" Value="0">
                     <EasingDoubleKeyFrame.EasingFunction>
                         <CircleEase EasingMode="EaseOut"/>
                     </EasingDoubleKeyFrame.EasingFunction>
                 </EasingDoubleKeyFrame>
-                <EasingDoubleKeyFrame KeyTime="0:0:0.6" Value="1">
+                <EasingDoubleKeyFrame KeyTime="0:0:0.7" Value="1">
                     <EasingDoubleKeyFrame.EasingFunction>
                         <CircleEase EasingMode="EaseOut"/>
-                    </EasingDoubleKeyFrame.EasingFunction>
-                </EasingDoubleKeyFrame>
-            </DoubleAnimationUsingKeyFrames>
-            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.ScaleX)" Storyboard.TargetName="rectangleOR1">
-                <EasingDoubleKeyFrame KeyTime="0" Value="0">
-                    <EasingDoubleKeyFrame.EasingFunction>
-                        <CubicEase EasingMode="EaseOut"/>
-                    </EasingDoubleKeyFrame.EasingFunction>
-                </EasingDoubleKeyFrame>
-                <EasingDoubleKeyFrame KeyTime="0:0:0.2" Value="0">
-                    <EasingDoubleKeyFrame.EasingFunction>
-                        <CubicEase EasingMode="EaseOut"/>
-                    </EasingDoubleKeyFrame.EasingFunction>
-                </EasingDoubleKeyFrame>
-                <EasingDoubleKeyFrame KeyTime="0:0:1" Value="1">
-                    <EasingDoubleKeyFrame.EasingFunction>
-                        <CubicEase EasingMode="EaseOut"/>
-                    </EasingDoubleKeyFrame.EasingFunction>
-                </EasingDoubleKeyFrame>
-            </DoubleAnimationUsingKeyFrames>
-            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.ScaleX)" Storyboard.TargetName="rectangleOR2">
-                <EasingDoubleKeyFrame KeyTime="0" Value="0">
-                    <EasingDoubleKeyFrame.EasingFunction>
-                        <CubicEase EasingMode="EaseOut"/>
-                    </EasingDoubleKeyFrame.EasingFunction>
-                </EasingDoubleKeyFrame>
-                <EasingDoubleKeyFrame KeyTime="0:0:0.2" Value="0">
-                    <EasingDoubleKeyFrame.EasingFunction>
-                        <CubicEase EasingMode="EaseOut"/>
-                    </EasingDoubleKeyFrame.EasingFunction>
-                </EasingDoubleKeyFrame>
-                <EasingDoubleKeyFrame KeyTime="0:0:1" Value="1">
-                    <EasingDoubleKeyFrame.EasingFunction>
-                        <CubicEase EasingMode="EaseOut"/>
                     </EasingDoubleKeyFrame.EasingFunction>
                 </EasingDoubleKeyFrame>
             </DoubleAnimationUsingKeyFrames>
             <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Opacity)" Storyboard.TargetName="buttonDragDrop">
                 <EasingDoubleKeyFrame KeyTime="0" Value="0"/>
-                <EasingDoubleKeyFrame KeyTime="0:0:0.2" Value="1"/>
-                <EasingDoubleKeyFrame KeyTime="0:0:0.4" Value="1"/>
+                <EasingDoubleKeyFrame KeyTime="0:0:0.5" Value="1"/>
             </DoubleAnimationUsingKeyFrames>
             <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Opacity)" Storyboard.TargetName="textblockOR">
                 <EasingDoubleKeyFrame KeyTime="0" Value="1"/>
-                <EasingDoubleKeyFrame KeyTime="0:0:0.2" Value="0"/>
-                <EasingDoubleKeyFrame KeyTime="0:0:0.4" Value="1"/>
-                <EasingDoubleKeyFrame KeyTime="0:0:0.6" Value="1"/>
+                <EasingDoubleKeyFrame KeyTime="0:0:0.3" Value="0"/>
+                <EasingDoubleKeyFrame KeyTime="0:0:0.7" Value="1"/>
             </DoubleAnimationUsingKeyFrames>
             <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Opacity)" Storyboard.TargetName="buttonAddImagesFromFolder">
-                <EasingDoubleKeyFrame KeyTime="0" Value="1"/>
-                <EasingDoubleKeyFrame KeyTime="0:0:0.4" Value="0"/>
-                <EasingDoubleKeyFrame KeyTime="0:0:0.6" Value="1"/>
-                <EasingDoubleKeyFrame KeyTime="0:0:0.8" Value="1"/>
+                <EasingDoubleKeyFrame KeyTime="0" Value="0.01"/>
+                <EasingDoubleKeyFrame KeyTime="0:0:0.5" Value="0"/>
+                <EasingDoubleKeyFrame KeyTime="0:0:1" Value="1"/>
             </DoubleAnimationUsingKeyFrames>
         </Storyboard>
-        <Storyboard x:Name="FadeInDrop">
-            <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Visibility)" Storyboard.TargetName="gridDrop">
-                <DiscreteObjectKeyFrame KeyTime="0">
-                    <DiscreteObjectKeyFrame.Value>
-                        <Visibility>Visible</Visibility>
-                    </DiscreteObjectKeyFrame.Value>
-                </DiscreteObjectKeyFrame>
-            </ObjectAnimationUsingKeyFrames>
-            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Opacity)" Storyboard.TargetName="gridDrop">
+        <Storyboard x:Name="AnimateInSelectBar" SpeedRatio="1.1">
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Opacity)" Storyboard.TargetName="stackpanelImageCount">
+                <EasingDoubleKeyFrame KeyTime="0" Value="1"/>
+                <EasingDoubleKeyFrame KeyTime="0:0:0.3" Value="0"/>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.TranslateY)" Storyboard.TargetName="stackpanelImageCount">
+                <EasingDoubleKeyFrame KeyTime="0" Value="0"/>
+                <EasingDoubleKeyFrame KeyTime="0:0:0.3" Value="-30"/>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.TranslateY)" Storyboard.TargetName="textblockItemsSelected">
+                <EasingDoubleKeyFrame KeyTime="0" Value="30"/>
+                <EasingDoubleKeyFrame KeyTime="0:0:0.3" Value="0">
+                    <EasingDoubleKeyFrame.EasingFunction>
+                        <CircleEase EasingMode="EaseOut"/>
+                    </EasingDoubleKeyFrame.EasingFunction>
+                </EasingDoubleKeyFrame>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Opacity)" Storyboard.TargetName="textblockItemsSelected">
+                <EasingDoubleKeyFrame KeyTime="0" Value="0"/>
                 <EasingDoubleKeyFrame KeyTime="0:0:0.2" Value="1"/>
             </DoubleAnimationUsingKeyFrames>
-            <DoubleAnimation Duration="0:0:0.2" To="1" Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.ScaleX)" Storyboard.TargetName="textblockDropToImport" d:IsOptimized="True">
-                <DoubleAnimation.EasingFunction>
-                    <CircleEase EasingMode="EaseOut"/>
-                </DoubleAnimation.EasingFunction>
-            </DoubleAnimation>
-            <DoubleAnimation Duration="0:0:0.2" To="1" Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.ScaleY)" Storyboard.TargetName="textblockDropToImport" d:IsOptimized="True">
-                <DoubleAnimation.EasingFunction>
-                    <CircleEase EasingMode="EaseOut"/>
-                </DoubleAnimation.EasingFunction>
-            </DoubleAnimation>
-        </Storyboard>
-        <Storyboard x:Name="FadeOutDrop">
-            <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Visibility)" Storyboard.TargetName="gridDrop">
-                <DiscreteObjectKeyFrame KeyTime="0:0:0.2">
+            <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Visibility)" Storyboard.TargetName="gridSelected">
+                <DiscreteObjectKeyFrame KeyTime="0">
                     <DiscreteObjectKeyFrame.Value>
-                        <Visibility>Collapsed</Visibility>
+                        <Visibility>Visible</Visibility>
                     </DiscreteObjectKeyFrame.Value>
                 </DiscreteObjectKeyFrame>
             </ObjectAnimationUsingKeyFrames>
-            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Opacity)" Storyboard.TargetName="gridDrop">
+            <DoubleAnimation Duration="0:0:0.3" To="1" BeginTime="0:0:0.1" Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.ScaleX)" Storyboard.TargetName="buttonDeselect" d:IsOptimized="True"/>
+            <DoubleAnimation Duration="0:0:0.3" To="1" BeginTime="0:0:0.1" Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.ScaleY)" Storyboard.TargetName="buttonDeselect" d:IsOptimized="True"/>
+            <DoubleAnimation Duration="0:0:0.3" To="1" BeginTime="0:0:0.1" Storyboard.TargetProperty="(UIElement.Opacity)" Storyboard.TargetName="buttonDeselect" d:IsOptimized="True"/>
+            <DoubleAnimation Duration="0:0:0.3" To="1" BeginTime="0:0:0.2" Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.ScaleX)" Storyboard.TargetName="buttonInverseSelection" d:IsOptimized="True"/>
+            <DoubleAnimation Duration="0:0:0.3" To="1" BeginTime="0:0:0.2" Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.ScaleY)" Storyboard.TargetName="buttonInverseSelection" d:IsOptimized="True"/>
+            <DoubleAnimation Duration="0:0:0.3" To="1" BeginTime="0:0:0.2" Storyboard.TargetProperty="(UIElement.Opacity)" Storyboard.TargetName="buttonInverseSelection" d:IsOptimized="True"/>
+            <DoubleAnimation Duration="0:0:0.3" To="1" BeginTime="0:0:0.3" Storyboard.TargetProperty="(UIElement.Opacity)" Storyboard.TargetName="buttonSelectAll" d:IsOptimized="True"/>
+            <DoubleAnimation Duration="0:0:0.3" To="1" BeginTime="0:0:0.3" Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.ScaleX)" Storyboard.TargetName="buttonSelectAll" d:IsOptimized="True"/>
+            <DoubleAnimation Duration="0:0:0.3" To="1" BeginTime="0:0:0.3" Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.ScaleY)" Storyboard.TargetName="buttonSelectAll" d:IsOptimized="True"/>
+            <DoubleAnimation Duration="0:0:0.3" To="1" BeginTime="0:0:0.4" Storyboard.TargetProperty="(UIElement.Opacity)" Storyboard.TargetName="buttonRemoveSelected" d:IsOptimized="True"/>
+            <DoubleAnimation Duration="0:0:0.3" To="1" BeginTime="0:0:0.4" Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.ScaleX)" Storyboard.TargetName="buttonRemoveSelected" d:IsOptimized="True"/>
+            <DoubleAnimation Duration="0:0:0.3" To="1" BeginTime="0:0:0.4" Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.ScaleY)" Storyboard.TargetName="buttonRemoveSelected" d:IsOptimized="True"/>
+
+        </Storyboard>
+        <Storyboard x:Name="AnimateOutSelectBar" SpeedRatio="1.1">
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Opacity)" Storyboard.TargetName="textblockItemsSelected">
+                <EasingDoubleKeyFrame KeyTime="0" Value="1"/>
                 <EasingDoubleKeyFrame KeyTime="0:0:0.2" Value="0"/>
             </DoubleAnimationUsingKeyFrames>
-            <DoubleAnimation Duration="0:0:0.4" To="0" Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.ScaleX)" Storyboard.TargetName="textblockDropToImport" d:IsOptimized="True">
-                <DoubleAnimation.EasingFunction>
-                    <CircleEase EasingMode="EaseOut"/>
-                </DoubleAnimation.EasingFunction>
-            </DoubleAnimation>
-            <DoubleAnimation Duration="0:0:0.4" To="0" Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.ScaleY)" Storyboard.TargetName="textblockDropToImport" d:IsOptimized="True">
-                <DoubleAnimation.EasingFunction>
-                    <CircleEase EasingMode="EaseOut"/>
-                </DoubleAnimation.EasingFunction>
-            </DoubleAnimation>
-        </Storyboard>
-        <Storyboard x:Name="AnimateInSelectBar" SpeedRatio="1.8">
-            <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Visibility)" Storyboard.TargetName="gridTitleBarButtons">
-                <DiscreteObjectKeyFrame KeyTime="0">
-                    <DiscreteObjectKeyFrame.Value>
-                        <Visibility>Visible</Visibility>
-                    </DiscreteObjectKeyFrame.Value>
-                </DiscreteObjectKeyFrame>
-                <DiscreteObjectKeyFrame KeyTime="0:0:1">
-                    <DiscreteObjectKeyFrame.Value>
-                        <Visibility>Collapsed</Visibility>
-                    </DiscreteObjectKeyFrame.Value>
-                </DiscreteObjectKeyFrame>
-            </ObjectAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.TranslateY)" Storyboard.TargetName="textblockItemsSelected">
+                <EasingDoubleKeyFrame KeyTime="0" Value="0"/>
+                <EasingDoubleKeyFrame KeyTime="0:0:0.3" Value="-30"/>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.TranslateY)" Storyboard.TargetName="stackpanelImageCount">
+                <EasingDoubleKeyFrame KeyTime="0" Value="30"/>
+                <EasingDoubleKeyFrame KeyTime="0:0:0.3" Value="0">
+                    <EasingDoubleKeyFrame.EasingFunction>
+                        <CircleEase EasingMode="EaseOut"/>
+                    </EasingDoubleKeyFrame.EasingFunction>
+                </EasingDoubleKeyFrame>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Opacity)" Storyboard.TargetName="stackpanelImageCount">
+                <EasingDoubleKeyFrame KeyTime="0" Value="0"/>
+                <EasingDoubleKeyFrame KeyTime="0:0:0.3" Value="1"/>
+            </DoubleAnimationUsingKeyFrames>
+
             <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Visibility)" Storyboard.TargetName="gridSelected">
                 <DiscreteObjectKeyFrame KeyTime="0">
                     <DiscreteObjectKeyFrame.Value>
                         <Visibility>Visible</Visibility>
                     </DiscreteObjectKeyFrame.Value>
                 </DiscreteObjectKeyFrame>
-            </ObjectAnimationUsingKeyFrames>
-            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.TranslateY)" Storyboard.TargetName="gridSelected">
-                <EasingDoubleKeyFrame KeyTime="0:0:1" Value="0">
-                    <EasingDoubleKeyFrame.EasingFunction>
-                        <BackEase EasingMode="EaseOut" Amplitude="0.3"/>
-                    </EasingDoubleKeyFrame.EasingFunction>
-                </EasingDoubleKeyFrame>
-            </DoubleAnimationUsingKeyFrames>
-            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.TranslateY)" Storyboard.TargetName="gridTitleBarButtons">
-                <EasingDoubleKeyFrame KeyTime="0:0:1" Value="-60">
-                    <EasingDoubleKeyFrame.EasingFunction>
-                        <BackEase EasingMode="EaseOut" Amplitude="0.3"/>
-                    </EasingDoubleKeyFrame.EasingFunction>
-                </EasingDoubleKeyFrame>
-            </DoubleAnimationUsingKeyFrames>
-        </Storyboard>
-        <Storyboard x:Name="AnimateOutSelectBar" SpeedRatio="1.8">
-            <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Visibility)" Storyboard.TargetName="gridTitleBarButtons">
-                <DiscreteObjectKeyFrame KeyTime="0">
-                    <DiscreteObjectKeyFrame.Value>
-                        <Visibility>Visible</Visibility>
-                    </DiscreteObjectKeyFrame.Value>
-                </DiscreteObjectKeyFrame>
-            </ObjectAnimationUsingKeyFrames>
-            <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Visibility)" Storyboard.TargetName="gridSelected">
-                <DiscreteObjectKeyFrame KeyTime="0">
-                    <DiscreteObjectKeyFrame.Value>
-                        <Visibility>Visible</Visibility>
-                    </DiscreteObjectKeyFrame.Value>
-                </DiscreteObjectKeyFrame>
-                <DiscreteObjectKeyFrame KeyTime="0:0:1">
+                <DiscreteObjectKeyFrame KeyTime="0:0:0.4">
                     <DiscreteObjectKeyFrame.Value>
                         <Visibility>Collapsed</Visibility>
                     </DiscreteObjectKeyFrame.Value>
                 </DiscreteObjectKeyFrame>
             </ObjectAnimationUsingKeyFrames>
-            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.TranslateY)" Storyboard.TargetName="gridSelected">
-                <EasingDoubleKeyFrame KeyTime="0:0:1" Value="60">
+            <DoubleAnimation Duration="0:0:0.2" BeginTime="0:0:0.1" To="0" Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.ScaleX)" Storyboard.TargetName="buttonDeselect" d:IsOptimized="True"/>
+            <DoubleAnimation Duration="0:0:0.2" BeginTime="0:0:0.1" To="0" Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.ScaleY)" Storyboard.TargetName="buttonDeselect" d:IsOptimized="True"/>
+            <DoubleAnimation Duration="0:0:0.2" BeginTime="0:0:0.1" To="0" Storyboard.TargetProperty="(UIElement.Opacity)" Storyboard.TargetName="buttonDeselect" d:IsOptimized="True"/>
+            <DoubleAnimation Duration="0:0:0.2" BeginTime="0:0:0.2" To="0" Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.ScaleX)" Storyboard.TargetName="buttonInverseSelection" d:IsOptimized="True"/>
+            <DoubleAnimation Duration="0:0:0.2" BeginTime="0:0:0.2" To="0" Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.ScaleY)" Storyboard.TargetName="buttonInverseSelection" d:IsOptimized="True"/>
+            <DoubleAnimation Duration="0:0:0.2" BeginTime="0:0:0.2" To="0" Storyboard.TargetProperty="(UIElement.Opacity)" Storyboard.TargetName="buttonInverseSelection" d:IsOptimized="True"/>
+            <DoubleAnimation Duration="0:0:0.2" BeginTime="0:0:0.3" To="0" Storyboard.TargetProperty="(UIElement.Opacity)" Storyboard.TargetName="buttonSelectAll" d:IsOptimized="True"/>
+            <DoubleAnimation Duration="0:0:0.2" BeginTime="0:0:0.3" To="0" Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.ScaleX)" Storyboard.TargetName="buttonSelectAll" d:IsOptimized="True"/>
+            <DoubleAnimation Duration="0:0:0.2" BeginTime="0:0:0.3" To="0" Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.ScaleY)" Storyboard.TargetName="buttonSelectAll" d:IsOptimized="True"/>
+            <DoubleAnimation Duration="0:0:0.2" BeginTime="0:0:0.4" To="0" Storyboard.TargetProperty="(UIElement.Opacity)" Storyboard.TargetName="buttonRemoveSelected" d:IsOptimized="True"/>
+            <DoubleAnimation Duration="0:0:0.2" BeginTime="0:0:0.4" To="0" Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.ScaleX)" Storyboard.TargetName="buttonRemoveSelected" d:IsOptimized="True"/>
+            <DoubleAnimation Duration="0:0:0.2" BeginTime="0:0:0.4" To="0" Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.ScaleY)" Storyboard.TargetName="buttonRemoveSelected" d:IsOptimized="True"/>
+
+        </Storyboard>
+        <Storyboard x:Name="AnimateInContent">
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.TranslateY)" Storyboard.TargetName="gridSidebarInner">
+                <EasingDoubleKeyFrame KeyTime="0" Value="60">
                     <EasingDoubleKeyFrame.EasingFunction>
-                        <BackEase EasingMode="EaseOut" Amplitude="0.3"/>
+                        <CircleEase EasingMode="EaseOut"/>
+                    </EasingDoubleKeyFrame.EasingFunction>
+                </EasingDoubleKeyFrame>
+                <EasingDoubleKeyFrame KeyTime="0:0:0.4" Value="0">
+                    <EasingDoubleKeyFrame.EasingFunction>
+                        <CircleEase EasingMode="EaseOut"/>
                     </EasingDoubleKeyFrame.EasingFunction>
                 </EasingDoubleKeyFrame>
             </DoubleAnimationUsingKeyFrames>
-            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.TranslateY)" Storyboard.TargetName="gridTitleBarButtons">
-                <EasingDoubleKeyFrame KeyTime="0:0:1" Value="0">
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Opacity)" Storyboard.TargetName="gridSidebarInner">
+                <EasingDoubleKeyFrame KeyTime="0" Value="0"/>
+                <EasingDoubleKeyFrame KeyTime="0:0:0.4" Value="1"/>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.TranslateY)" Storyboard.TargetName="gridContentInner">
+                <EasingDoubleKeyFrame KeyTime="0" Value="60">
                     <EasingDoubleKeyFrame.EasingFunction>
-                        <BackEase EasingMode="EaseOut" Amplitude="0.3"/>
+                        <CircleEase EasingMode="EaseOut"/>
                     </EasingDoubleKeyFrame.EasingFunction>
                 </EasingDoubleKeyFrame>
+                <EasingDoubleKeyFrame KeyTime="0:0:0.4" Value="60">
+                    <EasingDoubleKeyFrame.EasingFunction>
+                        <CircleEase EasingMode="EaseOut"/>
+                    </EasingDoubleKeyFrame.EasingFunction>
+                </EasingDoubleKeyFrame>
+                <EasingDoubleKeyFrame KeyTime="0:0:0.8" Value="0">
+                    <EasingDoubleKeyFrame.EasingFunction>
+                        <CircleEase EasingMode="EaseOut"/>
+                    </EasingDoubleKeyFrame.EasingFunction>
+                </EasingDoubleKeyFrame>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Opacity)" Storyboard.TargetName="gridContentInner">
+                <EasingDoubleKeyFrame KeyTime="0" Value="0"/>
+                <EasingDoubleKeyFrame KeyTime="0:0:0.4" Value="0"/>
+                <EasingDoubleKeyFrame KeyTime="0:0:0.8" Value="1"/>
             </DoubleAnimationUsingKeyFrames>
         </Storyboard>
 
     </Page.Resources>
 
-    <Grid x:Name="gridContainer" Background="{ThemeResource BackgroundColour}" AllowDrop="True" Drop="Grid_Drop" DragOver="Grid_DragOver" DragEnter="Grid_DragEnter" DragLeave="Grid_DragLeave" DropCompleted="Grid_DropCompleted">
+    <Grid x:Name="gridContainer" Background="{ThemeResource BackgroundColor}" AllowDrop="True" Drop="Grid_Drop" DragOver="Grid_DragOver" DropCompleted="Grid_DropCompleted">
 
-        <controls:HostBackDrop/>
+        <Rectangle>
+            <Rectangle.Fill>
+                <shared:BackdropBlurBrush/>
+            </Rectangle.Fill>
+        </Rectangle>
+        <Rectangle Fill="{ThemeResource BackgroundColor}" Opacity=".8"/>
+        <Rectangle Fill="Black" Opacity=".075"/>
 
-        <Rectangle Fill="Black" Opacity=".05"/>
-        
-        <Rectangle Fill="{ThemeResource BackgroundColour}" Opacity=".85"/>
+        <RelativePanel x:Name="relativePanelContainer" Visibility="Collapsed">
 
-        <StackPanel x:Name="stackpanelImport" MaxWidth="300" VerticalAlignment="Center">
+            <Grid x:Name="gridSidebar" Width="390" RelativePanel.AlignTopWithPanel="True" RelativePanel.AlignBottomWithPanel="True" RelativePanel.AlignLeftWithPanel="True">
 
-            <Button x:Name="buttonDragDrop"  IsHitTestVisible="False" Content="Drag and drop images" Style="{StaticResource buttonImportStyle}" IsEnabled="False" RenderTransformOrigin="0.5,1">
-                <Button.RenderTransform>
-                    <CompositeTransform/>
-                </Button.RenderTransform>
-            </Button>
-
-            <Grid Margin="0,8">
-
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="*"/>
-                    <ColumnDefinition Width="15"/>
-                    <ColumnDefinition Width="Auto"/>
-                    <ColumnDefinition Width="15"/>
-                    <ColumnDefinition Width="*"/>
-                </Grid.ColumnDefinitions>
-
-                <Rectangle x:Name="rectangleOR1" Fill="{ThemeResource SeparatorColour}" Height="1" VerticalAlignment="Center" RenderTransformOrigin="1,0.5">
-                    <Rectangle.RenderTransform>
-                        <CompositeTransform/>
-                    </Rectangle.RenderTransform>
-                </Rectangle>
-
-                <TextBlock x:Name="textblockOR" Grid.Column="2" FontSize="12" TextLineBounds="Tight" FontWeight="SemiBold" RenderTransformOrigin="0.5,0.5">
-                    <TextBlock.RenderTransform>
-                        <CompositeTransform/>
-                    </TextBlock.RenderTransform>OR</TextBlock>
-
-                <Rectangle x:Name="rectangleOR2" Grid.Column="4" Fill="{ThemeResource SeparatorColour}" Height="1" VerticalAlignment="Center" RenderTransformOrigin="0,0.5">
-                    <Rectangle.RenderTransform>
-                        <CompositeTransform/>
-                    </Rectangle.RenderTransform>
-                </Rectangle>
-
-            </Grid>
-
-            <Button x:Name="buttonAddImagesFromFolder" Content="Click to import images" Style="{StaticResource buttonImportStyle}" Click="AddImagesFromFolderAsync" RenderTransformOrigin="0.5,0">
-                <Button.RenderTransform>
-                    <CompositeTransform/>
-                </Button.RenderTransform>
-            </Button>
-
-        </StackPanel>
-
-        <GridView x:Name="gridviewImages" KeyDown="gridviewImages_KeyDown" ItemsSource="{x:Bind mainPageViewModel.Images.ImageList, Mode=TwoWay}" SelectionChanged="gridviewImages_SelectionChanged" SelectionMode="Multiple" Visibility="Collapsed" Padding="0,60,0,0" ContainerContentChanging="gridviewImages_ContainerContentChanging">
-
-            <GridView.ItemContainerStyle>
-                <Style TargetType="GridViewItem">
-                    <Setter Property="Padding" Value="0" />
-                    <Setter Property="Margin" Value="0" />
-                    <Setter Property="BorderThickness" Value="0" />
-                    <Setter Property="HorizontalAlignment" Value="Stretch" />
-                    <Setter Property="Template">
-                        <Setter.Value>
-                            <ControlTemplate TargetType="GridViewItem">
-                                <ListViewItemPresenter ContentMargin="0" Padding="0"/>
-                            </ControlTemplate>
-                        </Setter.Value>
-                    </Setter>
-                </Style>
-            </GridView.ItemContainerStyle>
-
-            <GridView.ItemsPanel>
-                <ItemsPanelTemplate>
-                    <ItemsWrapGrid Orientation="Horizontal" SizeChanged="ItemsWrapGrid_SizeChanged" AreStickyGroupHeadersEnabled="False" Margin="0,0,-10,0"/>
-                </ItemsPanelTemplate>
-            </GridView.ItemsPanel>
-
-            <GridView.ItemTemplate>
-                <DataTemplate>
-                    <Grid RightTapped="Grid_RightTapped">
-                        <controls:ImageItemControl/>
-                        <FlyoutBase.AttachedFlyout>
-                            <MenuFlyout>
-                                <MenuFlyout.Items>
-                                    <MenuFlyoutItem x:Name="menuFlyoutShowInFileExplorer" Text="Open Image" Click="menuFlyoutShowInFileExplorer_Click"/>
-                                    <MenuFlyoutItem x:Name="menuFlyoutRemoveImage" Text="Remove Image" Click="menuFlyoutRemoveImage_Click"/>
-                                </MenuFlyout.Items>
-                            </MenuFlyout>
-                        </FlyoutBase.AttachedFlyout>
-                    </Grid>
-                </DataTemplate>
-            </GridView.ItemTemplate>
-
-            <GridView.Footer>
-                <StackPanel x:Name="stackpanelImageCount" Opacity="0" Orientation="Horizontal" HorizontalAlignment="Center" Padding="30">
-                    <TextBlock Text="{x:Bind mainPageViewModel.Images.ImageList.Count, Mode=OneWay, FallbackValue=0}" FontSize="12" FontWeight="SemiBold"/>
-                    <TextBlock Text="{x:Bind mainPageViewModel.Images.ImageList.Count, Converter={StaticResource IntToTextConverter}, Mode=OneWay, FallbackValue=Images}" Margin="5,0,0,0" FontSize="12" FontWeight="SemiBold"/>
-                </StackPanel>
-            </GridView.Footer>
-
-        </GridView>
-
-        <Grid x:Name="gridTitleBar" VerticalAlignment="Top" Height="60" converters:Clip.ToBounds="True">
-
-            <!--Titlebar Background-->
-
-            <Grid x:Name="gridTitleBarBackground" Background="Transparent">
-                <Grid x:Name="gridTitleBarBackgroundInner" Opacity="0">
-                    <controls:BackDrop BlurAmount="25"/>
-                    <Rectangle Fill="{ThemeResource TitleBarBrush}" Opacity=".875"/>
-                    <Rectangle Fill="{ThemeResource BackgroundColour}" Height="1" VerticalAlignment="Bottom" Opacity=".175"/>
+                <Grid x:Name="gridSidebarBG">
+                    <Rectangle Fill="{ThemeResource BackgroundColor}" Opacity=".26"/>
+                    <Rectangle Fill="White" Opacity=".04"/>
                 </Grid>
-            </Grid>
 
-            <!--Logo, Buttons and Separator-->
-
-            <Grid x:Name="gridTitleBarButtons" Visibility="Collapsed" RenderTransformOrigin="0.5,0.5">
-                <Grid.RenderTransform>
-                    <CompositeTransform/>
-                </Grid.RenderTransform>
-
-                <TextBlock x:Name="textblockLogo" FontSize="12" HorizontalAlignment="Center" VerticalAlignment="Center" IsHitTestVisible="False" FontFamily="Assets/Fonts/Raleway-SemiBold.ttf#Raleway" RenderTransformOrigin="0.5,0.5">
-                    <TextBlock.RenderTransform>
+                <Grid x:Name="gridSidebarInner" RenderTransformOrigin="0.5,0.5">
+                    <Grid.RenderTransform>
                         <CompositeTransform/>
-                    </TextBlock.RenderTransform>Scalemate</TextBlock>
+                    </Grid.RenderTransform>
 
-                <CheckBox x:Name="checkboxOverflow" Click="checkboxOverflow_Click" Style="{StaticResource checkboxAppBar}" RenderTransformOrigin="0.5,0.5">
-                    <CheckBox.RenderTransform>
-                        <CompositeTransform/>
-                    </CheckBox.RenderTransform>
+                    <TextBlock Text="Scalemate" Margin="30,58,0,0" Style="{StaticResource TextBlockTitle}"/>
 
-                    <ToolTipService.ToolTip>
-                        More
-                    </ToolTipService.ToolTip>
+                    <ScrollViewer Margin="0,100,0,0" VerticalScrollBarVisibility="Auto">
+                        <StackPanel>
 
-                    <Grid>
-
-                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center" Visibility="{Binding IsChecked,ElementName=checkboxOverflow,Converter={StaticResource BooleanToVisibilityConverterInverted}}">
-
-                            <Ellipse
-			Height="4"
-			Width="4"
-			Opacity="1"
-			Stroke="{ThemeResource ForegroundColour}" />
-
-                            <Ellipse
-			Height="4"
-			Width="4"
-			Opacity="1"
-            Margin="4"
-			Stroke="{ThemeResource ForegroundColour}" />
-
-                            <Ellipse
-			Height="4"
-			Width="4"
-			Opacity="1"
-			Stroke="{ThemeResource ForegroundColour}" />
-
-                        </StackPanel>
-
-                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center" Visibility="{Binding IsChecked,ElementName=checkboxOverflow,Converter={StaticResource BooleanToVisibilityConverter}}">
-
-                            <Ellipse
-			Height="4"
-			Width="4"
-			Opacity="1"
-			Fill="{ThemeResource ForegroundColour}" />
-
-                            <Ellipse
-			Height="4"
-			Width="4"
-			Opacity="1"
-            Margin="4"
-			Fill="{ThemeResource ForegroundColour}" />
-
-                            <Ellipse
-			Height="4"
-			Width="4"
-			Opacity="1"
-			Fill="{ThemeResource ForegroundColour}" />
-
-                        </StackPanel>
-
-                    </Grid>
-
-                </CheckBox>
-
-                <Rectangle x:Name="rectangleTitleBarSeparator" Width="1" HorizontalAlignment="Right" Fill="{ThemeResource ForegroundColour}" Opacity=".1"/>
-
-                <CheckBox x:Name="checkboxDone" HorizontalAlignment="Right" Click="checkboxDone_Click" Style="{StaticResource checkboxAppBar}" RenderTransformOrigin="0.5,0.5">
-                    
-                    <CheckBox.RenderTransform>
-                        <CompositeTransform/>
-                    </CheckBox.RenderTransform>
-                    
-                    <ToolTipService.ToolTip>
-                        Export
-                    </ToolTipService.ToolTip>
-                    
-                    <Path
-			Height="10"
-			Width="14"
-			Stretch="Fill"
-			Opacity="1"
-			Data="M 15,0 C15,0 5.4375,9.546875 5.4375,9.546875 5.4375,9.546875 0.875,5 0.875,5 0.875,5 0,5.875 0,5.875 0,5.875 5.4375,11.328125 5.4375,11.328125 5.4375,11.328125 15.875,0.875 15.875,0.875 15.875,0.875 15,0 15,0 15,0 15,0 15,0 z"
-			Fill="{ThemeResource ForegroundColour}" />
-                    
-                </CheckBox>
-
-            </Grid>
-
-            <Grid x:Name="gridSelected" Visibility="Collapsed" RenderTransformOrigin="0.5,0.5">
-                <Grid.RenderTransform>
-                    <CompositeTransform TranslateY="60"/>
-                </Grid.RenderTransform>
-
-                <TextBlock x:Name="textblockItemsSelected" FontSize="12" HorizontalAlignment="Left" Margin="20,0,0,0" VerticalAlignment="Center" IsHitTestVisible="False" FontFamily="Assets/Fonts/Raleway-SemiBold.ttf#Raleway" RenderTransformOrigin="0.5,0.5">
-                    1 Selected
-                </TextBlock>
-
-                <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
-                    <Button x:Name="buttonDeselect" Click="buttonDeselectAll_Click" Style="{StaticResource buttonAppBar}" RenderTransformOrigin="0.5,0.5">
-                        <Button.RenderTransform>
-                            <CompositeTransform/>
-                        </Button.RenderTransform>
-
-                        <ToolTipService.ToolTip>
-                            Deselect All
-                        </ToolTipService.ToolTip>
-
-                        <Path
-		Height="16"
-		Width="16"
-		Stretch="Fill"
-		Opacity="1"
-		Data="M 10,10 C10,10 15,10 15,10 15,10 15,15 15,15 15,15 10,15 10,15 10,15 10,10 10,10 zM 9,9 C9,9 9,16 9,16 9,16 16,16 16,16 16,16 16,9 16,9 16,9 9,9 9,9 zM 1,10 C1,10 6,10 6,10 6,10 6,15 6,15 6,15 1,15 1,15 1,15 1,10 1,10 zM 0,9 C0,9 0,16 0,16 0,16 7,16 7,16 7,16 7,9 7,9 7,9 0,9 0,9 zM 10,1 C10,1 15,1 15,1 15,1 15,6 15,6 15,6 10,6 10,6 10,6 10,1 10,1 zM 9,0 C9,0 9,7 9,7 9,7 16,7 16,7 16,7 16,0 16,0 16,0 9,0 9,0 zM 1,1 C1,1 6,1 6,1 6,1 6,6 6,6 6,6 1,6 1,6 1,6 1,1 1,1 zM 0,0 C0,0 0,7 0,7 0,7 7,7 7,7 7,7 7,0 7,0 7,0 0,0 0,0 z"
-		Fill="{ThemeResource ForegroundColour}" />
-                    </Button>
-                    <Button x:Name="buttonInverseSelection" Click="buttonInverseSelection_Click" Style="{StaticResource buttonAppBar}" RenderTransformOrigin="0.5,0.5">
-                        <Button.RenderTransform>
-                            <CompositeTransform/>
-                        </Button.RenderTransform>
-
-                        <ToolTipService.ToolTip>
-                            Inverse Selection
-                        </ToolTipService.ToolTip>
-
-                        <Path
-		Height="16"
-		Width="16"
-		Stretch="Fill"
-		Opacity="1"
-		Data="M 15,1 C15,1 15,6 15,6 15,6 10,6 10,6 10,6 10,1 10,1 10,1 15,1 15,1 zM 16,0 C16,0 9,0 9,0 9,0 9,7 9,7 9,7 16,7 16,7 16,7 16,0 16,0 zM 6,10 C6,10 6,15 6,15 6,15 1,15 1,15 1,15 1,10 1,10 1,10 6,10 6,10 zM 7,9 C7,9 0,9 0,9 0,9 0,16 0,16 0,16 7,16 7,16 7,16 7,9 7,9 zM 16,9 C16,9 9,9 9,9 9,9 9,16 9,16 9,16 16,16 16,16 16,16 16,9 16,9 zM 7,0 C7,0 0,0 0,0 0,0 0,7 0,7 0,7 7,7 7,7 7,7 7,0 7,0 z"
-		Fill="{ThemeResource ForegroundColour}" />
-                    </Button>
-                    <Button x:Name="buttonSelectAll" Click="buttonSelectAll_Click" Style="{StaticResource buttonAppBar}" RenderTransformOrigin="0.5,0.5">
-                        <Button.RenderTransform>
-                            <CompositeTransform/>
-                        </Button.RenderTransform>
-
-                        <ToolTipService.ToolTip>
-                            Select All
-                        </ToolTipService.ToolTip>
-
-                        <Path
-		Height="16"
-		Width="16"
-		Stretch="Fill"
-		Opacity="1"
-		Data="M 9,9 C9,9 9,16 9,16 9,16 16,16 16,16 16,16 16,9 16,9 16,9 9,9 9,9 zM 0,9 C0,9 0,16 0,16 0,16 7,16 7,16 7,16 7,9 7,9 7,9 0,9 0,9 zM 9,0 C9,0 9,7 9,7 9,7 16,7 16,7 16,7 16,0 16,0 16,0 9,0 9,0 zM 0,0 C0,0 0,7 0,7 0,7 7,7 7,7 7,7 7,0 7,0 7,0 0,0 0,0 z"
-		Fill="{ThemeResource ForegroundColour}" />
-                    </Button>
-                    <Button x:Name="buttonRemoveSelected" Click="buttonRemoveSelected_Click" Style="{StaticResource buttonAppBar}" Margin="0,0,25,0" RenderTransformOrigin="0.5,0.5">
-                        <Button.RenderTransform>
-                            <CompositeTransform/>
-                        </Button.RenderTransform>
-
-                        <ToolTipService.ToolTip>
-                            Remove Selected
-                        </ToolTipService.ToolTip>
-
-                        <Path
-		Height="16"
-		Width="16"
-		Stretch="Fill"
-		Opacity="1"
-		Data="M 10.90625,1.53125 C10.90625,1.53125 10.46875,1.09375 10.46875,1.09375 10.46875,1.09375 6,5.5625 6,5.5625 6,5.5625 1.53125,1.09375 1.53125,1.09375 1.53125,1.09375 1.09375,1.53125 1.09375,1.53125 1.09375,1.53125 5.5625,6 5.5625,6 5.5625,6 1.09375,10.46875 1.09375,10.46875 1.09375,10.46875 1.53125,10.90625 1.53125,10.90625 1.53125,10.90625 6,6.4375 6,6.4375 6,6.4375 10.46875,10.90625 10.46875,10.90625 10.46875,10.90625 10.90625,10.46875 10.90625,10.46875 10.90625,10.46875 6.4375,6 6.4375,6 6.4375,6 10.90625,1.53125 10.90625,1.53125 10.90625,1.53125 10.90625,1.53125 10.90625,1.53125 z"
-		Stroke="{ThemeResource ForegroundColour}"
-		StrokeThickness="1" />
-                    </Button>
-                    <Rectangle Width="1" HorizontalAlignment="Right" Fill="{ThemeResource ForegroundColour}" Opacity=".1"/>
-                </StackPanel>
-
-            </Grid>
-
-        </Grid>
-
-        <Image x:Name="imageTitleBarShadow" Height="8" VerticalAlignment="Top" Margin="0,60,0,0" Source="Assets/TitleBarShadow.png" Stretch="Fill" Opacity="0" IsHitTestVisible="False"/>
-
-        <controlmate:DropdownMenu x:Name="dropdownMenu">
-            <controlmate:DropdownMenu.Menu>
-                <Grid>
-
-                    <StackPanel x:Name="stackpanelOverflow" Width="300">
-                        <Button Style="{StaticResource buttonMenu}" Click="AddImagesFromFolderAsync">
-                            Import Images
-                        </Button>
-                        <Rectangle Height="1" Fill="{ThemeResource ForegroundColour}" Opacity=".1"/>
-                        <TextBlock Margin="20,15,20,0" FontWeight="SemiBold" FontSize="13">Preview Size</TextBlock>
-                        <Slider x:Name="sliderImageSize" IsThumbToolTipEnabled="False" ValueChanged="sliderImageSize_ValueChanged" Minimum="9" Value="12" Maximum="15" Background="{ThemeResource ForegroundColour}" Style="{StaticResource SliderModern}" Margin="20,5"/>
-                        <Rectangle Height="1" Fill="{ThemeResource ForegroundColour}" Opacity=".1"/>
-                        <Button x:Name="buttonAbout" Click="buttonAbout_Click" Style="{StaticResource buttonMenu}">
-                            About Scalemate
-                        </Button>
-                    </StackPanel>
-
-                    <StackPanel x:Name="stackpanelSave" Width="300">
-
-                        <RadioButton Style="{StaticResource radiobuttonMenu}" IsChecked="{Binding PercentageChecked, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
-
-                            <StackPanel>
-
-                                <Grid Height="20" Margin="0,0,0,20">
-                                    <TextBlock Text="Percentage" VerticalAlignment="Center" TextLineBounds="Tight" Margin="40,0,0,0"/>
-                                </Grid>
-
-                                <Grid>
-
-                                    <Grid.ColumnDefinitions>
-                                        <ColumnDefinition Width="40"/>
-                                        <ColumnDefinition Width="50"/>
-                                        <ColumnDefinition Width="*"/>
-                                    </Grid.ColumnDefinitions>
-
-                                    <TextBox x:Name="textboxPercentage" TextChanged="ValidateTextboxes" PlaceholderText="100" KeyDown="TextBox_KeyDown" Text="{Binding Percentage, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" MaxLength="3" Style="{StaticResource textboxMenu}" Grid.Column="1"/>
-
-                                    <TextBlock TextLineBounds="Tight" VerticalAlignment="Center" Grid.Column="2" Margin="15,0,0,0">percent</TextBlock>
-
-                                </Grid>
-
-                            </StackPanel>
-
-                        </RadioButton>
-
-                        <Rectangle Height="1" Opacity=".1" Fill="{ThemeResource ForegroundColour}"/>
-
-                        <RadioButton Style="{StaticResource radiobuttonMenu}" IsChecked="{Binding SpecificSizeChecked, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
-
-                            <Grid>
-
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="*"/>
-                                </Grid.ColumnDefinitions>
+                            <RadioButton Style="{StaticResource radiobuttonMenu}" IsChecked="{Binding PercentageChecked, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
 
                                 <StackPanel>
 
                                     <Grid Height="20" Margin="0,0,0,20">
-
-                                        <TextBlock Text="Specific Size" VerticalAlignment="Center" TextLineBounds="Tight" Margin="40,0,0,0"/>
-
-                                        <CheckBox IsChecked="{Binding ConstrainProportions, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Style="{StaticResource CheckBoxMenu}" HorizontalAlignment="Right">
-                                            <ToolTipService.ToolTip>
-                                                <StackPanel>
-                                                    <TextBlock>
-                                            Constrain Proportions
-                                                    </TextBlock>
-                                                    <TextBlock Opacity=".6" Margin="0,10,0,0" TextWrapping="Wrap">
-                                            When checked, the image's proportions will be constrained to the width and height set below.
-                                                    </TextBlock>
-                                                </StackPanel>
-                                            </ToolTipService.ToolTip>
-                                        </CheckBox>
-
+                                        <TextBlock Text="Percentage" VerticalAlignment="Center" TextLineBounds="Tight" Margin="40,0,0,0"/>
                                     </Grid>
 
                                     <Grid>
 
                                         <Grid.ColumnDefinitions>
                                             <ColumnDefinition Width="40"/>
-                                            <ColumnDefinition Width="50"/>
+                                            <ColumnDefinition Width="70"/>
+                                            <ColumnDefinition Width="20"/>
                                             <ColumnDefinition Width="*"/>
                                         </Grid.ColumnDefinitions>
 
-                                        <StackPanel Grid.Column="1">
+                                        <TextBox x:Name="textboxPercentage" TextChanged="ValidateTextboxes" KeyDown="TextBox_KeyDown" PlaceholderText="100" Text="{Binding Percentage, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" MaxLength="3" Grid.Column="1" TextAlignment="Center"/>
 
-                                            <TextBox x:Name="textboxWidth" TextChanged="ValidateTextboxes" PlaceholderText="1280" KeyDown="TextBox_KeyDown" MaxLength="5" Text="{Binding Width, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Style="{StaticResource textboxMenu}" VerticalAlignment="Center" Margin="0,0,0,20"/>
-
-                                            <TextBox x:Name="textboxHeight" TextChanged="ValidateTextboxes" PlaceholderText="720" KeyDown="TextBox_KeyDown" MaxLength="5" Text="{Binding Height, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Style="{StaticResource textboxMenu}" VerticalAlignment="Center"/>
-
-                                        </StackPanel>
-
-                                        <StackPanel Grid.Column="2">
-
-                                            <Grid Height="35" Margin="15,0,0,20">
-                                                <TextBlock TextLineBounds="Tight" VerticalAlignment="Center">width</TextBlock>
-                                            </Grid>
-
-                                            <Grid Height="35" Margin="15,0,0,0">
-                                                <TextBlock TextLineBounds="Tight" VerticalAlignment="Center">height</TextBlock>
-                                            </Grid>
-
-                                        </StackPanel>
+                                        <TextBlock TextLineBounds="Tight" VerticalAlignment="Center" Grid.Column="3">percent</TextBlock>
 
                                     </Grid>
 
                                 </StackPanel>
 
+                            </RadioButton>
+
+                            <Grid Margin="30,0" Height="2">
+                                <Rectangle Opacity=".1">
+                                    <Rectangle.Fill>
+                                        <shared:BackdropBlurBrush/>
+                                    </Rectangle.Fill>
+                                </Rectangle>
+                                <Rectangle Opacity="{ThemeResource BorderOpacity}" Fill="{ThemeResource ForegroundColor}"/>
                             </Grid>
 
-                        </RadioButton>
+                            <RadioButton Style="{StaticResource radiobuttonMenu}" IsChecked="{Binding SpecificSizeChecked, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
 
-                        <Button x:Name="buttonSave" Click="{x:Bind mainPageViewModel.Save}" Style="{StaticResource buttonSave}">
-                            <StackPanel Orientation="Horizontal">
-                                <TextBlock>Export</TextBlock>
-                                <TextBlock Margin="5,0" Text="{x:Bind mainPageViewModel.Images.ImageList.Count, Mode=OneWay, FallbackValue=0}"/>
-                                <TextBlock Margin="0,0,1,0" Text="{x:Bind mainPageViewModel.Images.ImageList.Count, Converter={StaticResource IntToTextConverter}, Mode=OneWay, FallbackValue=Images}"/>
-                                <TextBlock>...</TextBlock>
-                            </StackPanel>
-                        </Button>
+                                <Grid>
 
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*"/>
+                                    </Grid.ColumnDefinitions>
+
+                                    <StackPanel>
+
+                                        <Grid Height="20" Margin="0,0,0,20">
+
+                                            <TextBlock Text="Specific Size" VerticalAlignment="Center" TextLineBounds="Tight" Margin="40,0,0,0"/>
+
+                                            <CheckBox IsChecked="{Binding ConstrainProportions, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Style="{StaticResource CheckBoxMenu}" HorizontalAlignment="Right">
+                                                <ToolTipService.ToolTip>
+                                                    <StackPanel>
+                                                        <TextBlock>
+                                            Constrain Proportions
+                                                        </TextBlock>
+                                                        <TextBlock Opacity=".6" Margin="0,10,0,0" TextWrapping="Wrap">
+                                            When checked, the image's proportions will be constrained to the width and height set below.
+                                                        </TextBlock>
+                                                    </StackPanel>
+                                                </ToolTipService.ToolTip>
+                                            </CheckBox>
+
+                                        </Grid>
+
+                                        <Grid>
+
+                                            <Grid.RowDefinitions>
+                                                <RowDefinition Height="50"/>
+                                                <RowDefinition Height="20"/>
+                                                <RowDefinition Height="50"/>
+                                            </Grid.RowDefinitions>
+
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="40"/>
+                                                <ColumnDefinition Width="70"/>
+                                                <ColumnDefinition Width="20"/>
+                                                <ColumnDefinition Width="*"/>
+                                            </Grid.ColumnDefinitions>
+
+                                            <TextBox x:Name="textboxWidth" TextChanged="ValidateTextboxes" PlaceholderText="1280" Grid.Column="1" KeyDown="TextBox_KeyDown" MaxLength="4" Text="{Binding Width, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" TextAlignment="Center" VerticalAlignment="Stretch"/>
+
+                                            <TextBlock TextLineBounds="Tight" VerticalAlignment="Center" Grid.Column="3">width</TextBlock>
+
+                                            <TextBox x:Name="textboxHeight" TextChanged="ValidateTextboxes" PlaceholderText="720" Grid.Column="1" Grid.Row="2" KeyDown="TextBox_KeyDown" MaxLength="4" Text="{Binding Height, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" TextAlignment="Center" VerticalAlignment="Stretch"/>
+
+                                            <TextBlock TextLineBounds="Tight" VerticalAlignment="Center" Grid.Column="3" Grid.Row="2">height</TextBlock>
+
+                                        </Grid>
+
+                                    </StackPanel>
+
+                                </Grid>
+
+                            </RadioButton>
+
+                            <Button x:Name="buttonSave" Click="{x:Bind mainPageViewModel.Save}" Margin="30,0,30,0">
+                                <StackPanel Orientation="Horizontal">
+                                    <TextBlock>Export Images...</TextBlock>
+                                </StackPanel>
+                            </Button>
+
+                        </StackPanel>
+                    </ScrollViewer>
+
+                </Grid>
+
+            </Grid>
+
+            <Grid x:Name="gridContent" RelativePanel.AlignRightWithPanel="True" RelativePanel.AlignTopWithPanel="True" RelativePanel.AlignBottomWithPanel="True" RelativePanel.RightOf="{Binding ElementName=gridSidebar}">
+
+                <Grid x:Name="gridContentInner" RenderTransformOrigin="0.5,0.5">
+
+                    <Grid.RenderTransform>
+                        <CompositeTransform/>
+                    </Grid.RenderTransform>
+
+                    <StackPanel x:Name="stackpanelImageCount" Orientation="Horizontal" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="30,58,0,0" RenderTransformOrigin="0.5,0.5">
+                        <StackPanel.Projection>
+                            <PlaneProjection/>
+                        </StackPanel.Projection>
+                        <StackPanel.RenderTransform>
+                            <CompositeTransform/>
+                        </StackPanel.RenderTransform>
+                        <TextBlock Text="{x:Bind mainPageViewModel.ImageList.Count, Mode=OneWay, FallbackValue=0}" Style="{StaticResource TextBlockTitle}"/>
+                        <TextBlock Text="{x:Bind mainPageViewModel.ImageList.Count, Converter={StaticResource IntToTextConverter}, Mode=OneWay, FallbackValue=Images}" Margin="5,0,0,0" Style="{StaticResource TextBlockTitle}"/>
+                    </StackPanel>
+
+                    <GridView x:Name="gridviewImages" Margin="30,125,0,0" Padding="0,0,25,25" KeyDown="gridviewImages_KeyDown" ItemsSource="{x:Bind mainPageViewModel.ImageList, Mode=TwoWay}" SelectionChanged="gridviewImages_SelectionChanged" SelectionMode="Multiple" ContainerContentChanging="gridviewImages_ContainerContentChanging">
+
+                        <GridView.ItemContainerStyle>
+                            <Style TargetType="GridViewItem">
+                                <Setter Property="Padding" Value="0" />
+                                <Setter Property="Margin" Value="0" />
+                                <Setter Property="BorderThickness" Value="0" />
+                                <Setter Property="HorizontalAlignment" Value="Stretch" />
+                                <Setter Property="Template">
+                                    <Setter.Value>
+                                        <ControlTemplate TargetType="GridViewItem">
+                                            <ListViewItemPresenter ContentMargin="0" Padding="0"/>
+                                        </ControlTemplate>
+                                    </Setter.Value>
+                                </Setter>
+                            </Style>
+                        </GridView.ItemContainerStyle>
+
+                        <GridView.ItemsPanel>
+                            <ItemsPanelTemplate>
+                                <ItemsWrapGrid Orientation="Horizontal" SizeChanged="ItemsWrapGrid_SizeChanged" AreStickyGroupHeadersEnabled="False"/>
+                            </ItemsPanelTemplate>
+                        </GridView.ItemsPanel>
+
+                        <GridView.ItemTemplate>
+                            <DataTemplate x:DataType="model:ImportedImage">
+                                <Grid RightTapped="Grid_RightTapped">
+                                    <controls:ImageItemControl Margin="0,0,5,5"/>
+                                    <FlyoutBase.AttachedFlyout>
+                                        <MenuFlyout>
+                                            <MenuFlyout.Items>
+                                                <MenuFlyoutItem x:Name="menuFlyoutShowInFileExplorer" Text="Open Image" Click="menuFlyoutShowInFileExplorer_Click"/>
+                                                <MenuFlyoutItem x:Name="menuFlyoutRemoveImage" Text="Remove Image" Click="menuFlyoutRemoveImage_Click"/>
+                                            </MenuFlyout.Items>
+                                        </MenuFlyout>
+                                    </FlyoutBase.AttachedFlyout>
+                                </Grid>
+                            </DataTemplate>
+                        </GridView.ItemTemplate>
+
+                    </GridView>
+
+                    <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center" Visibility="Collapsed">
+                        <TextBlock FontSize="13" FontWeight="SemiBold">
+                        You don't have any images
+                        </TextBlock>
+                        <TextBlock HorizontalAlignment="Center" FontSize="13" FontWeight="SemiBold" Margin="0,20,0,0" Opacity=".6">
+                        Why not import some?
+                        </TextBlock>
                     </StackPanel>
 
                 </Grid>
-            </controlmate:DropdownMenu.Menu>
-        </controlmate:DropdownMenu>
 
-        <controls:PopupControl x:Name="popupControl">
-            <controls:PopupControl.PopupContent>
-                <views:ViewAbout x:Name="viewAbout"/>
-            </controls:PopupControl.PopupContent>
-        </controls:PopupControl>
-        
-        <Grid x:Name="gridDrop" Visibility="Collapsed" Opacity="0">
-            <controls:BackDrop/>
-            <Rectangle Fill="{ThemeResource BackgroundColour}" Opacity=".8"/>
-            <TextBlock x:Name="textblockDropToImport" HorizontalAlignment="Center" FontSize="20" FontWeight="Light" VerticalAlignment="Center" TextLineBounds="Tight" RenderTransformOrigin="0.5,0.5">
-                <TextBlock.RenderTransform>
-                    <CompositeTransform ScaleX="0" ScaleY="0"/>
-                </TextBlock.RenderTransform>
-                Drop to import images
-            </TextBlock>
+                <Grid x:Name="gridSelected" VerticalAlignment="Top" Margin="0,49,0,0" Visibility="Collapsed">
+
+                    <TextBlock x:Name="textblockItemsSelected" Style="{StaticResource TextBlockTitle}" Margin="30,0,0,0" RenderTransformOrigin="0.5,0.5" VerticalAlignment="Center">
+                        <TextBlock.Projection>
+                            <PlaneProjection/>
+                        </TextBlock.Projection>
+                        <TextBlock.RenderTransform>
+                            <CompositeTransform/>
+                        </TextBlock.RenderTransform>
+                        1 Selected
+                    </TextBlock>
+
+                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Margin="0,0,30,0">
+                        <Button x:Name="buttonDeselect" Click="buttonDeselectAll_Click" Style="{StaticResource ButtonClose}" RenderTransformOrigin="0.5,0.5">
+                            <Button.RenderTransform>
+                                <CompositeTransform/>
+                            </Button.RenderTransform>
+
+                            <ToolTipService.ToolTip>
+                                Deselect All
+                            </ToolTipService.ToolTip>
+
+                            <Path
+		Height="16"
+		Width="16"
+		Stretch="Fill"
+		Opacity="1"
+		Data="M 10,10 C10,10 15,10 15,10 15,10 15,15 15,15 15,15 10,15 10,15 10,15 10,10 10,10 zM 9,9 C9,9 9,16 9,16 9,16 16,16 16,16 16,16 16,9 16,9 16,9 9,9 9,9 zM 1,10 C1,10 6,10 6,10 6,10 6,15 6,15 6,15 1,15 1,15 1,15 1,10 1,10 zM 0,9 C0,9 0,16 0,16 0,16 7,16 7,16 7,16 7,9 7,9 7,9 0,9 0,9 zM 10,1 C10,1 15,1 15,1 15,1 15,6 15,6 15,6 10,6 10,6 10,6 10,1 10,1 zM 9,0 C9,0 9,7 9,7 9,7 16,7 16,7 16,7 16,0 16,0 16,0 9,0 9,0 zM 1,1 C1,1 6,1 6,1 6,1 6,6 6,6 6,6 1,6 1,6 1,6 1,1 1,1 zM 0,0 C0,0 0,7 0,7 0,7 7,7 7,7 7,7 7,0 7,0 7,0 0,0 0,0 z"
+		Fill="{ThemeResource ForegroundColor}" />
+                        </Button>
+                        <Button x:Name="buttonInverseSelection" Click="buttonInverseSelection_Click" Style="{StaticResource ButtonClose}" RenderTransformOrigin="0.5,0.5" Margin="15,0,0,0">
+                            <Button.RenderTransform>
+                                <CompositeTransform/>
+                            </Button.RenderTransform>
+
+                            <ToolTipService.ToolTip>
+                                Inverse Selection
+                            </ToolTipService.ToolTip>
+
+                            <Path
+		Height="16"
+		Width="16"
+		Stretch="Fill"
+		Opacity="1"
+		Data="M 15,1 C15,1 15,6 15,6 15,6 10,6 10,6 10,6 10,1 10,1 10,1 15,1 15,1 zM 16,0 C16,0 9,0 9,0 9,0 9,7 9,7 9,7 16,7 16,7 16,7 16,0 16,0 zM 6,10 C6,10 6,15 6,15 6,15 1,15 1,15 1,15 1,10 1,10 1,10 6,10 6,10 zM 7,9 C7,9 0,9 0,9 0,9 0,16 0,16 0,16 7,16 7,16 7,16 7,9 7,9 zM 16,9 C16,9 9,9 9,9 9,9 9,16 9,16 9,16 16,16 16,16 16,16 16,9 16,9 zM 7,0 C7,0 0,0 0,0 0,0 0,7 0,7 0,7 7,7 7,7 7,7 7,0 7,0 z"
+		Fill="{ThemeResource ForegroundColor}" />
+                        </Button>
+                        <Button x:Name="buttonSelectAll" Click="buttonSelectAll_Click" Style="{StaticResource ButtonClose}" RenderTransformOrigin="0.5,0.5" Margin="15,0,0,0">
+                            <Button.RenderTransform>
+                                <CompositeTransform/>
+                            </Button.RenderTransform>
+
+                            <ToolTipService.ToolTip>
+                                Select All
+                            </ToolTipService.ToolTip>
+
+                            <Path
+		Height="16"
+		Width="16"
+		Stretch="Fill"
+		Opacity="1"
+		Data="M 9,9 C9,9 9,16 9,16 9,16 16,16 16,16 16,16 16,9 16,9 16,9 9,9 9,9 zM 0,9 C0,9 0,16 0,16 0,16 7,16 7,16 7,16 7,9 7,9 7,9 0,9 0,9 zM 9,0 C9,0 9,7 9,7 9,7 16,7 16,7 16,7 16,0 16,0 16,0 9,0 9,0 zM 0,0 C0,0 0,7 0,7 0,7 7,7 7,7 7,7 7,0 7,0 7,0 0,0 0,0 z"
+		Fill="{ThemeResource ForegroundColor}" />
+                        </Button>
+                        <Button x:Name="buttonRemoveSelected" Click="buttonRemoveSelected_Click" Style="{StaticResource ButtonClose}" RenderTransformOrigin="0.5,0.5" Margin="15,0,0,0">
+                            <Button.RenderTransform>
+                                <CompositeTransform/>
+                            </Button.RenderTransform>
+
+                            <ToolTipService.ToolTip>
+                                Remove Selected
+                            </ToolTipService.ToolTip>
+
+                            <Path
+		Height="16"
+		Width="16"
+		Stretch="Fill"
+		Opacity="1"
+		Data="M 10.90625,1.53125 C10.90625,1.53125 10.46875,1.09375 10.46875,1.09375 10.46875,1.09375 6,5.5625 6,5.5625 6,5.5625 1.53125,1.09375 1.53125,1.09375 1.53125,1.09375 1.09375,1.53125 1.09375,1.53125 1.09375,1.53125 5.5625,6 5.5625,6 5.5625,6 1.09375,10.46875 1.09375,10.46875 1.09375,10.46875 1.53125,10.90625 1.53125,10.90625 1.53125,10.90625 6,6.4375 6,6.4375 6,6.4375 10.46875,10.90625 10.46875,10.90625 10.46875,10.90625 10.90625,10.46875 10.90625,10.46875 10.90625,10.46875 6.4375,6 6.4375,6 6.4375,6 10.90625,1.53125 10.90625,1.53125 10.90625,1.53125 10.90625,1.53125 10.90625,1.53125 z"
+		Stroke="{ThemeResource ForegroundColor}"
+		StrokeThickness="1" />
+                        </Button>
+                    </StackPanel>
+
+                </Grid>
+
+            </Grid>
+
+            <CommandBar x:Name="commandBarSidebar" Background="Transparent" Width="390" IsOpen="False" ClosedDisplayMode="Minimal" RelativePanel.AlignLeftWithPanel="True" RelativePanel.AlignBottomWithPanel="True">
+                <CommandBar.PrimaryCommands>
+                    <AppBarButton Label="Import Images" Click="AddImagesFromFolderAsync">
+                        <AppBarButton.Icon>
+                            <PathIcon Data="M 2,0 C2,0 2,13.40625 2,13.40625 2,13.40625 4.296875,15.703125 4.296875,15.703125 4.484375,15.90625 4.71875,16 5,16 5.125,16 5.265625,15.984375 5.390625,15.921875 5.578125,15.84375 5.71875,15.71875 5.828125,15.546875 5.9375,15.390625 6,15.203125 6,15 6,15 6,14 6,14 6,14 13,14 13,14 13.125,14 13.265625,13.984375 13.390625,13.921875 13.515625,13.875 13.609375,13.796875 13.703125,13.703125 13.796875,13.609375 13.859375,13.515625 13.921875,13.390625 13.96875,13.265625 14,13.140625 14,13 14,13 14,10.75 14,10.75 14,10.515625 13.96875,10.3125 13.921875,10.140625 13.875,9.96875 13.8125,9.8125 13.75,9.6875 13.671875,9.5625 13.59375,9.4375 13.5,9.328125 13.40625,9.234375 13.328125,9.125 13.265625,9.015625 13.1875,8.90625 13.125,8.796875 13.078125,8.671875 13.015625,8.546875 13,8.40625 13,8.25 13,8.25 13,1 13,1 13,0.875 12.96875,0.734375 12.921875,0.609375 12.859375,0.484375 12.796875,0.390625 12.703125,0.296875 12.609375,0.203125 12.515625,0.140625 12.390625,0.078125 12.265625,0.03125 12.125,0 12,0 12,0 2,0 2,0 2,0 2,0 2,0 zM 5,15 C5,15 3,13 3,13 3,13 3,1.703125 3,1.703125 3,1.703125 6,4.703125 6,4.703125 6,4.703125 6,9.75 6,9.75 6,9.90625 5.96875,10.046875 5.921875,10.171875 5.875,10.296875 5.8125,10.421875 5.75,10.515625 5.671875,10.625 5.59375,10.734375 5.5,10.828125 5.40625,10.9375 5.328125,11.0625 5.265625,11.1875 5.1875,11.328125 5.125,11.484375 5.078125,11.640625 5.015625,11.8125 5,12.015625 5,12.25 5,12.25 5,15 5,15 5,15 5,15 5,15 zM 13,13 C13,13 6,13 6,13 6,13 6,12.25 6,12.25 6,12.09375 6.015625,11.953125 6.078125,11.828125 6.125,11.703125 6.1875,11.59375 6.265625,11.484375 6.328125,11.375 6.40625,11.265625 6.5,11.15625 6.59375,11.0625 6.671875,10.9375 6.75,10.8125 6.8125,10.6875 6.875,10.53125 6.921875,10.359375 6.96875,10.1875 7,9.984375 7,9.75 7,9.75 7,4.703125 7,4.703125 7,4.578125 6.96875,4.453125 6.921875,4.328125 6.875,4.203125 6.8125,4.09375 6.71875,4 6.71875,4 3.71875,1 3.71875,1 3.71875,1 12,1 12,1 12,1 12,8.25 12,8.25 12,8.484375 12.015625,8.6875 12.078125,8.859375 12.125,9.03125 12.1875,9.1875 12.265625,9.3125 12.328125,9.4375 12.40625,9.5625 12.5,9.671875 12.59375,9.78125 12.671875,9.890625 12.75,9.984375 12.8125,10.09375 12.875,10.203125 12.921875,10.328125 12.96875,10.453125 13,10.59375 13,10.75 13,10.75 13,13 13,13 13,13 13,13 13,13 z"/>
+                        </AppBarButton.Icon>
+                    </AppBarButton>
+                </CommandBar.PrimaryCommands>
+                <CommandBar.SecondaryCommands>
+                    <AppBarButton Label="About" Click="{x:Bind mainPageViewModel.About}"/>
+                </CommandBar.SecondaryCommands>
+            </CommandBar>
+
+        </RelativePanel>
+
+        <Grid x:Name="gridOOBE" Visibility="Visible">
+
+            <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
+
+                <StackPanel x:Name="stackpanelImport" Width="300" VerticalAlignment="Center">
+
+                    <Button x:Name="buttonDragDrop" IsHitTestVisible="False" Content="Drag and drop images" Style="{StaticResource buttonImportStyle}" IsEnabled="False" RenderTransformOrigin="0.5,1" Opacity="0">
+                        <Button.RenderTransform>
+                            <CompositeTransform/>
+                        </Button.RenderTransform>
+                    </Button>
+
+                    <Grid Margin="0,15" Opacity=".8">
+
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="15"/>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="15"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+
+                        <Rectangle x:Name="rectangleOR1" Fill="{ThemeResource ForegroundColor}" Height="1" Width="0" Opacity=".2" HorizontalAlignment="Right" VerticalAlignment="Center"/>
+
+                        <TextBlock x:Name="textblockOR" Grid.Column="2" FontSize="12" TextLineBounds="Tight" FontWeight="SemiBold" RenderTransformOrigin="0.5,0.5" Opacity="0">
+                            <TextBlock.RenderTransform>
+                                <CompositeTransform/>
+                            </TextBlock.RenderTransform>
+                            OR
+                        </TextBlock>
+
+                        <Rectangle x:Name="rectangleOR2" Grid.Column="4" Fill="{ThemeResource ForegroundColor}" Width="0" Opacity=".2" Height="1" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+
+                    </Grid>
+
+                    <Button x:Name="buttonAddImagesFromFolder" Content="Click to import images" Style="{StaticResource buttonImportStyle}" Click="AddImagesFromFolderAsync" RenderTransformOrigin="0.5,0" Opacity="0">
+                        <Button.RenderTransform>
+                            <CompositeTransform/>
+                        </Button.RenderTransform>
+                    </Button>
+
+                </StackPanel>
+
+            </StackPanel>
+
         </Grid>
 
         <Grid x:Name="gridSave" Visibility="Collapsed">
 
             <controls:BackDrop/>
 
-            <Rectangle Fill="{ThemeResource BackgroundColour}" Opacity=".9"/>
+            <Rectangle Fill="{ThemeResource BackgroundColor}" Opacity=".9"/>
 
             <StackPanel x:Name="stackpanelExporting" HorizontalAlignment="Center" VerticalAlignment="Center" Visibility="Visible">
-                <ProgressRing Foreground="{ThemeResource ForegroundColour}" IsActive="True" Margin="0,0,0,20" Width="30" Height="30"/>
+                <ProgressRing Foreground="{ThemeResource ForegroundColor}" IsActive="True" Margin="0,0,0,20" Width="40" Height="40"/>
                 <StackPanel Orientation="Horizontal">
-                    <TextBlock FontSize="16" FontWeight="Light">Saving</TextBlock>
-                    <TextBlock FontSize="16" FontWeight="Light" Text="{Binding ProgressValue, Mode=TwoWay, FallbackValue=1}" Margin="5,0"/>
-                    <TextBlock FontSize="16" FontWeight="Light">of</TextBlock>
-                    <TextBlock FontSize="16" FontWeight="Light" Text="{Binding ProgressMax, Mode=TwoWay, FallbackValue=100}" Margin="5,0"/>
-                    <TextBlock FontSize="16" FontWeight="Light">images</TextBlock>
+                    <TextBlock FontSize="16" FontWeight="SemiBold">Saving</TextBlock>
+                    <TextBlock FontSize="16" FontWeight="SemiBold" Text="{Binding ProgressValue, Mode=TwoWay, FallbackValue=1}" Margin="5,0"/>
+                    <TextBlock FontSize="16" FontWeight="SemiBold">of</TextBlock>
+                    <TextBlock FontSize="16" FontWeight="SemiBold" Text="{Binding ProgressMax, Mode=TwoWay, FallbackValue=100}" Margin="5,0"/>
+                    <TextBlock FontSize="16" FontWeight="SemiBold">images</TextBlock>
                 </StackPanel>
             </StackPanel>
 
-            <StackPanel x:Name="stackpanelExportComplete" HorizontalAlignment="Center" VerticalAlignment="Center" Visibility="Collapsed" Width="300">
+            <StackPanel x:Name="stackpanelExportComplete" HorizontalAlignment="Center" VerticalAlignment="Center" Visibility="Collapsed">
 
                 <TextBlock FontSize="30" FontWeight="Bold" HorizontalAlignment="Center">
                     Export Complete!
@@ -749,7 +645,7 @@
 
                 <Button x:Name="buttonOpenFolder" Click="{x:Bind mainPageViewModel.OpenFolder}" Content="Open Folder" Style="{StaticResource buttonImportStyle}" Margin="0,20,0,0"/>
 
-                <Grid Margin="0,8">
+                <Grid Margin="0,8" Opacity=".8">
 
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="*"/>
@@ -759,22 +655,13 @@
                         <ColumnDefinition Width="*"/>
                     </Grid.ColumnDefinitions>
 
-                    <Rectangle Fill="{ThemeResource SeparatorColour}" Height="1" VerticalAlignment="Center" RenderTransformOrigin="1,0.5">
-                        <Rectangle.RenderTransform>
-                            <CompositeTransform/>
-                        </Rectangle.RenderTransform>
-                    </Rectangle>
+                    <Rectangle Fill="{ThemeResource ForegroundColor}" Height="1" Width="100" Opacity=".2" HorizontalAlignment="Right" VerticalAlignment="Center"/>
 
-                    <TextBlock Grid.Column="2" FontSize="12" TextLineBounds="Tight" FontWeight="SemiBold" RenderTransformOrigin="0.5,0.5">
-                        <TextBlock.RenderTransform>
-                            <CompositeTransform/>
-                        </TextBlock.RenderTransform>OR</TextBlock>
-
-                    <Rectangle Grid.Column="4" Fill="{ThemeResource SeparatorColour}" Height="1" VerticalAlignment="Center" RenderTransformOrigin="0,0.5">
-                        <Rectangle.RenderTransform>
-                            <CompositeTransform/>
-                        </Rectangle.RenderTransform>
-                    </Rectangle>
+                    <TextBlock Grid.Column="2" FontSize="12" TextLineBounds="Tight" FontWeight="SemiBold" HorizontalAlignment="Center">
+                        OR
+                    </TextBlock>
+                    
+                    <Rectangle Fill="{ThemeResource ForegroundColor}" Height="1" Width="100" Opacity=".2" HorizontalAlignment="Right" VerticalAlignment="Center" Grid.Column="4"/>
 
                 </Grid>
 

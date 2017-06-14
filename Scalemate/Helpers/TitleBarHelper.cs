@@ -40,7 +40,7 @@ namespace Scalemate.Helpers
 
             //Tracks the system theme and updates the caption buttons accordingly
 
-            if (((SolidColorBrush)Application.Current.Resources["ForegroundColour"]).Color.ToString() == "#FF000000")
+            if (((SolidColorBrush)Application.Current.Resources["ForegroundColor"]).Color.ToString() == "#FF000000")
             {
                 formattableTitleBar.ButtonHoverBackgroundColor = Color.FromArgb(25, 0, 0, 0);
                 formattableTitleBar.ButtonPressedBackgroundColor = Color.FromArgb(50, 0, 0, 0);

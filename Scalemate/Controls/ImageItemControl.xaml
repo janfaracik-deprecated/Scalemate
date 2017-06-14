@@ -40,16 +40,16 @@
                                         <Storyboard>
                                             <DoubleAnimation Storyboard.TargetName="rectangleDarken" Storyboard.TargetProperty="Opacity" Duration="0:0:0.1" To="0"/>
                                             <DoubleAnimation Storyboard.TargetName="ellipseCheck" Storyboard.TargetProperty="Opacity" Duration="0:0:0.1" To="0"/>
-                                            <DoubleAnimation Storyboard.TargetName="ellipseCheck" Storyboard.TargetProperty="(RenderTransform).(ScaleTransform.ScaleX)" Duration="0:0:0.1" To="0"/>
-                                            <DoubleAnimation Storyboard.TargetName="ellipseCheck" Storyboard.TargetProperty="(RenderTransform).(ScaleTransform.ScaleY)" Duration="0:0:0.1" To="0"/>
+                                            <DoubleAnimation Storyboard.TargetName="ellipseCheck" Storyboard.TargetProperty="(RenderTransform).(ScaleTransform.ScaleX)" Duration="0:0:0.1" To=".8"/>
+                                            <DoubleAnimation Storyboard.TargetName="ellipseCheck" Storyboard.TargetProperty="(RenderTransform).(ScaleTransform.ScaleY)" Duration="0:0:0.1" To=".8"/>
                                         </Storyboard>
                                     </VisualState>
                                     <VisualState x:Name="UncheckedPointerOver">
                                         <Storyboard>
                                             <DoubleAnimation Storyboard.TargetName="rectangleDarken" Storyboard.TargetProperty="Opacity" Duration="0:0:0.1" To="0.2"/>
                                             <DoubleAnimation Storyboard.TargetName="ellipseCheck" Storyboard.TargetProperty="Opacity" Duration="0:0:0.1" To="0"/>
-                                            <DoubleAnimation Storyboard.TargetName="ellipseCheck" Storyboard.TargetProperty="(RenderTransform).(ScaleTransform.ScaleX)" Duration="0:0:0.1" To="0"/>
-                                            <DoubleAnimation Storyboard.TargetName="ellipseCheck" Storyboard.TargetProperty="(RenderTransform).(ScaleTransform.ScaleY)" Duration="0:0:0.1" To="0"/>
+                                            <DoubleAnimation Storyboard.TargetName="ellipseCheck" Storyboard.TargetProperty="(RenderTransform).(ScaleTransform.ScaleX)" Duration="0:0:0.1" To=".8"/>
+                                            <DoubleAnimation Storyboard.TargetName="ellipseCheck" Storyboard.TargetProperty="(RenderTransform).(ScaleTransform.ScaleY)" Duration="0:0:0.1" To=".8"/>
                                         </Storyboard>
                                     </VisualState>
                                     <VisualState x:Name="UncheckedPressed">
@@ -92,20 +92,20 @@
                                 </VisualStateGroup>
                             </VisualStateManager.VisualStateGroups>
 
-                            <Rectangle x:Name="rectangleDarken" Fill="{ThemeResource BackgroundColour}" Grid.ColumnSpan="2" Opacity="0"/>
+                            <Rectangle x:Name="rectangleDarken" Fill="{ThemeResource BackgroundColor}" Grid.ColumnSpan="2" Opacity="0"/>
 
                             <Grid x:Name="ellipseCheck" Width="28" Height="28" Opacity="0" RenderTransformOrigin="0.5,0.5">
                                 <Grid.RenderTransform>
                                     <CompositeTransform ScaleX="0" ScaleY="0"/>
                                 </Grid.RenderTransform>
-                                <Ellipse Fill="{ThemeResource ForegroundColour}"/>
+                                <Ellipse Fill="{ThemeResource ForegroundColor}"/>
                                 <Path
 			Height="8"
 			Width="10"
 			Stretch="Fill"
 			Opacity="1"
 			Data="M 15,0 C15,0 5.4375,9.546875 5.4375,9.546875 5.4375,9.546875 0.875,5 0.875,5 0.875,5 0,5.875 0,5.875 0,5.875 5.4375,11.328125 5.4375,11.328125 5.4375,11.328125 15.875,0.875 15.875,0.875 15.875,0.875 15,0 15,0 15,0 15,0 15,0 z"
-			Fill="{ThemeResource BackgroundColour}" />
+			Fill="{ThemeResource BackgroundColor}" />
                             </Grid>
 
                             <ContentPresenter x:Name="ContentPresenter" AutomationProperties.AccessibilityView="Raw" ContentTemplate="{TemplateBinding ContentTemplate}" ContentTransitions="{TemplateBinding ContentTransitions}" Content="{TemplateBinding Content}" Grid.Column="1" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" Margin="{TemplateBinding Padding}" TextWrapping="Wrap" VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
@@ -156,15 +156,46 @@
 
     </UserControl.Resources>
 
-    <Grid converters:Clip.ToBounds="True">
+    <Grid converters:Clip.ToBounds="True" PointerEntered="Grid_PointerEntered" PointerExited="Grid_PointerExited">
 
-        <Rectangle x:Name="rectangleDarken" Fill="{ThemeResource ForegroundColour}" Opacity="0"/>
+        <Rectangle x:Name="rectangleDarken" Fill="{ThemeResource ForegroundColor}" Opacity="0" Visibility="Collapsed"/>
 
         <Image x:Name="imageThumbnail" Opacity="0" HorizontalAlignment="Center" VerticalAlignment="Center" Stretch="UniformToFill" Margin="-2"/>
 
         <Image x:Name="imageFull" Opacity="0" HorizontalAlignment="Center" VerticalAlignment="Center" Stretch="UniformToFill" Margin="-2"/>
 
+        <Grid x:Name="gridHoverCheck" Opacity="0">
+            <Rectangle>
+                <Rectangle.Fill>
+                    <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                        <GradientStop x:Name="gradientStop1" Color="Red"/>
+                        <GradientStop x:Name="gradientStop2" Color="Black" Offset="1"/>
+                    </LinearGradientBrush>
+                </Rectangle.Fill>
+            </Rectangle>
+
+            <Grid HorizontalAlignment="Center" VerticalAlignment="Center" RenderTransformOrigin="0.5,0.5">
+                <Grid.RenderTransform>
+                    <CompositeTransform ScaleX="0.8" ScaleY="0.8"/>
+                </Grid.RenderTransform>
+
+                <Ellipse x:Name="ellipseRGB" Fill="{ThemeResource ForegroundColor}" Width="28" Height="28" Opacity=".6"/>
+                <Ellipse Fill="{ThemeResource ForegroundColor}" Width="28" Height="28" Opacity=".4"/>
+                <Path
+			Height="8"
+			Width="10"
+			Stretch="Fill"
+			Opacity=".5"
+			Data="M 15,0 C15,0 5.4375,9.546875 5.4375,9.546875 5.4375,9.546875 0.875,5 0.875,5 0.875,5 0,5.875 0,5.875 0,5.875 5.4375,11.328125 5.4375,11.328125 5.4375,11.328125 15.875,0.875 15.875,0.875 15.875,0.875 15,0 15,0 15,0 15,0 15,0 z"
+			Fill="{ThemeResource BackgroundColor}" />
+
+            </Grid>
+
+        </Grid>
+
         <CheckBox IsChecked="{Binding IsSelected, Mode=TwoWay}" Style="{StaticResource CheckBoxStyle1}" IsHitTestVisible="False"/>
+
+        <Rectangle IsHitTestVisible="False" StrokeThickness="1" Stroke="{ThemeResource ForegroundColor}" Opacity=".06"/>
 
         <ToolTipService.ToolTip>
             <ToolTip RequestedTheme="Dark" Style="{StaticResource ToolTipImage}">

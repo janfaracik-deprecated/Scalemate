@@ -95,15 +95,6 @@
     <!-- A reference to the entire .Net Framework and Windows SDK are automatically included -->
     <Content Include="Assets\BadgeLogo.png" />
     <Content Include="Assets\BadgeLogo.scale-100.png" />
-    <Content Include="Assets\Fonts\Raleway-Light.ttf" />
-    <Content Include="Assets\Fonts\Raleway-Medium.ttf" />
-    <Content Include="Assets\Fonts\Raleway-Regular.ttf" />
-    <Content Include="Assets\Fonts\Raleway-SemiBold.ttf" />
-    <Content Include="Assets\Fonts\Raleway-Thin.ttf" />
-    <Content Include="Assets\Fonts\Raleway-Black.ttf" />
-    <Content Include="Assets\Fonts\Raleway-Bold.ttf" />
-    <Content Include="Assets\Fonts\Raleway-ExtraBold.ttf" />
-    <Content Include="Assets\Fonts\Raleway-ExtraLight.ttf" />
     <None Include="project.json" />
   </ItemGroup>
   <ItemGroup>
@@ -111,23 +102,15 @@
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
     <Compile Include="Controls\BackDrop.cs" />
-    <Compile Include="Controls\DropShadowPanel.Properties.cs" />
-    <Compile Include="Controls\DropShadowPanel.xaml.cs">
-      <DependentUpon>DropShadowPanel.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Controls\HostBackDrop.cs" />
+    <Compile Include="Controls\BackdropBlurBrush.cs" />
     <Compile Include="Controls\ImageItemControl.xaml.cs">
       <DependentUpon>ImageItemControl.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Controls\PopupControl.xaml.cs">
-      <DependentUpon>PopupControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="Converters\Converters.cs" />
     <Compile Include="Helpers\NotificationHelper.cs" />
     <Compile Include="Helpers\SettingsHelper.cs" />
     <Compile Include="Helpers\TitleBarHelper.cs" />
     <Compile Include="Models\ImportedImage.cs" />
-    <Compile Include="Helpers\Animationmate.cs" />
     <Compile Include="MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>
     </Compile>
@@ -137,9 +120,6 @@
     <Compile Include="ViewModels\MainPageViewModel.cs" />
     <Compile Include="ViewModels\ViewModelAbout.cs" />
     <Compile Include="ViewModels\ViewModelHelpers.cs" />
-    <Compile Include="Views\ViewAbout.xaml.cs">
-      <DependentUpon>ViewAbout.xaml</DependentUpon>
-    </Compile>
   </ItemGroup>
   <ItemGroup>
     <AppxManifest Include="Package.appxmanifest">
@@ -154,7 +134,6 @@
     <Content Include="Assets\LargeTile.scale-100.png" />
     <Content Include="Assets\LargeTile.scale-200.png" />
     <Content Include="Assets\SmallTile.scale-200.png" />
-    <Content Include="Assets\StoreLogo.png" />
     <Content Include="Assets\TitleBarShadow.png" />
     <Content Include="Assets\SmallTile.scale-100.png" />
     <Content Include="Assets\SplashScreen.scale-100.png" />
@@ -177,30 +156,24 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Page Include="Controls\DropShadowPanel.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
     <Page Include="Controls\ImageItemControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Controls\PopupControl.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
     </Page>
     <Page Include="MainPage.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+    <Page Include="Properties\DesignTimeResources.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <ContainsDesignTimeResources>true</ContainsDesignTimeResources>
+    </Page>
     <Page Include="Styles.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Page>
-    <Page Include="Views\ViewAbout.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
     </Page>
   </ItemGroup>
   <ItemGroup>
@@ -208,6 +181,12 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\Controlmate\Controlmate\bin\Release\Controlmate.dll</HintPath>
     </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\Palette\Shared\Shared.csproj">
+      <Project>{cf57c6f7-f130-4d0b-97c2-4eb5208d3810}</Project>
+      <Name>Shared</Name>
+    </ProjectReference>
   </ItemGroup>
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '14.0' ">
     <VisualStudioVersion>14.0</VisualStudioVersion>
