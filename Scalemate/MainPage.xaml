@@ -568,6 +568,7 @@
                 </CommandBar.PrimaryCommands>
                 <CommandBar.SecondaryCommands>
                     <AppBarButton Label="About" Click="{x:Bind mainPageViewModel.About}"/>
+                    <AppBarButton Label="Donate" Click="{x:Bind mainPageViewModel.Donate}"/>
                 </CommandBar.SecondaryCommands>
             </CommandBar>
 

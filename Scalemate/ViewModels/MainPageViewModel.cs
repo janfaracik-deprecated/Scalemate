@@ -2,26 +2,20 @@
 using Scalemate.Models;
 using System;
 using System.Diagnostics;
-using System.IO;
-using System.Runtime.InteropServices.WindowsRuntime;
-using System.Threading.Tasks;
-using System.Windows.Input;
 using Windows.Foundation;
 using Windows.Graphics.Imaging;
 using Windows.Storage;
 using Windows.Storage.AccessCache;
 using Windows.Storage.Pickers;
-using Windows.Storage.Streams;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Media.Imaging;
-using GalaSoft.MvvmLight.Command;
 using System.Collections.Generic;
-using Scalemate.Helpers;
 using Windows.System;
 using Windows.Storage.FileProperties;
 using System.Collections.ObjectModel;
 using Windows.UI.Xaml.Controls;
 using Windows.ApplicationModel;
+using Shared.Helpers;
 
 namespace Scalemate.ViewModels
 {
@@ -376,7 +370,28 @@ namespace Scalemate.ViewModels
 
         }
 
-        #region About
+        #region Overflow
+
+        public async void Donate()
+        {
+            string url = "";
+            string appName = Package.Current.DisplayName;
+
+            string business = "jan.faracik@hotmail.com";  // your paypal email
+            string description = "Donation%20for%20" + appName;            // '%20' represents a space. remember HTML!
+            string country = "GB";                  // AU, US, etc.
+            string currency = "GBP";                 // AUD, USD, etc.
+
+            url += "https://www.paypal.com/cgi-bin/webscr" +
+                "?cmd=" + "_donations" +
+                "&business=" + business +
+                "&lc=" + country +
+                "&item_name=" + description +
+                "&currency_code=" + currency +
+                "&bn=" + "PP%2dDonationsBF";
+
+            await Launcher.LaunchUriAsync(new Uri(url));
+        }
 
         public async void About()
         {

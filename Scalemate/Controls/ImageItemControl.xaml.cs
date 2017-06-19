@@ -1,5 +1,4 @@
-﻿using Scalemate.Helpers;
-using Scalemate.Models;
+﻿using Scalemate.Models;
 using Shared.Helpers;
 using System;
 using System.Diagnostics;
@@ -44,7 +43,7 @@ namespace Scalemate.Controls
                         var bitmapImage = new BitmapImage();
                         await bitmapImage.SetSourceAsync(thumbnail2);
                         imageThumbnail.Source = bitmapImage;
-                        Animationmate.ChangeObjectOpacity(imageThumbnail, 0, 1, 75);
+                        AnimationHelper.ChangeObjectOpacity(imageThumbnail, 0, 1, 75);
                     }
                 }
 
@@ -57,8 +56,8 @@ namespace Scalemate.Controls
                         await bitmapImage.SetSourceAsync(thumbnail);
                         imageFull.Source = bitmapImage;
                         imagePreview.Source = bitmapImage;
-                        Animationmate.ChangeObjectOpacity(imageFull, 0, 1, 200);
-                        Animationmate.ChangeObjectOpacity(imageThumbnail, 1, 0, 300, 200);
+                        AnimationHelper.ChangeObjectOpacity(imageFull, 0, 1, 200);
+                        AnimationHelper.ChangeObjectOpacity(imageThumbnail, 1, 0, 300, 200);
                     }
                 }
 
@@ -99,12 +98,14 @@ namespace Scalemate.Controls
 
         private void Grid_PointerEntered(object sender, Windows.UI.Xaml.Input.PointerRoutedEventArgs e)
         {
-            Animationmate.ChangeObjectOpacity(gridHoverCheck, 0, 1);
+            AnimationHelper.ChangeObjectOpacity(gridHoverCheck, 0, 1);
+            ScaleImageUp.Begin();
         }
 
         private void Grid_PointerExited(object sender, Windows.UI.Xaml.Input.PointerRoutedEventArgs e)
         {
-            Animationmate.ChangeObjectOpacity(gridHoverCheck, 1, 0);
+            AnimationHelper.ChangeObjectOpacity(gridHoverCheck, 1, 0);
+            ScaleImageDown.Begin();
         }
     }
 }

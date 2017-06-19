@@ -1,5 +1,4 @@
 ﻿using GalaSoft.MvvmLight.Messaging;
-using Scalemate.Helpers;
 using Scalemate.Models;
 using Scalemate.ViewModels;
 using Shared.Helpers;
@@ -75,8 +74,8 @@ namespace Scalemate
             rectangleOR1.Width = 0;
             rectangleOR2.Width = 0;
             AnimateIn.Begin();
-            Animationmate.ChangeObjectWidth(rectangleOR1, 0, 100, 500, 600);
-            Animationmate.ChangeObjectWidth(rectangleOR2, 0, 100, 500, 600);
+            AnimationHelper.ChangeObjectWidth(rectangleOR1, 0, 100, 500, 600);
+            AnimationHelper.ChangeObjectWidth(rectangleOR2, 0, 100, 500, 600);
         }
 
         protected override void OnNavigatedTo(NavigationEventArgs e)
@@ -101,14 +100,14 @@ namespace Scalemate
                     gridSave.Visibility = Visibility.Visible;
                     stackpanelExporting.Visibility = Visibility.Visible;
                     stackpanelExportComplete.Visibility = Visibility.Collapsed;
-                    Animationmate.ChangeObjectOpacity(gridSave, 0, 1, 150);
+                    AnimationHelper.ChangeObjectOpacity(gridSave, 0, 1, 150);
                     gridContainer.AllowDrop = false;
                     break;
                 case "ExportComplete":
                     gridSave.Visibility = Visibility.Visible;
                     stackpanelExporting.Visibility = Visibility.Collapsed;
                     stackpanelExportComplete.Visibility = Visibility.Visible;
-                    Animationmate.ChangeObjectOpacity(stackpanelExportComplete, 0, 1, 150);
+                    AnimationHelper.ChangeObjectOpacity(stackpanelExportComplete, 0, 1, 150);
                     break;
                 case "TryShowStartUI":
                     TryShowStartUI();
@@ -231,7 +230,7 @@ namespace Scalemate
 
                         gridOOBE.Visibility = Visibility.Collapsed;
                         relativePanelContainer.Visibility = Visibility.Visible;
-                        Animationmate.ChangeObjectOpacity(gridSidebarBG, 0, 1, 200);
+                        AnimationHelper.ChangeObjectOpacity(gridSidebarBG, 0, 1, 200);
 
                         AnimateInContent.Begin();
 
@@ -408,7 +407,10 @@ namespace Scalemate
         private void buttonInverseSelection_Click(object sender, RoutedEventArgs e)
         {
 
-            shouldHide = false;
+            if (gridviewImages.SelectedItems.Count != gridviewImages.Items.Count)
+            {
+                shouldHide = false;
+            }
 
             List<ImportedImage> newList = new List<ImportedImage>();
 
