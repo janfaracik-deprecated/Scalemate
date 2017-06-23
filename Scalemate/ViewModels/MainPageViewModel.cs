@@ -341,7 +341,7 @@ namespace Scalemate.ViewModels
 
                 Messenger.Default.Send("ExportComplete");
 
-                NotificationHelper.ShowNotification();
+               // NotificationHelper.ShowNotification();
 
             }
 

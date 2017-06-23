@@ -6,7 +6,7 @@
     xmlns:local="using:Scalemate"
     xmlns:shared="using:Shared">
 
-    <Brush x:Key="AccentColor">#E88307</Brush>
+    <Brush x:Key="AccentColor">#FFAC3C</Brush>
 
     <Style x:Key="buttonImportStyle" TargetType="Button">
         <Setter Property="Background" Value="Transparent"/>
