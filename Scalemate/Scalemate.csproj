@@ -102,10 +102,14 @@
     </Compile>
     <Compile Include="Controls\BackDrop.cs" />
     <Compile Include="Controls\BackdropBlurBrush.cs" />
+    <Compile Include="Controls\ExportControl.xaml.cs">
+      <DependentUpon>ExportControl.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Controls\ImageItemControl.xaml.cs">
       <DependentUpon>ImageItemControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="Converters\Converters.cs" />
+    <Compile Include="Models\ExportItem.cs" />
     <Compile Include="Models\ImportedImage.cs" />
     <Compile Include="MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>
@@ -150,6 +154,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Page Include="Controls\ExportControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Controls\ImageItemControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

@@ -107,5 +107,6 @@ namespace Scalemate.Controls
             AnimationHelper.ChangeObjectOpacity(gridHoverCheck, 1, 0);
             ScaleImageDown.Begin();
         }
+        
     }
 }

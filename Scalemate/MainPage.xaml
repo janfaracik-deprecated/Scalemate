@@ -11,7 +11,7 @@
     xmlns:viewmodels="using:Scalemate.ViewModels"
     xmlns:controlmate="using:Controlmate"
     xmlns:shared="using:Shared"
-    mc:Ignorable="d" Foreground="{ThemeResource ForegroundColor}" FontSize="13" Loaded="Page_Loaded" Background="AliceBlue">
+    mc:Ignorable="d" Foreground="{ThemeResource ForegroundColor}" Loaded="Page_Loaded" RequestedTheme="Light" FontWeight="SemiBold" FontSize="13" SizeChanged="Page_SizeChanged">
 
     <Page.Resources>
 
@@ -262,15 +262,16 @@
 
     <Grid x:Name="gridContainer" Background="{ThemeResource BackgroundColor}" AllowDrop="True" Drop="Grid_Drop" DragOver="Grid_DragOver" DropCompleted="Grid_DropCompleted">
 
-        <Rectangle>
+        <Rectangle Fill="{ThemeResource BackgroundColor}" Opacity=".8"/>
+        <Rectangle Fill="{ThemeResource SystemAccentColor}" Opacity=".05"/>
+        <Rectangle Fill="Black" Opacity=".05"/>
+        <Rectangle Opacity=".4">
             <Rectangle.Fill>
                 <shared:BackdropBlurBrush/>
             </Rectangle.Fill>
         </Rectangle>
-        <Rectangle Fill="{ThemeResource BackgroundColor}" Opacity=".8"/>
-        <Rectangle Fill="Black" Opacity=".075"/>
 
-        <RelativePanel x:Name="relativePanelContainer" Visibility="Collapsed">
+        <RelativePanel x:Name="relativePanelContainer" Visibility="Visible">
 
             <Grid x:Name="gridSidebar" Width="390" RelativePanel.AlignTopWithPanel="True" RelativePanel.AlignBottomWithPanel="True" RelativePanel.AlignLeftWithPanel="True">
 
@@ -280,6 +281,7 @@
                 </Grid>
 
                 <Grid x:Name="gridSidebarInner" RenderTransformOrigin="0.5,0.5">
+
                     <Grid.RenderTransform>
                         <CompositeTransform/>
                     </Grid.RenderTransform>
@@ -289,43 +291,24 @@
                     <ScrollViewer Margin="0,100,0,0" VerticalScrollBarVisibility="Auto">
                         <StackPanel>
 
-                            <RadioButton Style="{StaticResource radiobuttonMenu}" IsChecked="{Binding PercentageChecked, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
+                            <RadioButton Style="{StaticResource RadioButtonMenu}" IsChecked="{Binding PercentageChecked, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
 
                                 <StackPanel>
 
                                     <Grid Height="20" Margin="0,0,0,20">
                                         <TextBlock Text="Percentage" VerticalAlignment="Center" TextLineBounds="Tight" Margin="40,0,0,0"/>
+                                        <TextBox x:Name="textboxPercentage" HorizontalAlignment="Right" TextChanged="ValidateTextboxes" KeyDown="TextBox_KeyDown" PlaceholderText="100" Text="{Binding Percentage, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" MaxLength="3" Grid.Column="1" TextAlignment="Center" Style="{StaticResource TextBoxMenu}"/>
                                     </Grid>
 
-                                    <Grid>
-
-                                        <Grid.ColumnDefinitions>
-                                            <ColumnDefinition Width="40"/>
-                                            <ColumnDefinition Width="70"/>
-                                            <ColumnDefinition Width="20"/>
-                                            <ColumnDefinition Width="*"/>
-                                        </Grid.ColumnDefinitions>
-
-                                        <TextBox x:Name="textboxPercentage" TextChanged="ValidateTextboxes" KeyDown="TextBox_KeyDown" PlaceholderText="100" Text="{Binding Percentage, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" MaxLength="3" Grid.Column="1" TextAlignment="Center"/>
-
-                                        <TextBlock TextLineBounds="Tight" VerticalAlignment="Center" Grid.Column="3">percent</TextBlock>
-
-                                    </Grid>
+                                    <Slider Value="{Binding Percentage, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged,FallbackValue='100'}" Minimum="1" Maximum="200" IsThumbToolTipEnabled="False" Style="{StaticResource SliderPointed}"/>
 
                                 </StackPanel>
 
                             </RadioButton>
 
-                            <Grid Margin="30,0" Height="2">
-                                <Rectangle Opacity=".1">
-                                    <Rectangle.Fill>
-                                        <shared:BackdropBlurBrush/>
-                                    </Rectangle.Fill>
-                                </Rectangle>
-                                <Rectangle Opacity="{ThemeResource BorderOpacity}" Fill="{ThemeResource ForegroundColor}"/>
-                            </Grid>
+                            <Rectangle Opacity="{ThemeResource BorderOpacity}" Fill="{ThemeResource ForegroundColor}" Height="2"/>
 
-                            <RadioButton Style="{StaticResource radiobuttonMenu}" IsChecked="{Binding SpecificSizeChecked, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
+                            <RadioButton Style="{StaticResource RadioButtonMenu}" IsChecked="{Binding SpecificSizeChecked, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
 
                                 <Grid>
 
@@ -335,7 +318,7 @@
 
                                     <StackPanel>
 
-                                        <Grid Height="20" Margin="0,0,0,20">
+                                        <Grid Height="20" Margin="0,0,0,30">
 
                                             <TextBlock Text="Specific Size" VerticalAlignment="Center" TextLineBounds="Tight" Margin="40,0,0,0"/>
 
@@ -356,26 +339,20 @@
 
                                         <Grid>
 
-                                            <Grid.RowDefinitions>
-                                                <RowDefinition Height="50"/>
-                                                <RowDefinition Height="20"/>
-                                                <RowDefinition Height="50"/>
-                                            </Grid.RowDefinitions>
-
                                             <Grid.ColumnDefinitions>
                                                 <ColumnDefinition Width="40"/>
-                                                <ColumnDefinition Width="70"/>
-                                                <ColumnDefinition Width="20"/>
+                                                <ColumnDefinition Width="*"/>
+                                                <ColumnDefinition Width="40"/>
                                                 <ColumnDefinition Width="*"/>
                                             </Grid.ColumnDefinitions>
 
-                                            <TextBox x:Name="textboxWidth" TextChanged="ValidateTextboxes" PlaceholderText="1280" Grid.Column="1" KeyDown="TextBox_KeyDown" MaxLength="4" Text="{Binding Width, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" TextAlignment="Center" VerticalAlignment="Stretch"/>
+                                            <TextBox x:Name="textboxWidth" TextChanged="ValidateTextboxes" Style="{StaticResource TextBoxMenu}" PlaceholderText="1280" KeyDown="TextBox_KeyDown" MaxLength="4" Text="{Binding Width, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" TextAlignment="Left" VerticalAlignment="Stretch"/>
 
-                                            <TextBlock TextLineBounds="Tight" VerticalAlignment="Center" Grid.Column="3">width</TextBlock>
+                                            <TextBlock TextLineBounds="Tight" VerticalAlignment="Center" Grid.Column="1" Opacity=".5">width</TextBlock>
 
-                                            <TextBox x:Name="textboxHeight" TextChanged="ValidateTextboxes" PlaceholderText="720" Grid.Column="1" Grid.Row="2" KeyDown="TextBox_KeyDown" MaxLength="4" Text="{Binding Height, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" TextAlignment="Center" VerticalAlignment="Stretch"/>
+                                            <TextBox x:Name="textboxHeight" TextChanged="ValidateTextboxes" Style="{StaticResource TextBoxMenu}" PlaceholderText="720" Grid.Column="2" KeyDown="TextBox_KeyDown" MaxLength="4" Text="{Binding Height, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" TextAlignment="Left" VerticalAlignment="Stretch"/>
 
-                                            <TextBlock TextLineBounds="Tight" VerticalAlignment="Center" Grid.Column="3" Grid.Row="2">height</TextBlock>
+                                            <TextBlock TextLineBounds="Tight" VerticalAlignment="Center" Grid.Column="3" Opacity=".5">height</TextBlock>
 
                                         </Grid>
 
@@ -385,10 +362,10 @@
 
                             </RadioButton>
 
-                            <Button x:Name="buttonSave" Click="{x:Bind mainPageViewModel.Save}" Margin="30,0,30,0">
-                                <StackPanel Orientation="Horizontal">
-                                    <TextBlock>Export Images...</TextBlock>
-                                </StackPanel>
+                            <Rectangle Opacity="{ThemeResource BorderOpacity}" Fill="{ThemeResource ForegroundColor}" Height="2"/>
+
+                            <Button x:Name="buttonSave" Click="{x:Bind mainPageViewModel.Save}" Margin="30">
+                                <TextBlock>Export Images...</TextBlock>
                             </Button>
 
                         </StackPanel>
@@ -400,24 +377,15 @@
 
             <Grid x:Name="gridContent" RelativePanel.AlignRightWithPanel="True" RelativePanel.AlignTopWithPanel="True" RelativePanel.AlignBottomWithPanel="True" RelativePanel.RightOf="{Binding ElementName=gridSidebar}">
 
+                <Rectangle Fill="{ThemeResource BackgroundColor}"/>
+
                 <Grid x:Name="gridContentInner" RenderTransformOrigin="0.5,0.5">
 
                     <Grid.RenderTransform>
                         <CompositeTransform/>
                     </Grid.RenderTransform>
 
-                    <StackPanel x:Name="stackpanelImageCount" Orientation="Horizontal" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="30,58,0,0" RenderTransformOrigin="0.5,0.5">
-                        <StackPanel.Projection>
-                            <PlaneProjection/>
-                        </StackPanel.Projection>
-                        <StackPanel.RenderTransform>
-                            <CompositeTransform/>
-                        </StackPanel.RenderTransform>
-                        <TextBlock Text="{x:Bind mainPageViewModel.ImageList.Count, Mode=OneWay, FallbackValue=0}" Style="{StaticResource TextBlockTitle}"/>
-                        <TextBlock Text="{x:Bind mainPageViewModel.ImageList.Count, Converter={StaticResource IntToTextConverter}, Mode=OneWay, FallbackValue=Images}" Margin="5,0,0,0" Style="{StaticResource TextBlockTitle}"/>
-                    </StackPanel>
-
-                    <GridView x:Name="gridviewImages" Margin="30,125,0,0" Padding="0,0,25,25" KeyDown="gridviewImages_KeyDown" ItemsSource="{x:Bind mainPageViewModel.ImageList, Mode=TwoWay}" SelectionChanged="gridviewImages_SelectionChanged" SelectionMode="Multiple" ContainerContentChanging="gridviewImages_ContainerContentChanging">
+                    <GridView x:Name="gridviewImages" Margin="30,0,0,0" Padding="0,125,25,25" KeyDown="gridviewImages_KeyDown" ItemsSource="{x:Bind mainPageViewModel.ImageList, Mode=TwoWay}" SelectionChanged="gridviewImages_SelectionChanged" SelectionMode="Multiple" ContainerContentChanging="gridviewImages_ContainerContentChanging">
 
                         <GridView.ItemContainerStyle>
                             <Style TargetType="GridViewItem">
@@ -458,6 +426,25 @@
                         </GridView.ItemTemplate>
 
                     </GridView>
+
+                    <Grid VerticalAlignment="Top">
+                        <Rectangle>
+                            <Rectangle.Fill>
+                                <shared:BlurBrush/>
+                            </Rectangle.Fill>
+                        </Rectangle>
+                        <Rectangle Fill="{ThemeResource BackgroundColor}" Opacity=".85" Height="100"/>
+                        <StackPanel x:Name="stackpanelImageCount" Orientation="Horizontal" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="30,58,0,0" RenderTransformOrigin="0.5,0.5">
+                            <StackPanel.Projection>
+                                <PlaneProjection/>
+                            </StackPanel.Projection>
+                            <StackPanel.RenderTransform>
+                                <CompositeTransform/>
+                            </StackPanel.RenderTransform>
+                            <TextBlock Text="{x:Bind mainPageViewModel.ImageList.Count, Mode=OneWay, FallbackValue=0}" Style="{StaticResource TextBlockTitle}"/>
+                            <TextBlock Text="{x:Bind mainPageViewModel.ImageList.Count, Converter={StaticResource IntToTextConverter}, Mode=OneWay, FallbackValue=Images}" Margin="5,0,0,0" Style="{StaticResource TextBlockTitle}"/>
+                        </StackPanel>
+                    </Grid>
 
                     <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center" Visibility="Collapsed">
                         <TextBlock FontSize="13" FontWeight="SemiBold">
@@ -568,7 +555,6 @@
                 </CommandBar.PrimaryCommands>
                 <CommandBar.SecondaryCommands>
                     <AppBarButton Label="About" Click="{x:Bind mainPageViewModel.About}"/>
-                    <AppBarButton Label="Donate" Click="{x:Bind mainPageViewModel.Donate}"/>
                 </CommandBar.SecondaryCommands>
             </CommandBar>
 
@@ -661,7 +647,7 @@
                     <TextBlock Grid.Column="2" FontSize="12" TextLineBounds="Tight" FontWeight="SemiBold" HorizontalAlignment="Center">
                         OR
                     </TextBlock>
-                    
+
                     <Rectangle Fill="{ThemeResource ForegroundColor}" Height="1" Width="100" Opacity=".2" HorizontalAlignment="Right" VerticalAlignment="Center" Grid.Column="4"/>
 
                 </Grid>
@@ -671,6 +657,147 @@
             </StackPanel>
 
         </Grid>
+
+        <Grid Background="{ThemeResource BackgroundColor}">
+
+            <Grid VerticalAlignment="Top">
+                <TextBlock FontSize="30" FontWeight="Bold" Margin="40,50,30,50">
+                    <TextBlock.Foreground>
+                        <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                            <LinearGradientBrush.RelativeTransform>
+                                <CompositeTransform CenterY="0.5" CenterX="0.5" Rotation="-45"/>
+                            </LinearGradientBrush.RelativeTransform>
+                            <GradientStop Color="#FFDDD6F3" Offset="1"/>
+                            <GradientStop Color="#FFFAACA8"/>
+                        </LinearGradientBrush>
+                    </TextBlock.Foreground>
+                    Scalemate
+                </TextBlock>
+                <StackPanel HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0,0,40,0" Orientation="Horizontal">
+                    <Grid Margin="0,0,30,0" Width="50">
+                        <Ellipse Opacity=".15">
+                            <Ellipse.Fill>
+                                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                                    <LinearGradientBrush.RelativeTransform>
+                                        <CompositeTransform CenterY="0.5" CenterX="0.5" Rotation="-45"/>
+                                    </LinearGradientBrush.RelativeTransform>
+                                    <GradientStop Color="#FFDDD6F3" Offset="1"/>
+                                    <GradientStop Color="#FFFAACA8"/>
+                                </LinearGradientBrush>
+                            </Ellipse.Fill>
+                        </Ellipse>
+                        <Button Style="{StaticResource ButtonTransparent}">
+                            <StackPanel Orientation="Horizontal">
+                                <Ellipse Width="4" Height="4" Stroke="Black" StrokeThickness="1"/>
+                                <Ellipse Width="4" Height="4" Margin="4,0" Stroke="Black" StrokeThickness="1"/>
+                                <Ellipse Width="4" Height="4" Stroke="Black" StrokeThickness="1"/>
+                            </StackPanel>
+                        </Button>
+                    </Grid>
+                    <Grid>
+                        <Rectangle Opacity=".15" RadiusX="25" RadiusY="25">
+                            <Rectangle.Fill>
+                                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                                    <LinearGradientBrush.RelativeTransform>
+                                        <CompositeTransform CenterY="0.5" CenterX="0.5" Rotation="-45"/>
+                                    </LinearGradientBrush.RelativeTransform>
+                                    <GradientStop Color="#FFDDD6F3" Offset="1"/>
+                                    <GradientStop Color="#FFFAACA8"/>
+                                </LinearGradientBrush>
+                            </Rectangle.Fill>
+                        </Rectangle>
+                        <Button Style="{StaticResource ButtonTransparent}" Padding="30,0" Foreground="{ThemeResource ForegroundColor}">
+                            Export
+                        </Button>
+                    </Grid>
+                </StackPanel>
+            </Grid>
+
+            <VariableSizedWrapGrid Margin="40,140,10,0" Orientation="Horizontal">
+                <Rectangle Fill="#f0ffff" Width="100" Height="100" Margin="0,0,30,30"/>
+                <Rectangle Fill="#f0ffff" Width="100" Height="100" Margin="0,0,30,30"/>
+                <Rectangle Fill="#f0ffff" Width="100" Height="100" Margin="0,0,30,30"/>
+                <Rectangle Fill="#f0ffff" Width="100" Height="100" Margin="0,0,30,30"/>
+                <Rectangle Fill="#f0ffff" Width="100" Height="100" Margin="0,0,30,30"/>
+                <Rectangle Fill="#44effe" Width="100" Height="100" Margin="0,0,30,30"/>
+                <Rectangle Fill="#44effe" Width="100" Height="100" Margin="0,0,30,30"/>
+                <Rectangle Fill="#44effe" Width="100" Height="100" Margin="0,0,30,30"/>
+                <Rectangle Fill="#44effe" Width="100" Height="100" Margin="0,0,30,30"/>
+                <Rectangle Fill="#44effe" Width="100" Height="100" Margin="0,0,30,30"/>
+                <Rectangle Fill="#44effe" Width="100" Height="100" Margin="0,0,30,30"/>
+                <Rectangle Fill="#44effe" Width="100" Height="100" Margin="0,0,30,30"/>
+                <Rectangle Fill="#44effe" Width="100" Height="100" Margin="0,0,30,30"/>
+                <Rectangle Fill="#44effe" Width="100" Height="100" Margin="0,0,30,30"/>
+                <Rectangle Fill="#44effe" Width="100" Height="100" Margin="0,0,30,30"/>
+                <Rectangle Fill="#44effe" Width="100" Height="100" Margin="0,0,30,30"/>
+                <Rectangle Fill="#44effe" Width="100" Height="100" Margin="0,0,30,30"/>
+                <Rectangle Fill="#44effe" Width="100" Height="100" Margin="0,0,30,30"/>
+                <Rectangle Fill="#44effe" Width="100" Height="100" Margin="0,0,30,30"/>
+                <Rectangle Fill="#44effe" Width="100" Height="100" Margin="0,0,30,30"/>
+                <Rectangle Fill="#44effe" Width="100" Height="100" Margin="0,0,30,30"/>
+                <Rectangle Fill="#44effe" Width="100" Height="100" Margin="0,0,30,30"/>
+                <Rectangle Fill="#44effe" Width="100" Height="100" Margin="0,0,30,30"/>
+                <Rectangle Fill="#44effe" Width="100" Height="100" Margin="0,0,30,30"/>
+                <Rectangle Fill="#44effe" Width="100" Height="100" Margin="0,0,30,30"/>
+                <Rectangle Fill="#ffeefe" Width="100" Height="100" Margin="0,0,30,30"/>
+                <Rectangle Fill="#ffeefe" Width="100" Height="100" Margin="0,0,30,30"/>
+                <Rectangle Fill="#ffeefe" Width="100" Height="100" Margin="0,0,30,30"/>
+                <Rectangle Fill="#ffeefe" Width="100" Height="100" Margin="0,0,30,30"/>
+                <Rectangle Fill="#ffeefe" Width="100" Height="100" Margin="0,0,30,30"/>
+                <Rectangle Fill="#ffeefe" Width="100" Height="100" Margin="0,0,30,30"/>
+                <Rectangle Fill="#ffeefe" Width="100" Height="100" Margin="0,0,30,30"/>
+                <Rectangle Fill="#ffeefe" Width="100" Height="100" Margin="0,0,30,30"/>
+                <Rectangle Fill="#ffeefe" Width="100" Height="100" Margin="0,0,30,30"/>
+                <Rectangle Fill="#ffeefe" Width="100" Height="100" Margin="0,0,30,30"/>
+                <Rectangle Fill="#ffeefe" Width="100" Height="100" Margin="0,0,30,30"/>
+                <Rectangle Fill="#ffeefe" Width="100" Height="100" Margin="0,0,30,30"/>
+                <Rectangle Fill="#ffeefe" Width="100" Height="100" Margin="0,0,30,30"/>
+                <Rectangle Fill="#ffeefe" Width="100" Height="100" Margin="0,0,30,30"/>
+            </VariableSizedWrapGrid>
+
+        </Grid>
+
+        <Rectangle>
+            <Rectangle.Fill>
+                <shared:BlurBrush BlurAmount="25"/>
+            </Rectangle.Fill>
+        </Rectangle>
+
+        <Rectangle Fill="Black" Opacity=".6"/>
+
+        <StackPanel VerticalAlignment="Center">
+            <ScrollViewer x:Name="scrollViewerExportItems" VerticalScrollBarVisibility="Disabled" VerticalScrollMode="Disabled" HorizontalScrollBarVisibility="Hidden" HorizontalScrollMode="Enabled" ViewChanged="scrollViewerExportItems_ViewChanged">
+                <StackPanel x:Name="stackPanelExportItems" Orientation="Horizontal" VerticalAlignment="Center">
+
+                    <GridView x:Name="gridViewExportItems" ItemsSource="{Binding ExportList, Mode=TwoWay}" SelectionMode="None" HorizontalAlignment="Left" VerticalAlignment="Center" Padding="0">
+                        <GridView.ItemTemplate>
+                            <DataTemplate>
+                                <Grid>
+                                    <controls:ExportControl x:Name="exportControl"/>
+                                </Grid>
+                            </DataTemplate>
+                        </GridView.ItemTemplate>
+                    </GridView>
+
+                    <Button x:Name="buttonAddExport" Click="buttonAddExport_Click" VerticalAlignment="Stretch" Width="300" Style="{StaticResource ButtonAddExport}" RequestedTheme="Dark" Margin="0,60,0,0">
+                        <StackPanel VerticalAlignment="Center">
+                            <Grid Width="24" Height="24" Margin="0,0,0,25">
+                                <Rectangle Width="2" Fill="{ThemeResource ForegroundColor}"/>
+                                <Rectangle Height="2" Fill="{ThemeResource ForegroundColor}"/>
+                            </Grid>
+                            <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" TextLineBounds="Tight">Add Export</TextBlock>
+                        </StackPanel>
+                    </Button>
+
+                </StackPanel>
+            </ScrollViewer>
+            <Grid Margin="0,30,0,35"  Height="60" Width="300" VerticalAlignment="Bottom">
+                <Rectangle Fill="#FF0082EE" RadiusX="6" RadiusY="6"/>
+                <Button Background="Transparent" Foreground="White" HorizontalAlignment="Stretch">
+                    Export
+                </Button>
+            </Grid>
+        </StackPanel>
 
     </Grid>
 

@@ -1,4 +1,5 @@
 ﻿using GalaSoft.MvvmLight.Messaging;
+using Scalemate.Controls;
 using Scalemate.Models;
 using Scalemate.ViewModels;
 using Shared.Helpers;
@@ -514,7 +515,7 @@ namespace Scalemate
                 Convert.ToDouble(textboxWidth.Text);
                 Convert.ToDouble(textboxHeight.Text);
 
-                if (percentage > 400)
+                if (percentage > 420)
                 {
                     return;
                 }
@@ -547,5 +548,52 @@ namespace Scalemate
         {
 
         }
+
+        private void Page_SizeChanged(object sender, SizeChangedEventArgs e)
+        {
+
+            double xPadding = (ActualWidth - 300) / 2;
+
+            stackPanelExportItems.Padding = new Thickness(xPadding, 0, xPadding, 0);
+
+        }
+
+        private void buttonAddExport_Click(object sender, RoutedEventArgs e)
+        {
+            scrollViewerExportItems.ChangeView(scrollViewerExportItems.ScrollableWidth, null, null);
+            mainPageViewModel.AddExport();
+        }
+        
+        private void scrollViewerExportItems_ViewChanged(object sender, ScrollViewerViewChangedEventArgs e)
+        {
+
+            // Checks if the scrollviewer is still scrolling, if not, then continue
+
+            if (!e.IsIntermediate)
+            {
+
+                // Gets the horizontal offset of the scrollviewer
+
+                double targetNumber = scrollViewerExportItems.HorizontalOffset;
+
+                // Create an array based on multiples of 330 (the ExportControl width + margin)
+
+                int[] array = new int[10];
+
+                for (int i = 0; i < 10; i++)
+                {
+                    array[i] = 330 * i;
+                }
+
+                // Find the nearest value in the array to the horizontal offset of the scrollviewer and scroll to that position
+
+                var nearest = array.OrderBy(v => Math.Abs(v - targetNumber)).First();
+
+                scrollViewerExportItems.ChangeView(nearest, null, null);
+
+            }
+
+        }
+
     }
 }

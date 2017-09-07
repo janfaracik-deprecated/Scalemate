@@ -11,15 +11,15 @@ namespace Scalemate.Models
 
         public String Address { get; set; }
         public StorageFile LinkedFile { get; set; }
-        private bool isSelected;
         public int Index = 0;
 
+        private bool _isSelected;
         public bool IsSelected
         {
-            get { return isSelected; }
+            get => _isSelected;
             set
             {
-                isSelected = value;
+                _isSelected = value;
                 OnPropertyChanged();
             }
         }

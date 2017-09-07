@@ -23,6 +23,7 @@ namespace Scalemate.ViewModels
     {
 
         public ObservableCollection<ImportedImage> ImageList = new ObservableCollection<ImportedImage>();
+        public ObservableCollection<ExportItem> ExportList { get; set; }
 
         private bool percentageChecked;
         private bool specificSizeChecked;
@@ -145,6 +146,11 @@ namespace Scalemate.ViewModels
             Height = "720";
             ProgressValue = 0;
             ProgressMax = 0;
+
+            ExportList = new ObservableCollection<ExportItem>();
+
+            ExportList.Add(new ExportItem());
+
         }
 
         private void UpdateCurrentFolder(StorageFolder storageFolder)
@@ -434,6 +440,22 @@ namespace Scalemate.ViewModels
         }
 
         #endregion
+
+        public void AddExport()
+        {
+
+            //Add a new ExportItem to the ExportList
+
+            ExportList.Add(new ExportItem());
+
+            //Rename existing ExportItems in accordance to their index
+
+            foreach (ExportItem exportItem in ExportList)
+            {
+                exportItem.Title = "Export " + (ExportList.IndexOf(exportItem) + 1);
+            }
+
+        }
 
     }
 }
