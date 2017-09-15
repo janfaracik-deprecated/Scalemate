@@ -61,6 +61,8 @@ namespace Scalemate.Controls
                     }
                 }
 
+               // ii.ImageProps = await ii.LinkedFile.Properties.GetImagePropertiesAsync();
+
                 using (StorageItemThumbnail dominantColour = await ii.LinkedFile.GetThumbnailAsync(ThumbnailMode.SingleItem, 1))
                 {
                     if (dominantColour != null)

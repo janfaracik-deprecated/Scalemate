@@ -5,6 +5,7 @@ using Scalemate.ViewModels;
 using Shared.Helpers;
 using System;
 using System.Collections.Generic;
+using System.Collections.Specialized;
 using System.Diagnostics;
 using System.Linq;
 using System.Numerics;
@@ -31,8 +32,6 @@ namespace Scalemate
         TitleBarHelper titleBarHelper = new TitleBarHelper();
         public MainPageViewModel mainPageViewModel { get; set; }
 
-        Visual visualAll;
-        Compositor compositor;
         bool shouldHide = true;
 
         #region Load
@@ -46,12 +45,36 @@ namespace Scalemate
 
             DataContext = mainPageViewModel;
 
+            mainPageViewModel.ImageList.CollectionChanged += ImageList_CollectionChanged;
+
             //Adds event handler in order to set proper margins for TitleBar buttons
 
-            visualAll = ElementCompositionPreview.GetElementVisual(gridContainer);
-            compositor = visualAll.Compositor;
+          //  visualAll = ElementCompositionPreview.GetElementVisual(gridContainer);
+          //  compositor = visualAll.Compositor;
 
             Messenger.Default.Register<String>(this, (action) => ReceiveMessage(action));
+
+        }
+
+        private void ImageList_CollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
+        {
+
+            //If initial item added then animate in
+
+            if (e.NewStartingIndex == 0)
+            {
+                importView.AnimateOut();
+                imagesView.Visibility = Visibility.Visible;
+                return;
+            }
+
+            //If all items are removed then animate out
+
+            if (mainPageViewModel.ImageList.Count == 0)
+            {
+                importView.AnimateIn();
+                imagesView.Visibility = Visibility.Collapsed;
+            }
 
         }
 
@@ -60,7 +83,7 @@ namespace Scalemate
             switch (arguments)
             {
                 case "importphotos":
-                    AddImagesFromFolderAsync(null, null);
+                    mainPageViewModel.BrowseImages();
                     break;
             }
         }
@@ -84,7 +107,7 @@ namespace Scalemate
             switch (e.Parameter)
             {
                 case "importphotos":
-                    AddImagesFromFolderAsync(null, null);
+                    mainPageViewModel.BrowseImages();
                     break;
             }
         }
@@ -97,21 +120,11 @@ namespace Scalemate
         {
             switch (action.ToString())
             {
-                case "Export":
-                    gridSave.Visibility = Visibility.Visible;
-                    stackpanelExporting.Visibility = Visibility.Visible;
-                    stackpanelExportComplete.Visibility = Visibility.Collapsed;
-                    AnimationHelper.ChangeObjectOpacity(gridSave, 0, 1, 150);
-                    gridContainer.AllowDrop = false;
+                case "Flip":
+                    exportView.FlipCards();
                     break;
-                case "ExportComplete":
-                    gridSave.Visibility = Visibility.Visible;
-                    stackpanelExporting.Visibility = Visibility.Collapsed;
-                    stackpanelExportComplete.Visibility = Visibility.Visible;
-                    AnimationHelper.ChangeObjectOpacity(stackpanelExportComplete, 0, 1, 150);
-                    break;
-                case "TryShowStartUI":
-                    TryShowStartUI();
+                case "ShowExportView":
+                    exportView.AnimateIn();
                     break;
             }
         }
@@ -127,45 +140,26 @@ namespace Scalemate
 
         private void UpdateItemSize()
         {
-            ItemsWrapGrid itemsWrapGrid = (ItemsWrapGrid)gridviewImages.ItemsPanelRoot;
+            //ItemsWrapGrid itemsWrapGrid = (ItemsWrapGrid)gridviewImages.ItemsPanelRoot;
 
-            if (itemsWrapGrid != null)
-            {
-                double optimizedWidth = 200;
-                double number = (int)itemsWrapGrid.ActualWidth / (int)optimizedWidth;
-                double newSize = itemsWrapGrid.ActualWidth / number;
+            //if (itemsWrapGrid != null)
+            //{
+            //    double optimizedWidth = 200;
+            //    double number = (int)itemsWrapGrid.ActualWidth / (int)optimizedWidth;
+            //    double newSize = itemsWrapGrid.ActualWidth / number;
 
-                if (itemsWrapGrid != null)
-                {
-                    itemsWrapGrid.ItemWidth = (int)newSize;
-                    itemsWrapGrid.ItemHeight = (int)newSize * 0.6;
-                }
-            }
+            //    if (itemsWrapGrid != null)
+            //    {
+            //        itemsWrapGrid.ItemWidth = (int)newSize;
+            //        itemsWrapGrid.ItemHeight = (int)newSize * 0.6;
+            //    }
+            //}
 
         }
 
         #endregion
 
         #region Add Images
-
-        private async void AddImagesFromFolderAsync(object sender, RoutedEventArgs e)
-        {
-
-            var picker = new Windows.Storage.Pickers.FileOpenPicker()
-            {
-                ViewMode = Windows.Storage.Pickers.PickerViewMode.Thumbnail,
-                SuggestedStartLocation = Windows.Storage.Pickers.PickerLocationId.PicturesLibrary
-            };
-
-            picker.FileTypeFilter.Add(".jpg");
-            picker.FileTypeFilter.Add(".jpeg");
-            picker.FileTypeFilter.Add(".png");
-            picker.FileTypeFilter.Add(".bmp");
-            picker.FileTypeFilter.Add(".tiff");
-
-            Import(await picker.PickMultipleFilesAsync());
-
-        }
 
         private async void Grid_Drop(object sender, DragEventArgs e)
         {
@@ -194,64 +188,47 @@ namespace Scalemate
 
             //Checks if files is empty, if not continue
 
-            if (files.Count > 0)
-            {
+            //if (files.Count > 0)
+            //{
 
-                foreach (IStorageItem i in files)
-                {
+            //    foreach (IStorageItem i in files)
+            //    {
 
-                    if (i.IsOfType(StorageItemTypes.File))
-                    {
-                        ImportPhotos((StorageFile)i);
-                    }
-                    if (i.IsOfType(StorageItemTypes.Folder))
-                    {
+            //        if (i.IsOfType(StorageItemTypes.File))
+            //        {
+            //            ImportPhotos((StorageFile)i);
+            //        }
+            //        if (i.IsOfType(StorageItemTypes.Folder))
+            //        {
 
-                        StorageFolder s = (StorageFolder)i;
+            //            StorageFolder s = (StorageFolder)i;
 
-                        foreach (IStorageItem i2 in await s.GetFilesAsync())
-                        {
-                            if (i2.IsOfType(StorageItemTypes.File))
-                            {
-                                ImportPhotos((StorageFile)i2);
-                            }
-                        }
+            //            foreach (IStorageItem i2 in await s.GetFilesAsync())
+            //            {
+            //                if (i2.IsOfType(StorageItemTypes.File))
+            //                {
+            //                    ImportPhotos((StorageFile)i2);
+            //                }
+            //            }
 
-                    }
-                }
+            //        }
+            //    }
 
-                if (mainPageViewModel.ImageList.Count != 0)
-                {
+            //    if (mainPageViewModel.ImageList.Count != 0)
+            //    {
 
-                    //Performs first time animation if need be
+            //        //Performs first time animation if need be
 
-                    if (stackpanelImport.IsHitTestVisible == true)
-                    {
-                        stackpanelImport.IsHitTestVisible = false;
+            //        if (stackpanelImport.IsHitTestVisible == true)
+            //        {
+            //            stackpanelImport.IsHitTestVisible = false;
 
-                        gridOOBE.Visibility = Visibility.Collapsed;
-                        relativePanelContainer.Visibility = Visibility.Visible;
-                        AnimationHelper.ChangeObjectOpacity(gridSidebarBG, 0, 1, 200);
+            //            gridOOBE.Visibility = Visibility.Collapsed;
 
-                        AnimateInContent.Begin();
+            //        }
+            //    }
 
-                    }
-                }
-
-            }
-        }
-
-        private void ImportPhotos(StorageFile sf)
-        {
-            if (sf.Path.ToLower().EndsWith(".jpg") || sf.Path.ToLower().EndsWith(".jpeg") || sf.Path.ToLower().EndsWith(".png") || sf.Path.ToLower().EndsWith(".bmp") || sf.Path.ToLower().EndsWith(".tiff"))
-            {
-                ImportedImage ii = new ImportedImage { Address = sf.Path, LinkedFile = sf };
-                if (mainPageViewModel.ImageList.FirstOrDefault(s => s.Address == ii.Address) == null)
-                {
-                    mainPageViewModel.ImageList.Add(ii);
-                    ii.Index = mainPageViewModel.ImageList.IndexOf(ii);
-                }
-            }
+            //}
         }
 
         #endregion
@@ -316,40 +293,40 @@ namespace Scalemate
 
         private void ItemContainer_Loaded(object sender, RoutedEventArgs e)
         {
-            var itemsPanel = (ItemsWrapGrid)gridviewImages.ItemsPanelRoot;
-            var itemContainer = (GridViewItem)sender;
-            var itemIndex = gridviewImages.IndexFromContainer(itemContainer);
+            //var itemsPanel = (ItemsWrapGrid)gridviewImages.ItemsPanelRoot;
+            //var itemContainer = (GridViewItem)sender;
+            //var itemIndex = gridviewImages.IndexFromContainer(itemContainer);
 
-            var uc = itemContainer.ContentTemplateRoot as FrameworkElement;
+            //var uc = itemContainer.ContentTemplateRoot as FrameworkElement;
 
-            //Debug.WriteLine(itemContainer.ActualWidth);
-            //Debug.WriteLine(itemContainer.ActualHeight);
+            ////Debug.WriteLine(itemContainer.ActualWidth);
+            ////Debug.WriteLine(itemContainer.ActualHeight);
 
-            //Don't animate if we're not in the visible viewport
-            if (itemIndex >= itemsPanel.FirstVisibleIndex && itemIndex <= itemsPanel.LastVisibleIndex)
-            {
-                var itemVisual = ElementCompositionPreview.GetElementVisual(uc);
+            ////Don't animate if we're not in the visible viewport
+            //if (itemIndex >= itemsPanel.FirstVisibleIndex && itemIndex <= itemsPanel.LastVisibleIndex)
+            //{
+            //    var itemVisual = ElementCompositionPreview.GetElementVisual(uc);
 
-                float width = (float)itemContainer.ActualWidth;
-                float height = (float)itemContainer.ActualHeight;
-                itemVisual.Size = new Vector2(width, height);
-                itemVisual.CenterPoint = new Vector3(width / 2, height / 2, 1); //GetCenterPoint2(itemContainer, itemContainer.ActualWidth);
-                itemVisual.Offset = new Vector3(0, 25, 0);
-                itemVisual.Scale = new Vector3(1, 1, 0);
+            //    float width = (float)itemContainer.ActualWidth;
+            //    float height = (float)itemContainer.ActualHeight;
+            //    itemVisual.Size = new Vector2(width, height);
+            //    itemVisual.CenterPoint = new Vector3(width / 2, height / 2, 1); //GetCenterPoint2(itemContainer, itemContainer.ActualWidth);
+            //    itemVisual.Offset = new Vector3(0, 25, 0);
+            //    itemVisual.Scale = new Vector3(1, 1, 0);
 
-                var relativeIndex = itemIndex - itemsPanel.FirstVisibleIndex;
+            //    var relativeIndex = itemIndex - itemsPanel.FirstVisibleIndex;
 
-                // Create KeyFrameAnimations
+            //    // Create KeyFrameAnimations
 
-                KeyFrameAnimation scaleXAnimation = compositor.CreateScalarKeyFrameAnimation();
-                scaleXAnimation.InsertExpressionKeyFrame(1f, "0", compositor.CreateCubicBezierEasingFunction(new Vector2(0, 0), new Vector2(0.58f, 1)));
-                scaleXAnimation.Duration = TimeSpan.FromMilliseconds(200);
+            //    KeyFrameAnimation scaleXAnimation = compositor.CreateScalarKeyFrameAnimation();
+            //    scaleXAnimation.InsertExpressionKeyFrame(1f, "0", compositor.CreateCubicBezierEasingFunction(new Vector2(0, 0), new Vector2(0.58f, 1)));
+            //    scaleXAnimation.Duration = TimeSpan.FromMilliseconds(200);
 
-                // Start animations
-                itemVisual.StartAnimation("Offset.Y", scaleXAnimation);
-            }
+            //    // Start animations
+            //    itemVisual.StartAnimation("Offset.Y", scaleXAnimation);
+            //}
 
-            itemContainer.Loaded -= ItemContainer_Loaded;
+            //itemContainer.Loaded -= ItemContainer_Loaded;
         }
 
         #endregion
@@ -358,10 +335,10 @@ namespace Scalemate
 
         public void ShowGridSelected()
         {
-            if (stackpanelImageCount.Opacity == 1)
-            {
-                AnimateInSelectBar.Begin();
-            }
+            //  if (stackpanelImageCount.Opacity == 1)
+            // {
+            //    AnimateInSelectBar.Begin();
+            //  }
         }
 
         public void HideGridSelected()
@@ -376,75 +353,75 @@ namespace Scalemate
         private void gridviewImages_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
 
-            foreach (ImportedImage ii in gridviewImages.Items)
-            {
-                if (gridviewImages.SelectedItems.Contains(ii))
-                {
-                    ii.IsSelected = true;
-                }
-                else
-                {
-                    ii.IsSelected = false;
-                }
-            }
+            //foreach (ImportedImage ii in gridviewImages.Items)
+            //{
+            //    if (gridviewImages.SelectedItems.Contains(ii))
+            //    {
+            //        ii.IsSelected = true;
+            //    }
+            //    else
+            //    {
+            //        ii.IsSelected = false;
+            //    }
+            //}
 
-            if (gridviewImages.SelectedItems.Count == 0)
-            {
-                HideGridSelected();
-            }
-            else
-            {
-                ShowGridSelected();
-                textblockItemsSelected.Text = gridviewImages.SelectedItems.Count + " Selected";
-            }
+            //if (gridviewImages.SelectedItems.Count == 0)
+            //{
+            //    HideGridSelected();
+            //}
+            //else
+            //{
+            //    ShowGridSelected();
+            //    textblockItemsSelected.Text = gridviewImages.SelectedItems.Count + " Selected";
+            //}
 
         }
 
         private void buttonDeselectAll_Click(object sender, RoutedEventArgs e)
         {
-            gridviewImages.SelectedIndex = -1;
+        //    gridviewImages.SelectedIndex = -1;
         }
 
         private void buttonInverseSelection_Click(object sender, RoutedEventArgs e)
         {
 
-            if (gridviewImages.SelectedItems.Count != gridviewImages.Items.Count)
-            {
-                shouldHide = false;
-            }
+            //if (gridviewImages.SelectedItems.Count != gridviewImages.Items.Count)
+            //{
+            //    shouldHide = false;
+            //}
 
-            List<ImportedImage> newList = new List<ImportedImage>();
+            //List<ImportedImage> newList = new List<ImportedImage>();
 
-            foreach (ImportedImage ii in gridviewImages.Items)
-            {
-                if (!ii.IsSelected)
-                {
-                    newList.Add(ii);
-                }
-            }
+            //foreach (ImportedImage ii in gridviewImages.Items)
+            //{
+            //    if (!ii.IsSelected)
+            //    {
+            //        newList.Add(ii);
+            //    }
+            //}
 
-            gridviewImages.SelectedIndex = -1;
+            //gridviewImages.SelectedIndex = -1;
 
-            foreach (ImportedImage ii2 in newList)
-            {
-                gridviewImages.SelectedItems.Add(ii2);
-            }
+            //foreach (ImportedImage ii2 in newList)
+            //{
+            //    gridviewImages.SelectedItems.Add(ii2);
+            //}
 
         }
 
         private void buttonSelectAll_Click(object sender, RoutedEventArgs e)
         {
-            shouldHide = false;
-            gridviewImages.SelectedIndex = -1;
-            foreach (ImportedImage ii in gridviewImages.Items)
-            {
-                gridviewImages.SelectedItems.Add(ii);
-            }
+            //shouldHide = false;
+            //gridviewImages.SelectedIndex = -1;
+            //foreach (ImportedImage ii in gridviewImages.Items)
+            //{
+            //    gridviewImages.SelectedItems.Add(ii);
+            //}
         }
 
         private void buttonRemoveSelected_Click(object sender, RoutedEventArgs e)
         {
-            mainPageViewModel.Delete(gridviewImages.SelectedItems.ToList());
+           // mainPageViewModel.Delete(gridviewImages.SelectedItems.ToList());
         }
 
         #endregion
@@ -458,9 +435,7 @@ namespace Scalemate
                 gridContainer.AllowDrop = true;
                 stackpanelImport.Visibility = Visibility.Visible;
                 stackpanelImport.Opacity = 1;
-                gridSave.Visibility = Visibility.Collapsed;
                 stackpanelImport.IsHitTestVisible = true;
-                relativePanelContainer.Visibility = Visibility.Collapsed;
                 gridOOBE.Visibility = Visibility.Visible;
                 AnimateOOBE();
             }
@@ -507,25 +482,25 @@ namespace Scalemate
         private void ValidateTextboxes(object sender, TextChangedEventArgs e)
         {
 
-            buttonSave.IsEnabled = false;
+            //buttonSave.IsEnabled = false;
 
-            try
-            {
-                Double percentage = Convert.ToDouble(textboxPercentage.Text);
-                Convert.ToDouble(textboxWidth.Text);
-                Convert.ToDouble(textboxHeight.Text);
+            //try
+            //{
+            //    Double percentage = Convert.ToDouble(textboxPercentage.Text);
+            //    Convert.ToDouble(textboxWidth.Text);
+            //    Convert.ToDouble(textboxHeight.Text);
 
-                if (percentage > 420)
-                {
-                    return;
-                }
+            //    if (percentage > 420)
+            //    {
+            //        return;
+            //    }
 
-                buttonSave.IsEnabled = true;
-            }
-            catch
-            {
-                buttonSave.IsEnabled = false;
-            }
+            //    buttonSave.IsEnabled = true;
+            //}
+            //catch
+            //{
+            //    buttonSave.IsEnabled = false;
+            //}
 
         }
 
@@ -535,65 +510,14 @@ namespace Scalemate
 
         private void gridviewImages_KeyDown(object sender, KeyRoutedEventArgs e)
         {
-            if (e.Key == VirtualKey.Delete)
-            {
-                e.Handled = true;
-                mainPageViewModel.Delete(gridviewImages.SelectedItems.ToList());
-            }
+            //if (e.Key == VirtualKey.Delete)
+            //{
+            //    e.Handled = true;
+            //    mainPageViewModel.Delete(gridviewImages.SelectedItems.ToList());
+            //}
         }
 
         #endregion
-
-        private void textboxPercentage_TextChanged(object sender, TextChangedEventArgs e)
-        {
-
-        }
-
-        private void Page_SizeChanged(object sender, SizeChangedEventArgs e)
-        {
-
-            double xPadding = (ActualWidth - 300) / 2;
-
-            stackPanelExportItems.Padding = new Thickness(xPadding, 0, xPadding, 0);
-
-        }
-
-        private void buttonAddExport_Click(object sender, RoutedEventArgs e)
-        {
-            scrollViewerExportItems.ChangeView(scrollViewerExportItems.ScrollableWidth, null, null);
-            mainPageViewModel.AddExport();
-        }
-        
-        private void scrollViewerExportItems_ViewChanged(object sender, ScrollViewerViewChangedEventArgs e)
-        {
-
-            // Checks if the scrollviewer is still scrolling, if not, then continue
-
-            if (!e.IsIntermediate)
-            {
-
-                // Gets the horizontal offset of the scrollviewer
-
-                double targetNumber = scrollViewerExportItems.HorizontalOffset;
-
-                // Create an array based on multiples of 330 (the ExportControl width + margin)
-
-                int[] array = new int[10];
-
-                for (int i = 0; i < 10; i++)
-                {
-                    array[i] = 330 * i;
-                }
-
-                // Find the nearest value in the array to the horizontal offset of the scrollviewer and scroll to that position
-
-                var nearest = array.OrderBy(v => Math.Abs(v - targetNumber)).First();
-
-                scrollViewerExportItems.ChangeView(nearest, null, null);
-
-            }
-
-        }
 
     }
 }

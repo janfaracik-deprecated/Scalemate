@@ -1,4 +1,8 @@
-﻿using Shared.Helpers;
+﻿using Scalemate.Models;
+using Shared.Helpers;
+using System;
+using Windows.Storage;
+using Windows.System;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 
@@ -6,22 +10,33 @@ namespace Scalemate.Controls
 {
     public sealed partial class ExportControl : UserControl
     {
+
         public ExportControl()
         {
             this.InitializeComponent();
         }
-
-        public void ShowTitleBar()
+        
+        public void Flip(int delay)
         {
-            gridTitleBar.Visibility = Visibility.Visible;
-            AnimationHelper.ChangeObjectHeight(gridTitleBar, 0, 60);
-            AnimationHelper.ChangeObjectOpacity(gridTitleBar, 0, 1);
+            AnimateInSaving.BeginTime = TimeSpan.FromMilliseconds(delay * 150);
+            AnimateInSaving.Begin();
         }
 
-        public void HideTitleBar()
+        private void progressBar_ValueChanged(object sender, Windows.UI.Xaml.Controls.Primitives.RangeBaseValueChangedEventArgs e)
         {
-            AnimationHelper.ChangeObjectHeight(gridTitleBar, 60, 0);
-            AnimationHelper.FadeObjectVisibility(gridTitleBar, 1, 0, Visibility.Collapsed);
+            if (progressBar.Value == progressBar.Maximum)
+            {
+                AnimationHelper.ChangeObjectTranslateY(stackPanelProgress, 0, -50, 200);
+                AnimationHelper.ChangeObjectOpacity(stackPanelProgress, 1, 0, 200);
+                AnimationHelper.ChangeObjectTranslateY(stackPanelExportComplete, 50, 0, 200);
+                AnimationHelper.ChangeObjectOpacity(stackPanelExportComplete, 0, 1, 200);
+            }
+        }
+
+        private async void buttonOpenFolder_Click(object sender, RoutedEventArgs e)
+        {
+            ExportItem exportItem = DataContext as ExportItem;
+            await Launcher.LaunchFolderAsync(exportItem.Folder);
         }
 
     }

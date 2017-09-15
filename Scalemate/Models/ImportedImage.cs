@@ -2,6 +2,7 @@
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using Windows.Storage;
+using Windows.Storage.FileProperties;
 using Windows.UI.Xaml.Controls;
 
 namespace Scalemate.Models
@@ -11,6 +12,7 @@ namespace Scalemate.Models
 
         public String Address { get; set; }
         public StorageFile LinkedFile { get; set; }
+        public ImageProperties ImageProps { get; set; }
         public int Index = 0;
 
         private bool _isSelected;

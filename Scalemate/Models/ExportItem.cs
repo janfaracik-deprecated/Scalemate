@@ -1,6 +1,7 @@
 ﻿using System;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
+using Windows.Storage;
 
 namespace Scalemate.Models
 {
@@ -15,6 +16,7 @@ namespace Scalemate.Models
         private bool _constrainProportions = false;
         private int _progressValue = 0;
         private int _progressMax = 0;
+        private StorageFolder _folder;
 
         public string Title
         {
@@ -129,6 +131,19 @@ namespace Scalemate.Models
             set
             {
                 _progressMax = value;
+                OnPropertyChanged();
+            }
+        }
+
+        public StorageFolder Folder
+        {
+            get
+            {
+                return _folder;
+            }
+            set
+            {
+                _folder = value;
                 OnPropertyChanged();
             }
         }

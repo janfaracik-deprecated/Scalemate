@@ -5,12 +5,45 @@
     xmlns:local="using:Scalemate.Controls"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:controls="using:Shared.Controls"
     mc:Ignorable="d"
     d:DesignHeight="500"
     FontWeight="SemiBold"
-    FontSize="13">
+    FontSize="13"
+    Foreground="{ThemeResource ForegroundColor}">
 
-    <Grid Width="300" Margin="0,0,30,0">
+    <UserControl.Resources>
+        <Storyboard x:Name="AnimateInSaving">
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Projection).(PlaneProjection.RotationY)" Storyboard.TargetName="gridOptions">
+                <EasingDoubleKeyFrame KeyTime="0" Value="0"/>
+                <EasingDoubleKeyFrame KeyTime="0:0:0.2" Value="90"/>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Projection).(PlaneProjection.RotationY)" Storyboard.TargetName="gridSaving">
+                <EasingDoubleKeyFrame KeyTime="0" Value="-90"/>
+                <EasingDoubleKeyFrame KeyTime="0:0:0.2" Value="-90"/>
+                <EasingDoubleKeyFrame KeyTime="0:0:0.4" Value="20"/>
+                <EasingDoubleKeyFrame KeyTime="0:0:0.7" Value="0"/>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Opacity)" Storyboard.TargetName="stackPanelProgress">
+                <EasingDoubleKeyFrame KeyTime="0:0:0.5" Value="0"/>
+                <EasingDoubleKeyFrame KeyTime="0:0:0.7" Value="1"/>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.TranslateY)" Storyboard.TargetName="stackPanelProgress">
+                <EasingDoubleKeyFrame KeyTime="0:0:0.5" Value="50">
+                    <EasingDoubleKeyFrame.EasingFunction>
+                        <BackEase EasingMode="EaseOut" Amplitude="0.4"/>
+                    </EasingDoubleKeyFrame.EasingFunction>
+                </EasingDoubleKeyFrame>
+                <EasingDoubleKeyFrame KeyTime="0:0:0.9" Value="0">
+                    <EasingDoubleKeyFrame.EasingFunction>
+                        <BackEase EasingMode="EaseOut" Amplitude="0.4"/>
+                    </EasingDoubleKeyFrame.EasingFunction>
+                </EasingDoubleKeyFrame>
+            </DoubleAnimationUsingKeyFrames>
+        </Storyboard>
+    </UserControl.Resources>
+
+    <Grid Width="304" Margin="0,0,32,32">
 
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
@@ -18,25 +51,51 @@
         </Grid.RowDefinitions>
 
         <Grid x:Name="gridTitleBar" Height="60">
-            <TextBlock Text="{Binding Title, Mode=OneWay, FallbackValue='Export 1'}" VerticalAlignment="Center" Margin="25,0" Foreground="White"/>
-            <Button HorizontalAlignment="Right" Margin="0,0,25,0" Foreground="White" Visibility="Collapsed">
-                x
-            </Button>
+            <TextBlock Text="{Binding Title, Mode=OneWay, FallbackValue='Export 1'}" VerticalAlignment="Center" Margin="24,0"/>
         </Grid>
-        
-        <Grid HorizontalAlignment="Stretch" VerticalAlignment="Center" Background="{ThemeResource BackgroundColor}" CornerRadius="6" Grid.Row="1">
+
+        <Grid x:Name="gridSaving" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Background="{ThemeResource BackgroundColor}" CornerRadius="8" Grid.Row="1" MinHeight="240" RequestedTheme="Light">
+
+            <Grid.Projection>
+                <PlaneProjection/>
+            </Grid.Projection>
+
+            <StackPanel x:Name="stackPanelProgress" VerticalAlignment="Center" Opacity="0" RenderTransformOrigin="0.5,0.5">
+                <StackPanel.RenderTransform>
+                    <CompositeTransform/>
+                </StackPanel.RenderTransform>
+                <TextBlock HorizontalAlignment="Center" Margin="0,0,0,30">Saving</TextBlock>
+                <ProgressBar x:Name="progressBar" ValueChanged="progressBar_ValueChanged" Width="100" Value="{Binding ProgressValue, Mode=OneWay}" Maximum="{Binding ProgressMax, Mode=OneWay}"/>
+            </StackPanel>
+
+            <StackPanel x:Name="stackPanelExportComplete" VerticalAlignment="Center" Opacity="0">
+                <TextBlock HorizontalAlignment="Center" FontWeight="Bold" FontSize="24">Export Complete!</TextBlock>
+                <TextBlock HorizontalAlignment="Center" Margin="0,24" Opacity=".5">Exported at 300 x 300</TextBlock>
+                <Rectangle Height="1" Fill="{ThemeResource ForegroundColor}" Opacity=".1" Margin="24,0"/>
+                <Button Click="buttonOpenFolder_Click" Style="{StaticResource ButtonTransparent}">
+                    Open Folder
+                </Button>
+                <Rectangle Height="1" Fill="{ThemeResource ForegroundColor}" Opacity=".1" Margin="24,0"/>
+            </StackPanel>
+
+        </Grid>
+
+        <Grid x:Name="gridOptions" HorizontalAlignment="Stretch" VerticalAlignment="Center" Background="{ThemeResource BackgroundColor}" CornerRadius="8" Grid.Row="1" Visibility="Visible" RequestedTheme="Light">
+            <Grid.Projection>
+                <PlaneProjection/>
+            </Grid.Projection>
             <StackPanel>
 
-                <RadioButton Style="{StaticResource RadioButtonMenu}" IsChecked="{Binding PercentageChecked, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Padding="25">
+                <RadioButton Style="{StaticResource RadioButtonMenu}" IsChecked="{Binding PercentageChecked, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Padding="24">
 
                     <StackPanel>
 
                         <Grid Height="20" Margin="0,0,0,20">
                             <TextBlock Text="Percentage" VerticalAlignment="Center" TextLineBounds="Tight" Margin="40,0,0,0"/>
-                            <TextBox HorizontalAlignment="Right" PlaceholderText="100" Text="{Binding Percentage, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" MaxLength="3" Grid.Column="1" TextAlignment="Center" Style="{StaticResource TextBoxMenu}"/>
+                            <TextBox HorizontalAlignment="Right" PlaceholderText="100" Text="{Binding Percentage, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, FallbackValue='100'}" MaxLength="3" Grid.Column="1" Style="{StaticResource TextBoxMenu}"/>
                         </Grid>
 
-                        <Slider Value="{Binding Percentage, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged,FallbackValue='100'}" Minimum="1" Maximum="200" IsThumbToolTipEnabled="False" Style="{StaticResource SliderPointed}"/>
+                        <Slider Value="{Binding Percentage, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, FallbackValue='100'}" Minimum="1" Maximum="200" IsThumbToolTipEnabled="False" Style="{StaticResource SliderPointed}"/>
 
                     </StackPanel>
 
@@ -44,7 +103,7 @@
 
                 <Rectangle Opacity="{ThemeResource BorderOpacity}" Fill="{ThemeResource ForegroundColor}" Height="2"/>
 
-                <RadioButton Style="{StaticResource RadioButtonMenu}" IsChecked="{Binding SpecificSizeChecked, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Padding="25">
+                <RadioButton Style="{StaticResource RadioButtonMenu}" IsChecked="{Binding SpecificSizeChecked, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Padding="24">
 
                     <Grid>
 
@@ -54,22 +113,9 @@
 
                         <StackPanel>
 
-                            <Grid Height="20" Margin="0,0,0,30">
+                            <Grid Height="20" Margin="0,0,0,32">
 
                                 <TextBlock Text="Specific Size" VerticalAlignment="Center" TextLineBounds="Tight" Margin="40,0,0,0"/>
-
-                                <CheckBox IsChecked="{Binding ConstrainProportions, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Style="{StaticResource CheckBoxMenu}" HorizontalAlignment="Right">
-                                    <ToolTipService.ToolTip>
-                                        <StackPanel>
-                                            <TextBlock>
-                                            Constrain Proportions
-                                            </TextBlock>
-                                            <TextBlock Opacity=".6" Margin="0,10,0,0" TextWrapping="Wrap">
-                                            When checked, the image's proportions will be constrained to the width and height set below.
-                                            </TextBlock>
-                                        </StackPanel>
-                                    </ToolTipService.ToolTip>
-                                </CheckBox>
 
                             </Grid>
 
@@ -86,20 +132,18 @@
 
                                 <TextBlock TextLineBounds="Tight" VerticalAlignment="Center" Grid.Column="1" Opacity=".5">width</TextBlock>
 
-                            </Grid>
+                                <TextBox Style="{StaticResource TextBoxMenu}" Grid.Column="2" PlaceholderText="720" MaxLength="4" Text="{Binding Height, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" TextAlignment="Left" VerticalAlignment="Stretch"/>
 
-                            <Grid Margin="0,25,0,0">
+                                <TextBlock TextLineBounds="Tight" VerticalAlignment="Center" Grid.Column="4" Opacity=".5">height</TextBlock>
 
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="40"/>
-                                    <ColumnDefinition Width="*"/>
-                                </Grid.ColumnDefinitions>
-
-                                <TextBox Style="{StaticResource TextBoxMenu}" PlaceholderText="720" MaxLength="4" Text="{Binding Height, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" TextAlignment="Left" VerticalAlignment="Stretch"/>
-
-                                <TextBlock TextLineBounds="Tight" VerticalAlignment="Center" Grid.Column="3" Opacity=".5">height</TextBlock>
 
                             </Grid>
+
+                            <ToggleButton Margin="0,32,0,0" IsChecked="{Binding ConstrainProportions, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Style="{StaticResource ToggleButtonCheckBox}">
+                                <TextBlock TextLineBounds="Tight">
+                                    Preserve Aspect Ratio
+                                </TextBlock>
+                            </ToggleButton>
 
                         </StackPanel>
 
@@ -108,11 +152,9 @@
                 </RadioButton>
 
             </StackPanel>
+
         </Grid>
-        <Grid HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Background="Red" CornerRadius="6" Visibility="Collapsed" Grid.Row="1">
-            
-        </Grid>
-        
+
     </Grid>
 
 </UserControl>
