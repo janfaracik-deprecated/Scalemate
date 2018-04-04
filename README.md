@@ -4,8 +4,6 @@
 
 Scalemate is an open source mass image scaling application built for Windows 10 as a UWP application in C# and XAML.
 
-With an incredibly simple user interface it's effortless to create, maintain and update your colours and branding. By taking advantage of the latest Windows APIs, Paleta is more powerful than ever with support for gradients, versions and clipboard integration.
-
 ## Features
 
 - Easy to use user interface
