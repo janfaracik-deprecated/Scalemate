@@ -8,7 +8,7 @@ Scalemate is an open source mass image scaling application built for Windows 10 
 
 - Easy to use user interface
 - Scale with percentages, specific sizes or constraining to a certain size
-- Multiple Exports at different sizes (coming soon)
+- Multiple exports at different sizes (coming soon)
 
 ## Want to try it out?
 
